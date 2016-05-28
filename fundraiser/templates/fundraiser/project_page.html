@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-projectpage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.name }}</h1>
+    {{ page.description|richtext }}
+    {{page.amount}}
+    {{page.organisation}}
+{% endblock %}
