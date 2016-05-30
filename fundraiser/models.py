@@ -2,32 +2,22 @@ from django.db import models
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 
-class FundRaiser(Page):
-    description = RichTextField(blank=True)
-    paypal_account = models.CharField(max_length=250)
-    iban_number = models.CharField(max_length=250)
-
-    search_fields = Page.search_fields + (
-        index.SearchField('name'),
-        index.SearchField('description'),
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('description', classname="full"),
-        FieldPanel('paypal_account'),
-        FieldPanel('iban_number')
-
-    ]
-
-class Project(Page):
-    fund_raiser = models.ForeignKey(FundRaiser, related_name='projects', on_delete=models.CASCADE)
+class ProjectPage(Page):
     amount = models.IntegerField()
     description = RichTextField(blank=True)
-    organisation = models.CharField(max_length=250)
+    organisation = models.CharField(max_length=250, blank=True)
+    feed_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = Page.search_fields + (
         index.SearchField('description'),
@@ -35,8 +25,16 @@ class Project(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('fund_raiser'),
         FieldPanel('description', classname="full"),
         FieldPanel('amount'),
         FieldPanel('organisation')
     ]
+
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+        ImageChooserPanel('feed_image'),
+    ]
+
+    # Parent page / subpage type rules
+    parent_page_types = ['home.Homepage']
+    subpage_types = []
