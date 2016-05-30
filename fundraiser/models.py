@@ -1,10 +1,27 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+
+
+class projectIndexPage(Page):
+    @property
+    def projects(self):
+        # Get list of blog pages that are descendants of this page
+        projects = ProjectPage.objects.descendant_of(self).live()
+        projects = projects.order_by(
+            '-date'
+        )
+        return projects
+
+    class Meta:
+        verbose_name = _('Projects index')
+
+    subpage_types = ['fundraiser.ProjectPage']
 
 
 class ProjectPage(Page):
@@ -36,5 +53,5 @@ class ProjectPage(Page):
     ]
 
     # Parent page / subpage type rules
-    parent_page_types = ['home.Homepage']
+    parent_page_types = ['fundraiser.ProjectIndexPage']
     subpage_types = []

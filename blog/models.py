@@ -58,7 +58,7 @@ class BlogPage(Page):
 
     # # Parent page / subpage type rules
     parent_page_types = ['blog.BlogIndexPage']
-    # subpage_types = []
+    subpage_types = []
 
 
 class BlogPageRelatedLink(Orderable):
