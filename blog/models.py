@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.fields import ParentalKey
 
@@ -7,6 +8,22 @@ from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+
+
+class BlogIndexPage(Page):
+    @property
+    def blogs(self):
+        # Get list of blog pages that are descendants of this page
+        blogs = BlogPage.objects.descendant_of(self).live()
+        blogs = blogs.order_by(
+            '-date'
+        )
+        return blogs
+
+    class Meta:
+        verbose_name = _('Blog index')
+
+    subpage_types = ['blog.BlogPage']
 
 
 class BlogPage(Page):
@@ -40,7 +57,7 @@ class BlogPage(Page):
     ]
 
     # # Parent page / subpage type rules
-    # parent_page_types = ['blog.BlogIndex']
+    parent_page_types = ['blog.BlogIndexPage']
     # subpage_types = []
 
 
