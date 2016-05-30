@@ -60,6 +60,13 @@ class BlogPage(Page):
     parent_page_types = ['blog.BlogIndexPage']
     subpage_types = []
 
+    def get_absolute_url(self):
+        return self.url
+
+    def get_blog_index(self):
+        # Find closest ancestor which is a blog index
+        return self.get_ancestors().type(BlogIndexPage).last()
+
 
 class BlogPageRelatedLink(Orderable):
     page = ParentalKey(BlogPage, related_name='related_links')
