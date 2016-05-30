@@ -92,11 +92,6 @@ docs/_build/
 # PyBuilder
 target/
 
-# Static dir for collectstatic
-static/
-/dcim/media/
-/media/
-
 # Ignore local settings
 local_settings.py
 
