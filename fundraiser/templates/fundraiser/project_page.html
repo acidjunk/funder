@@ -80,10 +80,14 @@
         </div>
     </div>
 
-    <script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $( document ).ready(function() {
         $('#project').progress({
             percent: Math.floor((Math.random() * 100) + 1),
         });
-    </script>
-
+    });
+</script>
 {% endblock %}

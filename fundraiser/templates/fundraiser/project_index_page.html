@@ -83,7 +83,12 @@
         </div>
     </div>
 
+{% endblock %}
 
-
-
+{% block extra_js %}
+<script>
+    $( document ).ready(function() {
+        $('.ui.progress').progress();
+    });
+</script>
 {% endblock %}
