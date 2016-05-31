@@ -1,0 +1,23 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="item">
+    <div class="left floated contemnt">
+        {% image project.feed_image width-300 class="ui avatar image" %}
+
+    </div>
+    <div class="content">
+        <a class="header" href="{% pageurl project %}">{{ project.title }} : &euro; {{ project.amount }}</a>
+        <div class="description">{{ project.teaser }}
+            <div class="ui hidden divider"></div>
+            <div class="ui indicating progress" data-percent="{{ project.amount }}">
+                <div class="bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.ui.progress').progress();
+</script>

@@ -30,11 +30,11 @@
         {% wagtailuserbar %}
         <div class="ui fixed inverted menu">
             <div class="ui container">
-                <a href="#" class="header item">
+                <a href="/" class="header item">
                     <img class="logo" src="{% static "images/logo.png" %}" style="height: 38px; width: 140px;">
                 </a>
-                <a class="item" href="#">Projecten</a>
-                <a class="item" href="#">Blog</a>
+                <a class="item" href="/projects">Projecten</a>
+                <a class="item" href="/blog">Blog</a>
 
                 <div class="ui simple dropdown item">
                     Test UI <i class="dropdown icon"></i>
@@ -62,11 +62,7 @@
         <div class="ui hidden divider"></div>
 
         <div class="ui container">
-
-            <div class="ui segment">
             {% block content %}{% endblock %}
-            </div>
-
         </div>
 
         <div class="ui hidden divider"></div>

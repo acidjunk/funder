@@ -8,13 +8,13 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 
-class projectIndexPage(Page):
+class ProjectIndexPage(Page):
     @property
     def projects(self):
         # Get list of blog pages that are descendants of this page
         projects = ProjectPage.objects.descendant_of(self).live()
         projects = projects.order_by(
-            '-date'
+            '-pk'
         )
         return projects
 
@@ -24,7 +24,23 @@ class projectIndexPage(Page):
     subpage_types = ['fundraiser.ProjectPage']
 
 
+    def get_context(self, request):
+        # Get blogs
+        projects = self.projects
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        if tag:
+            projects = projects.filter(tags__name=tag)
+
+        # Update template context
+        context = super(ProjectIndexPage, self).get_context(request)
+        context['projects'] = projects
+        return context
+
+
 class ProjectPage(Page):
+    teaser = models.TextField()
     amount = models.IntegerField()
     description = RichTextField(blank=True)
     organisation = models.CharField(max_length=250, blank=True)
@@ -42,6 +58,7 @@ class ProjectPage(Page):
     )
 
     content_panels = Page.content_panels + [
+        FieldPanel('teaser', classname="full"),
         FieldPanel('description', classname="full"),
         FieldPanel('amount'),
         FieldPanel('organisation')
