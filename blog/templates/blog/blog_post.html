@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="ui stackable grid">
-        <div class="fourteen wide column">
+        <div class="twelve wide column">
             <h1 class="ui dividing header" style="margin-top: -2px;">
                 <div class="content">
                     {{ blog.title }}
@@ -67,29 +67,35 @@ By {{ blog.author }} on {{ blog.date|date:"F jS, Y" }}
                 </script>
                 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
         </div>
-        <div class="two wide column">
+        <div class="four wide column">
 
-
-            <div class="ui vertical menu">
-                <a class="active teal item">
-                    Inbox
-                    <div class="ui teal left pointing label">1</div>
-                </a>
-                <a class="item">
-                    Spam
-                    <div class="ui label">51</div>
-                </a>
-                <a class="item">
-                    Updates
-                    <div class="ui label">1</div>
-                </a>
+            <div class="ui fluid vertical menu">
                 <div class="item">
+                    <h4><i class="tags icon"></i> Tags</h4>
+
+                    {% if blog.tags.all %}
+                        Tags:
+                        {% for tag in blog.tags.all %}
+                            <a href="{% url 'blog:tag' tag.slug %}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="item">
+                    <h4><i class="ticket icon"></i> Categories</h4>
+                    {% for cat in blog.categories.all %}
+                        <a href="{% url 'blog:category' cat.category.slug %}/">{{ cat.category.name }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="item">
+                    <h4>Search</h4>
                     <div class="ui transparent icon input">
-                        <input type="text" placeholder="Search mail...">
+                        <input type="text" placeholder="Search posts...">
                         <i class="search icon"></i>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
