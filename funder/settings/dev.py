@@ -13,9 +13,8 @@ SECRET_KEY = '*1%%@qo733cpl%ctlcmyg7!gi%qa-yraoie_bj$ij3l%+n9vtl'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DISQUS_API_KEY = 'TFq1eaFJ0wFgcUbj6BoOHCnuzrYu4WUK1M6fswyaOGE22Hhvzf4VdhT5YPHCyIbu'
+DISQUS_API_KEY = 'h4Cu1Eo53R34Q9QAsBInvU2p62wVi8rKCXVhqaMSNHLUbSQhv3wvueiBUFafwtPq'
 DISQUS_WEBSITE_SHORTNAME = 'Funder DEMO site'
-
 
 try:
     from .local import *
