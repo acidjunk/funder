@@ -1,67 +1,98 @@
 {% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
 
-<a href="/blog" class="icon button"><i class="double angle left icon"></i>back</a>
+{% block content %}
 
-<h1 class="ui dividing header" style="margin-top: -2px;">
-    <div class="content">
-        {{ blog.title }}
-        <div class="sub header">By {{ blog.author }} on {{ blog.date|date:"F jS, Y" }}</div>
+    <div class="ui stackable grid">
+        <div class="fourteen wide column">
+            <h1 class="ui dividing header" style="margin-top: -2px;">
+                <div class="content">
+                    {{ blog.title }}
+                    <div class="sub header">
+
+                        <a href="javascript: history.go(-1)" class="icon button"><i class="double angle left icon"></i>back</a>
+By {{ blog.author }} on {{ blog.date|date:"F jS, Y" }}
+                    </div>
+                </div>
+            </h1>
+
+            <div class="ui image">
+                {% image blog.header_image width-800 class="image" %}
+            </div>
+
+
+            <div class="content">
+                <div class="description">{{ blog.body|richtext }}</div>
+                <div class="ui divider"></div>
+                <h3 class="ui header">Share on</h3>
+                <button class="ui circular linkedin icon button" st_title="{{ blog.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="LinkedIn"><i class="linkedin icon"></i>
+                </button>
+                <button class="ui circular twitter icon button" st_title="{{ blog.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Tweet"><i class="twitter icon"></i>
+                </button>
+                <button class="ui circular facebook icon button" st_title="{{ blog.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Facebook"><i class="facebook icon"></i>
+                </button>
+                <button class="ui circular google plus icon button" st_title="{{ blog.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Google +1"><i class="google plus icon"></i>
+                </button>
+                <button class="ui circular mail icon button" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}"
+                        displayText="Email"><i class="mail icon"></i>
+                </button>
+            </div>
+
+                <div class="ui divider"></div>
+                <h3 class="ui header">Comments</h3>
+
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                     */
+                    /*
+                    var disqus_config = function () {
+                        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = '{{ blog.slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function() {  // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+
+                        s.src = '//funderdemosite.disqus.com/embed.js';
+
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+        <div class="two wide column">
+
+
+            <div class="ui vertical menu">
+                <a class="active teal item">
+                    Inbox
+                    <div class="ui teal left pointing label">1</div>
+                </a>
+                <a class="item">
+                    Spam
+                    <div class="ui label">51</div>
+                </a>
+                <a class="item">
+                    Updates
+                    <div class="ui label">1</div>
+                </a>
+                <div class="item">
+                    <div class="ui transparent icon input">
+                        <input type="text" placeholder="Search mail...">
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</h1>
 
-<div class="ui image">
-    {% image blog.header_image width-800 class="image" %}
-</div>
+{% endblock %}
 
-
-    <div class="content">
-        <div class="description">{{ blog.body|richtext }}</div>
-        <div class="ui divider"></div>
-        <h3 class="ui header">Share on</h3>
-        <button class="ui circular linkedin icon button" st_title="{{ blog.title }}"
-                st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="LinkedIn"><i class="linkedin icon"></i>
-        </button>
-        <button class="ui circular twitter icon button" st_title="{{ blog.title }}"
-                st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Tweet"><i class="twitter icon"></i>
-        </button>
-        <button class="ui circular facebook icon button" st_title="{{ blog.title }}"
-                st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Facebook"><i class="facebook icon"></i>
-        </button>
-        <button class="ui circular google plus icon button" st_title="{{ blog.title }}"
-                st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Google +1"><i class="google plus icon"></i>
-        </button>
-        <button class="ui circular mail icon button" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}"
-                displayText="Email"><i class="mail icon"></i>
-        </button>
-    </div>
-
-
-        <div class="ui divider"></div>
-        <h3 class="ui header">Comments</h3>
-
-
-<div id="disqus_thread"></div>
-<script>
-    /**
-     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-     */
-    /*
-    var disqus_config = function () {
-        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = '{{ blog.slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() {  // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-
-        s.src = '//funderdemosite.disqus.com/embed.js';
-
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-<div class="ui secondary menu">
-
-</div>
