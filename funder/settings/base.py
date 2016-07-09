@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'disqus',
+    # TODO: find out why tags/site is not working ok
+    #'disqus',
 
     'django.contrib.humanize',
     'django_gravatar',
