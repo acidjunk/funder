@@ -1,0 +1,46 @@
+{% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
+
+<a href="/blog" class="icon button"><i class="double angle left icon"></i>back</a>
+
+<h1 class="ui dividing header" style="margin-top: -2px;">
+    <div class="content">
+        {{ blog.title }}
+        <div class="sub header">By {{ blog.author }} on {{ blog.date|date:"F jS, Y" }}</div>
+    </div>
+</h1>
+
+<div class="ui image">
+    {% image blog.header_image width-800 class="image" %}
+</div>
+
+
+    <div class="content">
+                <div class="description">{{ blog.body|richtext }}</div>
+    </div>
+    <div class="image">
+        <img>
+    </div>
+    <div class="content">
+    <span class="right floated">
+      <i class="heart outline like icon"></i>
+      17 likes
+    </span>
+        <i class="comment icon"></i>
+        3 comments
+    </div>
+    <div class="extra content">
+        <div class="ui large transparent left icon input">
+            <i class="heart outline icon"></i>
+            <input type="text" placeholder="Add Comment...">
+        </div>
+
+    <!-- end of blog home -->
+    </div>
+
+
+{% load disqus_tags %}
+{% disqus_show_comments %}
+
+<div class="ui secondary menu">
+
+</div>

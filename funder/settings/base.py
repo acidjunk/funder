@@ -24,11 +24,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    'home',
-    'search',
-    'blog',
-    'fundraiser',
-
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -48,8 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'disqus',
+
+    'django.contrib.humanize',
+    'django_gravatar',
+    'home',
+    'search',
+    'blog',
+    'fundraiser',
+
 ]
 
 MIDDLEWARE_CLASSES = [
