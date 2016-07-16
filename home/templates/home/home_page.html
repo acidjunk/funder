@@ -1,10 +1,52 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    <h1 class="ui header">{{ page.title }}</h1>
-    {{ page.body|richtext }}
+
+    <div class="ui raised center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui header">
+                We support nonprofits
+                <div class="sub header">An free platform ready to support millions of nonprofits worldwide.</div>
+            </h1>
+            <a href="https://github.com/acidjunk/funder" class="ui huge purple icon button">
+                <i class="github icon"></i> Contribute <i class="right arrow icon"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ui stackable grid">
+        <div class="ten wide column">
+            <div class="ui purple segment">
+                <h1 class="ui header">{{ page.title }}</h1>
+                {{ page.body|richtext }}
+            </div>
+        </div>
+        <div class="six wide column">
+            <div class="ui purple segment">
+                <h1 class="ui header">Demo projects</h1>
+                <p>To show how this application can be used in some real world scenario's we added some demo projects.</p>
+                <a href="https://github.com/acidjunk/funder" class="ui huge purple icon button">
+                    <i class="search icon"></i> View projects</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+<div class="ui segment">
+    <h2>Recent projects</h2>
+    <div class="ui six doubling cards">
+        {% for project in recent_projects %}
+            <div class="card">
+                <div class="image">
+                    {% image project.header_image fill-150x150 %}
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

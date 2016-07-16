@@ -7,6 +7,7 @@ from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel)
 
+from fundraiser.models import ProjectPage
 
 class HomePage(Page):
     body = RichTextField(blank=True)
@@ -14,6 +15,11 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full")
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(HomePage, self).get_context(request, *args, **kwargs)
+        context['recent_projects'] = ProjectPage.objects.all().order_by('-id')[0:5]
+        return context
 
 class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')

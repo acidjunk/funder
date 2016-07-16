@@ -15,16 +15,19 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsearch import index
 from taggit.models import TaggedItemBase, Tag
-from modelcluster.tags import ClusterTaggableManager
+from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 import datetime
-
 
 COMMENTS_APP = getattr(settings, 'COMMENTS_APP', None)
 
 
 def get_blog_context(context):
-    """ Get context data on all blog related pages """
+    """
+    Get context data on all blog related pages
+
+    :param context: the current context
+    """
     context['authors'] = get_user_model().objects.filter(
         owned_pages__live=True,
         owned_pages__content_type__model='blogpage'
@@ -107,6 +110,7 @@ class BlogIndexPage(Page):
 
     class Meta:
         verbose_name = _('Blog index')
+
     subpage_types = ['blog.BlogPage']
 
 
@@ -214,7 +218,7 @@ class BlogPage(Page):
         limit_choices_to=limit_author_choices,
         verbose_name=_('Author'),
         on_delete=models.SET_NULL,
-        related_name='author_pages',
+        related_name='author_blog_pages',
     )
 
     search_fields = Page.search_fields + (

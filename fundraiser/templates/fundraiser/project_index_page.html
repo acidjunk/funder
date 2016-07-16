@@ -1,92 +1,168 @@
 {% extends "base.html" %}
-
-{% load wagtailcore_tags %}
+{% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
+    {% for rl in self.related_links.all %}
+        <p>{{ rl.title }}: <a href='{{ rl.link_page.url }}'>{{ rl.link_page }}</a></p>
+    {% endfor %}
+
+
     <div class="ui stackable grid">
-        <div class="twelve wide column">
-            <div class="ui raised segment">
-                <h1 class="ui header">
-                    <i class="list icon"></i>
-                    Projecten
-                </h1>
-            <div class="ui divider"></div>
-
-                <div class="ui massive animated divided list">
-                    {% for project in projects %}
-                        {% include "fundraiser/includes/project_list_item.html" %}
-                    {% empty %}
-                        No projects found
-                    {% endfor %}
-                </div>
-
+        <div class="thirteen wide column">
+        <h1 class="ui dividing header">Projects</h1>
+        {% if category %}
+            <div class="ui info message">
+                <div class="header">Filtered on category</div>
+                Showing only projects in '{{ category }}'
+                <br>
+                <a href="/projects">Reset</a>
             </div>
+        {% endif %}
+        {% if tag %}
+            <div class="ui info message">
+            <div class="header">Filtered on tags</div>
+                Showing only projects tagged with '{{ tag }}'
+                <br>
+                <a href="/projects">Reset</a>
+            </div>
+        {% endif %}
+
+        {% if projects %}
+            <div class="ui three doubling cards">
+            {% for project in projects %}
+                <div class="ui card">
+
+                    <div class="content">
+                        <div class="header">
+                            <img class="right floated mini ui image" src="{% gravatar_url 'acidjunk@gmail.com' 35 %}">
+                            <a href="{% pageurl project %}">{{ project.title }}<a>
+
+                        </div>
+                        <div class="meta">{{ project.date|date:"F jS, Y" }}</div>
+                    </div>
+
+                    <div class="blurring dimmable image">
+                        <div class="ui inverted dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <a href="{% pageurl project %}" class="ui primary button"><i class="search icon"></i> View</a>
+                                </div>
+                            </div>
+                        </div>
+                       {% image project.header_image fill-300x300 class="image" %}
+                    </div>
+
+                    <div class="content">
+                        <div class="description">{{ blog.teaser|richtext }}</div>
+                        <a href="{% pageurl project %}">Read more &raquo;</a>
+                        <div class="ui divider"></div>
+                        <button class="ui circular linkedin icon button" st_title="{{ blog.title }}"
+                                st_url="{{ SITE_URL }}{% pageurl project %}" displayText="LinkedIn"><i class="linkedin icon"></i>
+                        </button>
+                        <button class="ui circular twitter icon button" st_title="{{ blog.title }}"
+                                st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Tweet"><i class="twitter icon"></i>
+                        </button>
+                        <button class="ui circular facebook icon button" st_title="{{ blog.title }}"
+                                st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Facebook"><i class="facebook icon"></i>
+                        </button>
+                        <button class="ui circular google plus icon button" st_title="{{ blog.title }}"
+                                st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Google +1"><i class="google plus icon"></i>
+                        </button>
+                        <button class="ui circular mail icon button" st_title="{{ project.title }}" st_url="{{ SITE_URL }}{% pageurl project %}"
+                                displayText="Email"><i class="mail icon"></i>
+                        </button>
+                    </div>
+
+                    <div class="extra content">
+                        {% if project.categories.all %}
+                            <i class="ticket icon"></i>
+                            {% for cat in project.categories.all %}
+                                <a href="{% url 'project:category' cat.category.slug %}">{{ cat.category.name }}</a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if project.tags.all %}
+                            {% if project.tags.all %}&nbsp;{% endif %}<i class="tags icon"></i>
+                            {% for tag in project.tags.all %}
+                                <a href="{% url 'project:tag' tag.slug %}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if not project.categories.all and not project.tags.all %}
+                            No tags or categories
+                        {% endif %}
+                    </div>
+
+                </div>
+            {% endfor %}
+            </div>
+
+            <div class="ui pagination menu" style="margin-top: 10px;">
+                <a href="?page=1" class="icon item" id="paginator_first_id"><i class="angle double left icon"></i></a>
+                {% if projects.has_previous %}
+                    <a href="?page={{ projects.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"
+                       class="icon item" id="paginator_next_id"><i class="angle left icon"></i></a>
+                {% endif %}
+                {% if blogs.has_next %}
+                    <a href="?page={{ projects.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"
+                       class="icon item" id="paginator_previous_id"><i class="angle right icon"></i></a>
+                {% endif %}
+                <a href="?page={{ projects.count }}" class="icon item" id="paginator_last_id"><i
+                        class="angle double right icon"></i></a>
+            </div>
+
+        {% else %}
+            <p>There are currently no projects</p>
+        {% endif %}
+
         </div>
-        <div class="four wide column">
+        <div class="three wide column">
+
             <div class="ui vertical menu">
-                <div class="item">
-                    <div class="ui input"><input type="text" placeholder="Search..."></div>
-                </div>
-                <div class="item">
-                    Categorien
-                    <div class="menu">
-                        <a class="active item">Alle
-                            <div class="ui purple left pointing label">100</div>
-                        </a>
-                        <a class="item">Maatschappelijk
-                            <div class="ui label">60</div>
-                        </a>
-                        <a class="item">Buurt
-                            <div class="ui label">40</div>
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    Status
-                    <div class="menu">
-                        <a class="item">0%
-                            <div class="ui label">10</div>
-                        </a>
-                        <a class="item">20%
-                            <div class="ui label">20</div>
-                        </a>
-                        <a class="item">40%
-                            <div class="ui label">10</div>
-                        </a>
-                        <a class="item">60%
-                            <div class="ui label">10</div>
-                        </a>
-                        <a class="item">80%
-                            <div class="ui label">15</div>
-                        </a>
-                        <a class="item">100%
-                            <div class="ui label">15</div>
-                        </a>
-                    </div>
-                </div>
-                <a class="item">
-                    <i class="grid layout icon"></i> Browse
+                <a class="{% if not category and not tag %}active {% endif %}teal item">
+                    All
+                    <div class="ui teal left pointing label">{{ number_of_projects }}</div>
                 </a>
-                <div class="ui dropdown item">
-                    More
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                        <a class="item"><i class="edit icon"></i> Edit Profile</a>
-                        <a class="item"><i class="globe icon"></i> Choose Language</a>
-                        <a class="item"><i class="settings icon"></i> Account Settings</a>
+
+                <div class="item">
+                    <h4>Tags</h4>
+                    <p>Select a tag to filter:</p>
+                    {% if tags %}
+                        {% for tag_item in tags %}
+                            <a class="{% if tag == tag_item.slug %}active {% endif %}teal item" href="{% url 'project:tag' tag_item.slug %}/">{{ tag_item }}</a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="item">
+                    <h4>Categories</h4>
+                    <p>Select a category to filter:</p>
+                    {% if categories %}
+                        {% for category_item in categories %}
+                            <a class="{% if category == category_item %}active {% endif %}teal item" href="{% url 'project:category' category_item.slug %}/">{{ category_item }}</a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="item">
+                    <h4>Search</h4>
+                    <div class="ui transparent icon input">
+                        <input type="text" placeholder="Search projects...">
+                        <i class="search icon"></i>
                     </div>
                 </div>
             </div>
-            <div class="ui hidden divider"></div>
-            <div class="ui hidden divider"></div>
-
         </div>
+
     </div>
 
 {% endblock %}
 
 {% block extra_js %}
 <script>
+    $('.ui.cards .image').dimmer({
+        on: 'hover'
+    });
     $( document ).ready(function() {
         $('.ui.progress').progress();
     });

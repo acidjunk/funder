@@ -7,7 +7,7 @@
     {% endfor %}
 
     <div class="ui stackable grid">
-        <div class="fourteen wide column">
+        <div class="thirteen wide column">
         <h1 class="ui dividing header">Blog</h1>
         {% if category %}
             <div class="ui info message">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                       {% image blog.header_image fill-400x400 class="image" %}
+                       {% image blog.header_image fill-300x300 class="image" %}
                     </div>
 
                     <div class="content">
@@ -75,7 +75,6 @@
                     <div class="extra content">
                         {% if blog.categories.all %}
                             <i class="ticket icon"></i>
-                            Posted in:
                             {% for cat in blog.categories.all %}
                                 <a href="{% url 'blog:category' cat.category.slug %}">{{ cat.category.name }}</a>{% if not forloop.last %}, {% endif %}
                             {% endfor %}
@@ -83,7 +82,6 @@
 
                         {% if blog.tags.all %}
                             {% if blog.tags.all %}&nbsp;{% endif %}<i class="tags icon"></i>
-                            Tags:
                             {% for tag in blog.tags.all %}
                                 <a href="{% url 'blog:tag' tag.slug %}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
                             {% endfor %}
@@ -116,7 +114,7 @@
             <p>There are currently no blog posts</p>
         {% endif %}
         </div>
-        <div class="two wide column">
+        <div class="three wide column">
 
 
             <div class="ui vertical menu">
@@ -127,7 +125,7 @@
 
                 <div class="item">
                     <h4>Tags</h4>
-                    <p>Select a tag to filter</p>
+                    <p>Select a tag to filter:</p>
                     {% if tags %}
                         {% for tag_item in tags %}
                             <a class="{% if tag == tag_item.slug %}active {% endif %}teal item" href="{% url 'blog:tag' tag_item.slug %}/">{{ tag_item }}</a>
@@ -137,14 +135,14 @@
 
                 <div class="item">
                     <h4>Categories</h4>
-                    <p>Select a category to filter {{ category }}</p>
-
+                    <p>Select a category to filter:</p>
                     {% if categories %}
                         {% for category_item in categories %}
                             <a class="{% if category == category_item %}active {% endif %}teal item" href="{% url 'blog:category' category_item.slug %}/">{{ category_item }}</a>
                         {% endfor %}
                     {% endif %}
                 </div>
+
                 <div class="item">
                     <h4>Search</h4>
                     <div class="ui transparent icon input">
@@ -157,7 +155,9 @@
 
     </div>
 
+{% endblock %}
 
+{% block extra_js %}
     <script>
         $('.ui.cards .image').dimmer({
             on: 'hover'
