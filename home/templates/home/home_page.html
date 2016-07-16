@@ -39,14 +39,29 @@
     <h2>Recent projects</h2>
     <div class="ui six doubling cards">
         {% for project in recent_projects %}
-            <div class="card">
-                <div class="image">
+            <div class="ui card">
+                <div class="blurring dimmable image">
+                    <div class="ui inverted dimmer">
+                        <div class="content">
+                            <div class="center">
+                                <a href="{% pageurl project %}" class="ui purple button"><i
+                                        class="right chevron icon"></i> {{ project.title }}</a>
+                            </div>
+                        </div>
+                    </div>
                     {% image project.header_image fill-150x150 %}
                 </div>
             </div>
-
         {% endfor %}
     </div>
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        $('.ui.cards .image').dimmer({
+            on: 'hover'
+        });
+    </script>
 {% endblock %}
