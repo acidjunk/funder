@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+
+    <h1 class="ui dividing header">
+        Donate
+        <div class="sub header">To "{{ project }}"</div>
+    </h1>
+    <div class="ui stackable grid">
+        <div class="twelve wide column">
+            <div class="ui segment">Check the form, and then click one of the banks to complete your donation.
+                <div class="ui equal width form">
+                  <div class="fields">
+                    <div class="field">
+                      <label>Name</label>
+                      <input type="text" placeholder="Your name">
+                    </div>
+                    <div class="field">
+                      <label>Organisation</label>
+                      <input type="text" placeholder="You organisation's name if any">
+                    </div>
+                  </div>
+                  <div class="fields">
+                    <div class="field">
+                      <label>E-mail</label>
+                      <input type="text" placeholder="Email">
+                    </div>
+                    <div class="field">
+                      <label>Amount</label>
+                      <input type="text" placeholder="Amount">
+                    </div>
+                    <div class="field">
+                      <label>Anonymous</label>
+                      <input type="checkbox" placeholder="Last Name">
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+
+            <h2 class="ui dividing header">Choose a bank to continue</h2>
+            {% if banks %}
+                <div class="ui three doubling link cards">
+                    {% for bank in banks %}
+                        <div class="ui card">
+                            <div class="content">{{ bank.name }}</div>
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="content">
+                                        <div class="center">
+                                            <a href="../start-payment/{{ bank.id }}"><div class="ui huge inverted icon button"><i class="trophy icon"></i> Checkout</div></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img src="/static/images/sisow/providers/{{ bank.name }}.png">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+        <div class="four wide column">
+
+            <div class="ui raised segment">
+                <h4>Newsletter</h4>
+                <p>Also subscribe to the newsletter?</p>
+
+
+                <div class="ui form">
+
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" tabindex="0" class="hidden">
+                            <label>Sign me up for the newsletter </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $('.ui.cards .image').dimmer({
+        on: 'hover'
+    });
+</script>
+{% endblock %}

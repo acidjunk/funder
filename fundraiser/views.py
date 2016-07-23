@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+from django.views.generic import TemplateView
 from django.utils.feedgenerator import Atom1Feed
 from .models import ProjectIndexPage, ProjectPage, ProjectCategory
 from django.shortcuts import get_object_or_404

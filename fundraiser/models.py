@@ -1,3 +1,5 @@
+import urllib
+
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
@@ -6,7 +8,9 @@ from django.db import models
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import slugify
+from django.template.response import TemplateResponse
 from django.utils.translation import ugettext_lazy as _
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailforms.models import AbstractForm, AbstractFormField
@@ -20,6 +24,10 @@ from modelcluster.contrib.taggit import  ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 import datetime
 
+from sisow import _account_from_file
+from sisow import SisowAPI
+from sisow import Transaction
+from sisow import WebshopURLs
 
 def get_project_context(context):
     """
@@ -195,7 +203,7 @@ def limit_author_choices():
     return limit
 
 
-class ProjectPage(Page):
+class ProjectPage(RoutablePageMixin, Page):
     teaser = models.TextField()
     description = RichTextField(blank=True)
     organisation = models.CharField(max_length=250, blank=True)
@@ -258,6 +266,54 @@ class ProjectPage(Page):
         context = get_project_context(context)
         return context
 
+    @route(r'^choose-bank/$')
+    def choose_bank(self, request):
+        api = SisowAPI(None, None)
+
+        return TemplateResponse(
+          request,
+           'fundraiser/banks.html',
+           { "banks" : api.providers,
+             "project": "TODO: get dynamic project name"}
+        )
+
+    @route(r'^start-payment/(?P<provider_id>\d+)/$')
+    def start_payment(self, request, *args, **kwargs):
+        (merchantid, merchantkey) = _account_from_file('account-sisow.secret')
+        api = SisowAPI(merchantid, merchantkey, testmode=True)
+
+        # Build transaction
+        entrance = datetime.datetime.now().strftime("E%Y%m%dT%H%M")
+        t = Transaction(entrance, 100, '06', entrance, 'Funder donatie')
+
+        # Send transaction
+        urls = WebshopURLs('https://funder.formatics.nl/projects/project-1/thanks')
+        response = api.start_transaction(t, urls)
+        if not response.is_valid(merchantid, merchantkey):
+            raise ValueError('Invalid SHA1')
+
+        url_ideal = urllib.url2pathname(response.issuerurl)
+        return TemplateResponse(
+          request,
+           'fundraiser/redirect_to_sisow.html',
+           { "provider_id" : "provider_id",
+             "project": "TODO: get dynamic project name",
+             "url_ideal": url_ideal}
+        )
+
+
+    @route(r'^thanks/$')
+    def thanks(self, request, *args, **kwargs):
+        return TemplateResponse(
+          request,
+           'fundraiser/thanks.html',
+           {
+               "status": request.GET.get('status'),
+               "trxid": request.GET.get('trxid'),
+               "ec": request.GET.get('ec')
+           }
+        )
+
     class Meta:
         verbose_name = _('Project')
         verbose_name_plural = _('Projects')
@@ -290,3 +346,17 @@ class PledgeFormPage(AbstractForm):
         FieldPanel('name', classname="full"),
         FieldPanel('amount', classname="full"),
     ]
+
+class Order(models.Model):
+    project = models.ForeignKey(ProjectPage, related_name='orders')
+    order_nr = models.TextField()
+    billing_name = models.CharField(max_length=250, blank=True)
+    billing_name = models.CharField(max_length=250, blank=True)
+    billing_company = models.CharField(max_length=250, blank=True)
+    billing_email = models.EmailField(blank=True)
+    billing_date = models.DateField(auto_now_add=True)
+    paid_date = models.DateField(editable=False)
+    paid_issuer = models.CharField(max_length=250, editable=False)
+    paid_id = models.CharField(max_length=250, editable=False)
+    anonymous = models.BooleanField(default=False)
+    amount = models.IntegerField()

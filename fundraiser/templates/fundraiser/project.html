@@ -11,7 +11,8 @@
                         {{ project.title }}
                         <div class="sub header">
 
-                            <a href="javascript: history.go(-1)" class="icon button"><i class="double angle left icon"></i>back</a>
+                            <a href="javascript: history.go(-1)" class="icon button"><i
+                                    class="double angle left icon"></i>back</a>
                             By {{ project.author }} on {{ project.date|date:"F jS, Y" }}
                         </div>
                     </div>
@@ -38,22 +39,61 @@
                 <div class="ui divider"></div>
                 <h3 class="ui header">Share on</h3>
                 <button class="ui circular linkedin icon button" st_title="{{ project.title }}"
-                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="LinkedIn"><i class="linkedin icon"></i>
+                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="LinkedIn"><i
+                        class="linkedin icon"></i>
                 </button>
                 <button class="ui circular twitter icon button" st_title="{{ project.title }}"
                         st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Tweet"><i class="twitter icon"></i>
                 </button>
                 <button class="ui circular facebook icon button" st_title="{{ project.title }}"
-                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Facebook"><i class="facebook icon"></i>
+                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Facebook"><i
+                        class="facebook icon"></i>
                 </button>
                 <button class="ui circular google plus icon button" st_title="{{ project.title }}"
-                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Google +1"><i class="google plus icon"></i>
+                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Google +1"><i
+                        class="google plus icon"></i>
                 </button>
-                <button class="ui circular mail icon button" st_title="{{ project.title }}" st_url="{{ SITE_URL }}{% pageurl project %}"
+                <button class="ui circular mail icon button" st_title="{{ project.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl project %}"
                         displayText="Email"><i class="mail icon"></i>
                 </button>
 
+                <div class="ui divider"></div>
+                    <a href="choose-bank/">
+                        <div class="ui large vertical animated button" tabindex="0">
+                            <div class="hidden content"><i class="paypal icon"></i> Donate now</div>
+                            <div class="visible content">
+                                <i class="shop icon"></i> Demo payment
+                            </div>
+                        </div>
+                    </a>
+                <div class="ui divider"></div>
+                <h3 class="ui header">Comments</h3>
 
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                     */
+                    /*
+                     var disqus_config = function () {
+                     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                     this.page.identifier = '{{ project.slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                     };
+                     */
+                    (function () {  // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+
+                        s.src = '//funderdemosite.disqus.com/embed.js';
+
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                                                                  rel="nofollow">comments powered by Disqus.</a>
+                </noscript>
 
 
             </div>
@@ -104,11 +144,11 @@
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    $( document ).ready(function() {
-        $('#project').progress({
-            percent: Math.floor((Math.random() * 100) + 1),
+    <script>
+        $(document).ready(function () {
+            $('#project').progress({
+                percent: Math.floor((Math.random() * 100) + 1),
+            });
         });
-    });
-</script>
+    </script>
 {% endblock %}
