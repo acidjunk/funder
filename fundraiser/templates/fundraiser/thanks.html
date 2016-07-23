@@ -11,7 +11,7 @@
 
         <table class="ui definition table">
             <tr>
-                <td>Status</td><td><div class="ui positive label">{{ status }}</div></td>
+                <td>Status</td><td><div class="ui {% if status|lower == success %}positive{% else %}negative{% endif %} label">{{ status|lower }}</div></td>
             </tr>
             <tr>
                 <td>TRX ID</td><td>{{ trxid }}</td>
