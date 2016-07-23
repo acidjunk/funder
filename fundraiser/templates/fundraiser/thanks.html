@@ -5,19 +5,24 @@
     <div class="ui raised segment">
         <h1 class="ui dividing header">
             Thanks
-            <div class="sub header">Thanks for your donations</div>
+            <div class="sub header">Thanks for your donation</div>
         </h1>
         <p>Payment successfully processed</p>
 
         <table class="ui definition table">
             <tr>
-                <td>Status</td><td><div class="ui {% if status|lower == success %}positive{% else %}negative{% endif %} label">{{ status|lower }}</div></td>
+                <td>Status</td>
+                <td>
+                    <div class="ui {% if status|lower == 'success' %}green{% else %}red{% endif %} label">{{ status|lower }}</div>
+                </td>
             </tr>
             <tr>
-                <td>TRX ID</td><td>{{ trxid }}</td>
+                <td>TRX ID</td>
+                <td>{{ trxid }}</td>
             </tr>
             <tr>
-                <td>EC</td><td>{{ ec }}</td>
+                <td>EC</td>
+                <td>{{ ec }}</td>
             </tr>
         </table>
 
