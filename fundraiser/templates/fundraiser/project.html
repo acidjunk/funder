@@ -1,5 +1,6 @@
 {% load wagtailcore_tags %}
 {% load wagtailcore_tags wagtailimages_tags %}
+{% load staticfiles %}
 
 {% block content %}
     <div class="ui stackable grid">
@@ -68,6 +69,64 @@
                         </div>
                     </a>
                 <div class="ui divider"></div>
+
+                <h3 class="ui header">Activity</h3>
+
+                <div class="ui feed">
+                    <div class="event">
+                        <div class="label">
+                            <img src="{% static "images/pledge_icon.png" %}">
+                        </div>
+                        <div class="content">
+                            <div class="date">
+                            a moment ago
+                            </div>
+                            <div class="summary">
+                                <a class="user">
+                                  Formatics
+                                </a> pledged &euro; 900,-
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="label">
+                            <img src="{% static "images/pledge_icon.png" %}">
+                        </div>
+                        <div class="content">
+                            <div class="date">
+                            1 hour ago
+                            </div>
+                            <div class="summary">
+                                <a class="user">
+                                  Anononymous
+                                </a> pledged &euro; 500,-
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event">
+                        <div class="label">
+                            <img src="{% static "images/pledge_icon.png" %}">
+                        </div>
+                        <div class="content">
+                            <div class="date">
+                            3 days ago
+                            </div>
+                            <div class="summary">
+                                <a class="user">
+                                  Elliot Fu
+                                </a> pledged &euro; 200,-
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="ui divider"></div>
+
                 <h3 class="ui header">Comments</h3>
 
                 <div id="disqus_thread"></div>
