@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
+    'wagtail.contrib.modeladmin',
 
     'modelcluster',
     'taggit',
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
 
     'django.contrib.humanize',
     'django_gravatar',
+    'cart',
     'home',
     'search',
     'blog',

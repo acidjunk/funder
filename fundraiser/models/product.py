@@ -29,64 +29,64 @@ from sisow import SisowAPI
 from sisow import Transaction
 from sisow import WebshopURLs
 
-def get_project_context(context):
+def get_product_context(context):
     """
-    Get context data on all project related pages
+    Get context data on all product related pages
 
     :param context: the current context
     """
     context['authors'] = get_user_model().objects.filter(
         owned_pages__live=True,
-        owned_pages__content_type__model='projectpage'
+        owned_pages__content_type__model='productpage'
     ).annotate(Count('owned_pages')).order_by('-owned_pages__count')
-    context['all_categories'] = ProjectCategory.objects.all()
-    context['root_categories'] = ProjectCategory.objects.filter(
+    context['all_categories'] = ProductCategory.objects.all()
+    context['root_categories'] = ProductCategory.objects.filter(
         parent=None,
     ).prefetch_related(
         'children',)
     # ).annotate(
-    #     project_count=Count('projectpage'),
+    #     product_count=Count('productpage'),
     # )
     return context
 
 
-class ProjectIndexPage(Page):
+class ProductIndexPage(Page):
     @property
-    def projects(self):
-        # Get list of project pages that are descendants of this page
-        projects = ProjectPage.objects.descendant_of(self).live()
-        projects = projects.order_by(
+    def products(self):
+        # Get list of product pages that are descendants of this page
+        products = ProductPage.objects.descendant_of(self).live()
+        products = products.order_by(
             '-date'
         ).select_related('owner').prefetch_related(
             'tagged_items__tag',
             'categories',
             'categories__category',
         )
-        return projects
+        return products
 
     def get_context(self, request, tag=None, category=None, author=None, *args,
                     **kwargs):
-        context = super(ProjectIndexPage, self).get_context(
+        context = super(ProductIndexPage, self).get_context(
             request, *args, **kwargs)
-        projects = self.projects
+        products = self.products
 
         if tag is None:
             tag = request.GET.get('tag')
         if tag:
-            projects = projects.filter(tags__slug=tag)
+            products = products.filter(tags__slug=tag)
         if category is None:  # Not coming from category_view in views.py
             if request.GET.get('category'):
                 category = get_object_or_404(
-                    ProjectCategory, slug=request.GET.get('category'))
+                    ProductCategory, slug=request.GET.get('category'))
         if category:
             if not request.GET.get('category'):
-                category = get_object_or_404(ProjectCategory, slug=category)
-            projects = projects.filter(categories__category__name=category)
+                category = get_object_or_404(ProductCategory, slug=category)
+            products = products.filter(categories__category__name=category)
         if author:
             if isinstance(author, str) and not author.isdigit():
-                projects = projects.filter(author__username=author)
+                products = products.filter(author__username=author)
             else:
-                projects = projects.filter(author_id=author)
+                products = products.filter(author_id=author)
 
         # Pagination
         page = request.GET.get('page')
@@ -95,34 +95,34 @@ class ProjectIndexPage(Page):
             page_size = settings.PROJECT_PAGINATION_PER_PAGE
 
         if page_size is not None:
-            paginator = Paginator(projects, page_size)  # Show 10 blogs per page
+            paginator = Paginator(products, page_size)  # Show 10 blogs per page
             try:
-                projects = paginator.page(page)
+                products = paginator.page(page)
             except PageNotAnInteger:
-                projects = paginator.page(1)
+                products = paginator.page(1)
             except EmptyPage:
-                projects = paginator.page(paginator.num_pages)
+                products = paginator.page(paginator.num_pages)
 
         context['tags'] = Tag.objects.all()
-        context['categories'] = ProjectCategory.objects.all()
-        context['number_of_projects'] = ProjectPage.objects.count() # Todo: update with tag
-        context['projects'] = projects
+        context['categories'] = ProductCategory.objects.all()
+        context['number_of_products'] = ProductPage.objects.count() # Todo: update with tag
+        context['products'] = products
         context['category'] = category
         context['tag'] = tag
         context['author'] = author
-        context = get_project_context(context)
+        context = get_product_context(context)
 
         return context
 
 
     class Meta:
-        verbose_name = _('Projects index')
+        verbose_name = _('Products index')
 
-    subpage_types = ['fundraiser.ProjectPage']
+    subpage_types = ['fundraiser.ProductPage']
 
 
 @register_snippet
-class ProjectCategory(models.Model):
+class ProductCategory(models.Model):
     name = models.CharField(
         max_length=80, unique=True, verbose_name=_('Category Name'))
     slug = models.SlugField(unique=True, max_length=80)
@@ -137,8 +137,8 @@ class ProjectCategory(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = _("Project Category")
-        verbose_name_plural = _("Project Categories")
+        verbose_name = _("Product Category")
+        verbose_name_plural = _("Product Categories")
 
     panels = [
         FieldPanel('name'),
@@ -160,34 +160,34 @@ class ProjectCategory(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = slugify(self.name)
-            count = ProjectCategory.objects.filter(slug=slug).count()
+            count = ProductCategory.objects.filter(slug=slug).count()
             if count > 0:
                 slug = '{}-{}'.format(slug, count)
             self.slug = slug
-        return super(ProjectCategory, self).save(*args, **kwargs)
+        return super(ProductCategory, self).save(*args, **kwargs)
 
 
-class ProjectCategoryProjectPage(models.Model):
+class ProductCategoryProductPage(models.Model):
     category = models.ForeignKey(
-        ProjectCategory, related_name="+", verbose_name=_('Category'))
-    page = ParentalKey('ProjectPage', related_name='categories')
+        ProductCategory, related_name="+", verbose_name=_('Category'))
+    page = ParentalKey('ProductPage', related_name='categories')
     panels = [
         FieldPanel('category'),
     ]
 
 
-class ProjectPageTag(TaggedItemBase):
-    content_object = ParentalKey('ProjectPage', related_name='tagged_items')
+class ProductPageTag(TaggedItemBase):
+    content_object = ParentalKey('ProductPage', related_name='tagged_items')
 
 
 @register_snippet
-class ProjectTag(Tag):
+class ProductTag(Tag):
     class Meta:
         proxy = True
 
 
 def limit_author_choices():
-    """ Limit choices in project author field based on config settings """
+    """ Limit choices in product author field based on config settings """
     LIMIT_AUTHOR_CHOICES = getattr(settings, 'PROJECT_LIMIT_AUTHOR_CHOICES_GROUP', None)
     if LIMIT_AUTHOR_CHOICES:
         if isinstance(LIMIT_AUTHOR_CHOICES, str):
@@ -203,12 +203,13 @@ def limit_author_choices():
     return limit
 
 
-class ProjectPage(RoutablePageMixin, Page):
+class ProductPage(RoutablePageMixin, Page):
     teaser = models.TextField()
     description = RichTextField(blank=True)
     organisation = models.CharField(max_length=250, blank=True)
-    amount = models.IntegerField()
-    tags = ClusterTaggableManager(through=ProjectPageTag, blank=True)
+    amount = models.PositiveIntegerField()
+    prize = models.PositiveIntegerField
+    tags = ClusterTaggableManager(through=ProductPageTag, blank=True)
 
     date = models.DateField(
         _("Post date"), default=datetime.datetime.today,
@@ -229,7 +230,7 @@ class ProjectPage(RoutablePageMixin, Page):
         limit_choices_to=limit_author_choices,
         verbose_name=_('Author'),
         on_delete=models.SET_NULL,
-        related_name='author_project_pages',
+        related_name='author_product_pages',
     )
 
     search_fields = Page.search_fields + (
@@ -251,76 +252,29 @@ class ProjectPage(RoutablePageMixin, Page):
     def save_revision(self, *args, **kwargs):
         if not self.author:
             self.author = self.owner
-        return super(ProjectPage, self).save_revision(*args, **kwargs)
+        return super(ProductPage, self).save_revision(*args, **kwargs)
 
     def get_absolute_url(self):
         return self.url
 
-    def get_project_index(self):
-        # Find closest ancestor which is a project index
-        return self.get_ancestors().type(ProjectIndexPage).last()
+    def get_product_index(self):
+        # Find closest ancestor which is a product index
+        return self.get_ancestors().type(ProductIndexPage).last()
 
     def get_context(self, request, *args, **kwargs):
-        context = super(ProjectPage, self).get_context(request, *args, **kwargs)
-        context['projects'] = self.get_project_index().projectindexpage.projects
-        context = get_project_context(context)
+        context = super(ProductPage, self).get_context(request, *args, **kwargs)
+        context['products'] = self.get_product_index().productindexpage.products
+        context = get_product_context(context)
         return context
 
-    @route(r'^choose-bank/$')
-    def choose_bank(self, request):
-        api = SisowAPI(None, None)
-
-        return TemplateResponse(
-          request,
-           'fundraiser/banks.html',
-           { "banks" : api.providers,
-             "project": "TODO: get dynamic project name"}
-        )
-
-    @route(r'^start-payment/(?P<provider_id>\d+)/$')
-    def start_payment(self, request, *args, **kwargs):
-        (merchantid, merchantkey) = _account_from_file('account-sisow.secret')
-        api = SisowAPI(merchantid, merchantkey, testmode=True)
-
-        # Build transaction
-        entrance = datetime.datetime.now().strftime("E%Y%m%dT%H%M")
-        t = Transaction(entrance, 100, '06', entrance, 'Funder donatie')
-
-        # Send transaction
-        urls = WebshopURLs('https://funder.formatics.nl/projects/project-1/thanks')
-        response = api.start_transaction(t, urls)
-        if not response.is_valid(merchantid, merchantkey):
-            raise ValueError('Invalid SHA1')
-
-        url_ideal = urllib.url2pathname(response.issuerurl)
-        return TemplateResponse(
-          request,
-           'fundraiser/redirect_to_sisow.html',
-           { "provider_id" : "provider_id",
-             "project": "TODO: get dynamic project name",
-             "url_ideal": url_ideal}
-        )
-
-
-    @route(r'^thanks/$')
-    def thanks(self, request, *args, **kwargs):
-        return TemplateResponse(
-          request,
-           'fundraiser/thanks.html',
-           {
-               "status": request.GET.get('status'),
-               "trxid": request.GET.get('trxid'),
-               "ec": request.GET.get('ec')
-           }
-        )
 
     class Meta:
-        verbose_name = _('Project')
-        verbose_name_plural = _('Projects')
+        verbose_name = _('Product')
+        verbose_name_plural = _('Products')
 
-    parent_page_types = ['fundraiser.ProjectIndexPage']
+    parent_page_types = ['fundraiser.ProductIndexPage']
 
-ProjectPage.content_panels = [
+ProductPage.content_panels = [
     FieldPanel('title', classname="full title"),
     MultiFieldPanel([
         FieldPanel('tags'),
@@ -332,31 +286,3 @@ ProjectPage.content_panels = [
     FieldPanel('organisation', classname="full organisation"),
     FieldPanel('amount', classname="full amount"),
 ]
-
-
-class PledgeFormField(AbstractFormField):
-    page = ParentalKey('ProjectPage', related_name='pledge_form_fields')
-
-
-class PledgeFormPage(AbstractForm):
-    name = models.CharField(max_length=250, blank=True)
-    amount = models.IntegerField()
-
-    content_panels = AbstractForm.content_panels + [
-        FieldPanel('name', classname="full"),
-        FieldPanel('amount', classname="full"),
-    ]
-
-class Order(models.Model):
-    project = models.ForeignKey(ProjectPage, related_name='orders')
-    order_nr = models.TextField()
-    billing_name = models.CharField(max_length=250, blank=True)
-    billing_name = models.CharField(max_length=250, blank=True)
-    billing_company = models.CharField(max_length=250, blank=True)
-    billing_email = models.EmailField(blank=True)
-    billing_date = models.DateField(auto_now_add=True)
-    paid_date = models.DateField(editable=False)
-    paid_issuer = models.CharField(max_length=250, editable=False)
-    paid_id = models.CharField(max_length=250, editable=False)
-    anonymous = models.BooleanField(default=False)
-    amount = models.IntegerField()
