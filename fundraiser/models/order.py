@@ -57,7 +57,7 @@ class OrderIndexPage(RoutablePageMixin, Page):
         t = Transaction(entrance, 100, '06', entrance, 'Funder donatie')
 
         # Send transaction
-        urls = WebshopURLs('https://funder.formatics.nl/projects/project-1/thanks')
+        urls = WebshopURLs('https://funder.formatics.nl/order//thanks')
         response = api.start_transaction(t, urls)
         if not response.is_valid(merchantid, merchantkey):
             raise ValueError('Invalid SHA1')
@@ -87,7 +87,8 @@ class OrderIndexPage(RoutablePageMixin, Page):
     def add_project_to_cart(self, request, *args, **kwargs):
         project = ProjectPage.objects.get(id=request.POST.get('project_id'))
         cart = Cart(request)
-        cart.add(project, request.POST.get('amount'))
+        # Todo: check if project already exists and increase amount
+        cart.add(project, request.POST.get('amount'), 1)
         return redirect('/order/checkout')
 
 
