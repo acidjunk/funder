@@ -60,15 +60,6 @@
                 </button>
 
                 <div class="ui divider"></div>
-                    <a href="choose-bank/">
-                        <div class="ui large vertical animated button" tabindex="0">
-                            <div class="hidden content"><i class="paypal icon"></i> Donate now</div>
-                            <div class="visible content">
-                                <i class="shop icon"></i> Demo payment
-                            </div>
-                        </div>
-                    </a>
-                <div class="ui divider"></div>
 
                 <h3 class="ui header">Activity</h3>
 
@@ -122,37 +113,37 @@
 
                 </div>
 
-
-
-
                 <div class="ui divider"></div>
 
                 <h3 class="ui header">Comments</h3>
+                {% if project.show_comments %}
+                    <div id="disqus_thread"></div>
+                    <script>
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                         */
+                        /*
+                         var disqus_config = function () {
+                         this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                         this.page.identifier = '{{ project.slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                         };
+                         */
+                        (function () {  // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
 
-                <div id="disqus_thread"></div>
-                <script>
-                    /**
-                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-                     */
-                    /*
-                     var disqus_config = function () {
-                     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                     this.page.identifier = '{{ project.slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                     };
-                     */
-                    (function () {  // DON'T EDIT BELOW THIS LINE
-                        var d = document, s = d.createElement('script');
+                            s.src = '//funderdemosite.disqus.com/embed.js';
 
-                        s.src = '//funderdemosite.disqus.com/embed.js';
-
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
-                                                                  rel="nofollow">comments powered by Disqus.</a>
-                </noscript>
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                                                                      rel="nofollow">comments powered by Disqus.</a>
+                    </noscript>
+                {% else %}
+                    <p>Comments are disabled for this project</p>
+                {% endif %}
 
 
             </div>
@@ -176,24 +167,19 @@
             </div>
 
             <div class="ui raised segment">
-                <a class="ui purple ribbon label">Doneer nu!</a>
-
-                <form class="ui form">
+                <a class="ui purple ribbon label">Donate now!</a>
+                <form class="ui form" method="post" action="/order/add-project/">
+                    {% csrf_token %}
+                    <input type="hidden" name="project_id" value="{{ project.id }}">
                     <div class="field">
-                        <label>Naam</label>
-                        <input type="text" name="name" placeholder="Naam">
+                        <label>Name</label>
+                        <input type="text" name="name" placeholder="Name">
                     </div>
                     <div class="field">
-                        <label>Bedrag</label>
+                        <label>Amount</label>
                         <input type="text" name="amount" placeholder="50,00">
                     </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden">
-                            <label>I agree to the Terms and Conditions</label>
-                        </div>
-                    </div>
-                    <button class="ui purple button" type="submit">Doneer</button>
+                    <button class="ui purple button" type="submit">Donate</button>
                 </form>
             </div>
 

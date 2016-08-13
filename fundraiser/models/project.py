@@ -204,6 +204,7 @@ class ProjectPage(RoutablePageMixin, Page):
     description = RichTextField(blank=True)
     organisation = models.CharField(max_length=250, blank=True)
     amount = models.IntegerField()
+    show_comments = models.BooleanField(default=True)
     tags = ClusterTaggableManager(through=ProjectPageTag, blank=True)
 
     date = models.DateField(
@@ -280,4 +281,5 @@ ProjectPage.content_panels = [
     FieldPanel('description', classname="full"),
     FieldPanel('organisation', classname="full organisation"),
     FieldPanel('amount', classname="full amount"),
+    FieldPanel('show_comments')
 ]

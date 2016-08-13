@@ -220,6 +220,7 @@ class BlogPage(Page):
         on_delete=models.SET_NULL,
         related_name='author_blog_pages',
     )
+    show_comments = models.BooleanField(default=True)
 
     search_fields = Page.search_fields + (
         index.SearchField('body'),
@@ -272,4 +273,5 @@ BlogPage.content_panels = [
     ], heading="Tags and Categories"),
     ImageChooserPanel('header_image'),
     FieldPanel('body', classname="full"),
+    FieldPanel('show_comments')
 ]

@@ -3,11 +3,10 @@
 {% block content %}
 
     <h1 class="ui dividing header">
-        Donate
-        <div class="sub header">To "{{ project }}"</div>
+        Checkout
     </h1>
     <div class="ui stackable grid">
-        <div class="twelve wide column">
+        <div class="eleven wide column">
             <div class="ui segment">Check the form, and then click one of the banks to complete your donation.
                 <div class="ui equal width form">
                   <div class="fields">
@@ -34,9 +33,12 @@
                       <input type="checkbox" placeholder="Last Name">
                     </div>
                   </div>
+                    <div class="field">
+                      <label>I agree to the <a href="">terms and conditions</a></label>
+                      <input type="checkbox" placeholder="Last Name">
+                    </div>
                 </div>
             </div>
-
 
             <h2 class="ui dividing header">Choose a bank to continue</h2>
             {% if banks %}
@@ -60,12 +62,30 @@
             {% endif %}
 
         </div>
-        <div class="four wide column">
+        <div class="five wide column">
+            <div class="ui raised segment">
+                <h1 class="ui header">
+                    <i class="shopping cart icon"></i>
+                    <div class="content">Cart</div>
+                </h1>
+
+                <table class="ui very basic collapsing celled table">
+                    <tr>
+                        <th>Product/Project</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for item in cart %}
+                    <tr>
+                        <td>{{ item }}</td>
+                        <td>{{ item.total_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
 
             <div class="ui raised segment">
                 <h4>Newsletter</h4>
                 <p>Also subscribe to the newsletter?</p>
-
 
                 <div class="ui form">
 

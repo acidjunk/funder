@@ -1,6 +1,7 @@
 import datetime
 import urllib
 
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -34,13 +35,13 @@ class OrderIndexPage(RoutablePageMixin, Page):
           self.get_context(request)
         )
 
-    @route(r'^choose-bank/$')
-    def choose_bank(self, request):
+    @route(r'^checkout/$')
+    def checkout(self, request):
         api = SisowAPI(None, None)
 
         return TemplateResponse(
           request,
-           'fundraiser/banks.html',
+           'fundraiser/checkout.html',
            { "banks" : api.providers,
              "project": "TODO: get dynamic project name",
              "cart": Cart(request)}
@@ -70,7 +71,6 @@ class OrderIndexPage(RoutablePageMixin, Page):
              "url_ideal": url_ideal}
         )
 
-
     @route(r'^thanks/$')
     def thanks(self, request, *args, **kwargs):
         return TemplateResponse(
@@ -82,18 +82,13 @@ class OrderIndexPage(RoutablePageMixin, Page):
                "ec": request.GET.get('ec')
            }
         )
-    @route(r'^add_project/$')
+
+    @route(r'^add-project/$')
     def add_project_to_cart(self, request, *args, **kwargs):
-        project = ProjectPage.objects.get(id=request.GET.get('project_id'))
+        project = ProjectPage.objects.get(id=request.POST.get('project_id'))
         cart = Cart(request)
-        cart.add(project, 300, 1)
-        return TemplateResponse(
-          request,
-           'fundraiser/add.html',
-           {
-               "cart": Cart(request)
-           }
-        )
+        cart.add(project, request.POST.get('amount'))
+        return redirect('/order/checkout')
 
 
 def add_project_to_cart(request, project_id, prize):
