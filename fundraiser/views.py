@@ -1,15 +1,13 @@
 from django.contrib.syndication.views import Feed
 from django.views.generic import TemplateView
 from django.utils.feedgenerator import Atom1Feed
-from .models import ProjectIndexPage, ProjectPage, ProjectCategory
+from .models import ProductIndexPage, ProductPage, ProjectIndexPage, ProjectPage, ProjectCategory
 from django.shortcuts import get_object_or_404
 from django.conf import settings
-
 
 def tag_view(request, tag):
     index = ProjectIndexPage.objects.first()
     return index.serve(request, tag=tag)
-
 
 def category_view(request, category):
     index = ProjectIndexPage.objects.first()
@@ -19,6 +17,8 @@ def category_view(request, category):
 def author_view(request, author):
     index = ProjectIndexPage.objects.first()
     return index.serve(request, author=author)
+
+
 
 
 class LatestEntriesFeed(Feed):
