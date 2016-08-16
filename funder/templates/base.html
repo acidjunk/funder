@@ -73,10 +73,12 @@
                     </a>
                 </div>
             </div>
-            <div class="ui inverted vertical fluid menu">
+
+            <div class="ui vertical fluid menu" style="margin-top: -14px;">
                 <a href="" class="item">Blog</a>
                 <a href="" class="item">Contact</a>
             </div>
+
             <div class="ui hidden divider"></div>
         </div>
 
@@ -90,10 +92,18 @@
             <div class="ui center aligned container">
                 <div class="ui stackable inverted divided grid">
                     <div class="three wide column">
+                        <h4 class="ui inverted header"><i class="rss icon"></i>Product Feeds</h4>
+                        <div class="ui inverted link list">
+                            <a href="/products/products-category/animal/feed/" class="item">Animal</a>
+                            <a href="/products/productst-category/neighborhood/feed/" class="item">Neighborhood</a>
+                            <a href="/products/productst-category/wellfare/feed/" class="item">Wellfare</a>
+                        </div>
+                    </div>
+                    <div class="three wide column">
                         <h4 class="ui inverted header"><i class="rss icon"></i>Project Feeds</h4>
                         <div class="ui inverted link list">
-                            <a href="/projects/category/live/feed/" class="item">International</a>
-                            <a href="/projects/category/local-area/feed/" class="item">Local Area</a>
+                            <a href="/projects/project-category/international/feed/" class="item">International</a>
+                            <a href="/projects/project-category/local-area/feed/" class="item">Local Area</a>
                         </div>
                     </div>
                     <div class="three wide column">
@@ -102,25 +112,17 @@
                             <a href="/blog/category/live/feed/" class="item">Category Live</a>
                         </div>
                     </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header"><i class="info circle icon"></i> About</h4>
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">About us</a>
-                            <a href="#" class="item">Press</a>
-                            <a href="#" class="item">Link Three</a>
-                            <a href="#" class="item">Link Four</a>
-                        </div>
-                    </div>
                     <div class="seven wide column">
-                        <h4 class="ui inverted header">Footer Header</h4>
-                        <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+                        <h4 class="ui inverted header">Want to add your own project or product?</h4>
+                        <p>We are always open for suggestions. If you are running your own non profit organisation and
+                            want to join us, please fill out the <a href="/contact">form</a>.</p>
                     </div>
                 </div>
                 <div class="ui inverted section divider"></div>
                 <img src="{% static "images/logo.png" %}" class="ui centered mini image">
                 <div class="ui horizontal inverted small divided link list">
                     <a class="item" href="#">Site Map</a>
-                    <a class="item" href="#">Contact Us</a>
+                    <a class="item" href="/contact">Contact Us</a>
                     <a class="item" href="#">Terms and Conditions</a>
                     <a class="item" href="#">Privacy Policy</a>
                 </div>

@@ -1,0 +1,86 @@
+{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="ui stackable grid">
+        <div class="twelve wide column">
+            <div class="ui raised segment">
+
+                <h1 class="ui dividing header" style="margin-top: -2px;">
+                    <div class="content">
+                        {{ product.title }}
+                        <div class="sub header">
+
+                            <a href="javascript: history.go(-1)" class="icon button"><i
+                                    class="double angle left icon"></i>back</a>
+                            By {{ product.author }} on {{ product.date|date:"F jS, Y" }}
+                        </div>
+                    </div>
+                </h1>
+
+
+                {% image self.header_image width-800 class="ui fluid image" %}
+
+                <div class="ui divider"></div>
+                {{ page.description|richtext }}
+                <div class="ui divider"></div>
+                <h3 class="ui header">Share on</h3>
+                <button class="ui circular linkedin icon button" st_title="{{ product.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl product %}" displayText="LinkedIn"><i
+                        class="linkedin icon"></i>
+                </button>
+                <button class="ui circular twitter icon button" st_title="{{ product.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl product %}" displayText="Tweet"><i class="twitter icon"></i>
+                </button>
+                <button class="ui circular facebook icon button" st_title="{{ product.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl product %}" displayText="Facebook"><i
+                        class="facebook icon"></i>
+                </button>
+                <button class="ui circular google plus icon button" st_title="{{ product.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl product %}" displayText="Google +1"><i
+                        class="google plus icon"></i>
+                </button>
+                <button class="ui circular mail icon button" st_title="{{ product.title }}"
+                        st_url="{{ SITE_URL }}{% pageurl product %}"
+                        displayText="Email"><i class="mail icon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui raised segment">
+
+                <div class="ui statistic">
+                    <div class="label">
+                        Prize
+                    </div>
+                    <div class="value">
+                        &euro; {{ product.prize }},-
+                    </div>
+                </div>
+
+                <form class="ui form" method="post" action="/order/add-product/">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <div class="field">
+                        <label>Quantity</label>
+                        <input type="text" name="quantity" value="1">
+                    </div>
+                    <button class="ui purple button" type="submit">Add to shopping basket</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        $(document).ready(function () {
+            $('#product').progress({
+                percent: Math.floor((Math.random() * 100) + 1),
+            });
+        });
+    </script>
+{% endblock %}

@@ -72,11 +72,13 @@
                 <table class="ui very basic collapsing celled table">
                     <tr>
                         <th>Product/Project</th>
+                        <th>Quantity</th>
                         <th>Price</th>
                     </tr>
                     {% for item in cart %}
                     <tr>
-                        <td>{{ item }}</td>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.quantity }}</td>
                         <td>{{ item.total_price }}</td>
                     </tr>
                     {% endfor %}

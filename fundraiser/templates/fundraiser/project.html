@@ -26,11 +26,11 @@
                     <table class="ui definition table">
                         <tr>
                             <td>Amount needed</td>
-                            <td>{{ page.amount }}</td>
+                            <td>{{ project.amount }}</td>
                         </tr>
                         <tr>
                             <td>Organisation</td>
-                            <td>{{ page.organisation }}</td>
+                            <td>{{ project.organisation }}</td>
                         </tr>
                     </table>
 
@@ -173,11 +173,11 @@
                     <input type="hidden" name="project_id" value="{{ project.id }}">
                     <div class="field">
                         <label>Name</label>
-                        <input type="text" name="name" placeholder="Name">
+                        <input type="text" name="name" value="Testuser">
                     </div>
                     <div class="field">
                         <label>Amount</label>
-                        <input type="text" name="amount" placeholder="50">
+                        <input type="text" name="amount" value="50">
                     </div>
                     <button class="ui purple button" type="submit">Donate</button>
                 </form>

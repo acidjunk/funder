@@ -91,6 +91,14 @@ class OrderIndexPage(RoutablePageMixin, Page):
         cart.add(project, request.POST.get('amount'), 1)
         return redirect('/order/checkout')
 
+    @route(r'^add-product/$')
+    def add_product_to_cart(self, request, *args, **kwargs):
+        product = ProductPage.objects.get(id=request.POST.get('product_id'))
+        cart = Cart(request)
+        # Todo: check if project already exists and increase amount
+        cart.add(product, product.prize, request.POST.get('quantity'))
+        return redirect('/order/checkout')
+
 
 def add_project_to_cart(request, project_id, prize):
     project = ProjectPage.objects.get(id=project_id)

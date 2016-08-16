@@ -8,12 +8,10 @@ from django.db import models
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import slugify
-from django.template.response import TemplateResponse
 from django.utils.translation import ugettext_lazy as _
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailforms.models import AbstractForm, AbstractFormField
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel, MultiFieldPanel, FieldRowPanel)
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -24,10 +22,6 @@ from modelcluster.contrib.taggit import  ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 import datetime
 
-from sisow import _account_from_file
-from sisow import SisowAPI
-from sisow import Transaction
-from sisow import WebshopURLs
 
 def get_product_context(context):
     """
@@ -186,7 +180,7 @@ class ProductTag(Tag):
         proxy = True
 
 
-def limit_author_choices():
+def product_limit_author_choices():
     """ Limit choices in product author field based on config settings """
     LIMIT_AUTHOR_CHOICES = getattr(settings, 'PROJECT_LIMIT_AUTHOR_CHOICES_GROUP', None)
     if LIMIT_AUTHOR_CHOICES:
@@ -208,7 +202,7 @@ class ProductPage(RoutablePageMixin, Page):
     description = RichTextField(blank=True)
     organisation = models.CharField(max_length=250, blank=True)
     stock = models.PositiveIntegerField()
-    prize = models.PositiveIntegerField
+    prize = models.PositiveIntegerField()
     tags = ClusterTaggableManager(through=ProductPageTag, blank=True)
 
     date = models.DateField(
@@ -227,7 +221,7 @@ class ProductPage(RoutablePageMixin, Page):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         blank=True, null=True,
-        limit_choices_to=limit_author_choices,
+        limit_choices_to=product_limit_author_choices,
         verbose_name=_('Author'),
         on_delete=models.SET_NULL,
         related_name='author_product_pages',
@@ -284,5 +278,6 @@ ProductPage.content_panels = [
     FieldPanel('teaser', classname="full intro"),
     FieldPanel('description', classname="full"),
     FieldPanel('organisation', classname="full organisation"),
+    FieldPanel('prize', classname="full prize"),
     FieldPanel('stock', classname="full stock"),
 ]
