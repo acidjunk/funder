@@ -9,7 +9,17 @@
             <div class="ui form">
                 <form action="{% pageurl page %}" method="POST">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {% for field in form %}
+                        <div class="field{% if field.errors %} error {% endif %}">
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                        {% if field.errors %}
+                              <div class="ui negative message">
+                                {% for error in  field.errors %}{{ error }}{% endfor %}
+                              </div>
+                        {% endif %}
+                    {% endfor %}
                     <button class="ui primary button"><i class="mail icon"></i> submit</button>
                 </form>
             </div>
