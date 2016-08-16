@@ -207,7 +207,7 @@ class ProductPage(RoutablePageMixin, Page):
     teaser = models.TextField()
     description = RichTextField(blank=True)
     organisation = models.CharField(max_length=250, blank=True)
-    amount = models.PositiveIntegerField()
+    stock = models.PositiveIntegerField()
     prize = models.PositiveIntegerField
     tags = ClusterTaggableManager(through=ProductPageTag, blank=True)
 
@@ -284,5 +284,5 @@ ProductPage.content_panels = [
     FieldPanel('teaser', classname="full intro"),
     FieldPanel('description', classname="full"),
     FieldPanel('organisation', classname="full organisation"),
-    FieldPanel('amount', classname="full amount"),
+    FieldPanel('stock', classname="full stock"),
 ]
