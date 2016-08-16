@@ -1,0 +1,15 @@
+.mobile.only.row {
+    display: none;
+}
+.ui.inverted.vertical.fluid.menu {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .mobile.only.row {
+        display: block;
+    }
+    .desktop.only.row {
+        display: none;
+    }
+}

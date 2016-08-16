@@ -84,7 +84,7 @@
                         {% if product.tags.all %}
                             {% if product.tags.all %}&nbsp;{% endif %}<i class="tags icon"></i>
                             {% for tag in product.tags.all %}
-                                <a href="{% url 'product:tag' tag.slug %}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                                <a href="{% url 'product:product_tag' tag.slug %}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
                             {% endfor %}
                         {% endif %}
 
