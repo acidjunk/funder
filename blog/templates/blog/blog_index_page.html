@@ -146,8 +146,10 @@
                 <div class="item">
                     <h4>Search</h4>
                     <div class="ui transparent icon input">
-                        <input type="text" placeholder="Search posts...">
-                        <i class="search icon"></i>
+                        <form action="{% url 'blog:search' %}" method="get">
+                            <input type="text" name="query" placeholder="Search posts...">
+                            <i class="search icon"></i>
+                        </form>
                     </div>
                 </div>
             </div>

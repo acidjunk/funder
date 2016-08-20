@@ -1,9 +1,10 @@
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from .models import BlogIndexPage, BlogPage, BlogCategory
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.conf import settings
 
+from wagtail.wagtailsearch.models import Query
 
 def tag_view(request, tag):
     index = BlogIndexPage.objects.first()
@@ -19,6 +20,23 @@ def author_view(request, author):
     index = BlogIndexPage.objects.first()
     return index.serve(request, author=author)
 
+def search(request):
+    # Search
+    search_query = request.GET.get('query', None)
+    if search_query:
+        search_results = BlogPage.objects.live().search(search_query)
+        print search_results
+
+        # Log the query so Wagtail can suggest promoted results
+        Query.get(search_query).add_hit()
+    else:
+        search_results = BlogPage.objects.none()
+
+    # Render template
+    return render(request, 'blog/search_results.html', {
+        'search_query': search_query,
+        'search_results': search_results,
+    })
 
 class LatestEntriesFeed(Feed):
     '''

@@ -2,8 +2,32 @@ from django.contrib.syndication.views import Feed
 from django.views.generic import TemplateView
 from django.utils.feedgenerator import Atom1Feed
 from .models import ProductIndexPage, ProductPage, ProjectIndexPage, ProjectPage, ProjectCategory
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.conf import settings
+
+# Todo use: generic Page to make search accross aa couple of tables
+from wagtail.wagtailcore.models import Page
+
+from wagtail.wagtailsearch.models import Query
+
+def search(request):
+    # Search
+    search_query = request.GET.get('query', None)
+    if search_query:
+        search_results = ProjectPage.objects.live().search(search_query)
+        print search_results
+
+        # Log the query so Wagtail can suggest promoted results
+        Query.get(search_query).add_hit()
+    else:
+        search_results = ProjectPage.objects.none()
+
+    # Render template
+    return render(request, 'fundraiser/search_results.html', {
+        'search_query': search_query,
+        'search_results': search_results,
+    })
+
 
 def project_tag_view(request, tag):
     index = ProjectIndexPage.objects.first()

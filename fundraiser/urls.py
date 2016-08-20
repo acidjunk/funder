@@ -3,6 +3,7 @@ from . import views
 
 
 urlpatterns = [
+    url(r'^search/', views.search, name="search"),
     url(r'^project-tag/(?P<tag>[-\w]+)/', views.project_tag_view, name="project_tag"),
     url(r'^product-tag/(?P<tag>[-\w]+)/', views.product_tag_view, name="product_tag"),
 

@@ -3,6 +3,7 @@ from . import views
 
 
 urlpatterns = [
+    url(r'^search/', views.search, name="search"),
     url(r'^tag/(?P<tag>[-\w]+)/', views.tag_view, name="tag"),
     url(r'^category/(?P<category>[-\w]+)/feed/$', views.LatestCategoryFeed(), name="category_feed"),
     url(r'^category/(?P<category>[-\w]+)/', views.category_view, name="category"),
