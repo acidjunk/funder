@@ -10,7 +10,7 @@ from wagtail.wagtailcore.models import Page
 
 from wagtail.wagtailsearch.models import Query
 
-def search(request):
+def project_search(request):
     # Search
     search_query = request.GET.get('query', None)
     if search_query:
@@ -24,10 +24,29 @@ def search(request):
 
     # Render template
     return render(request, 'fundraiser/search_results.html', {
+        'title': 'Project search results',
         'search_query': search_query,
         'search_results': search_results,
     })
 
+def product_search(request):
+    # Search
+    search_query = request.GET.get('query', None)
+    if search_query:
+        search_results = ProductPage.objects.live().search(search_query)
+        print search_results
+
+        # Log the query so Wagtail can suggest promoted results
+        Query.get(search_query).add_hit()
+    else:
+        search_results = ProductPage.objects.none()
+
+    # Render template
+    return render(request, 'fundraiser/search_results.html', {
+        'title': 'Product search results',
+        'search_query': search_query,
+        'search_results': search_results,
+    })
 
 def project_tag_view(request, tag):
     index = ProjectIndexPage.objects.first()

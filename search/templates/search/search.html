@@ -6,33 +6,79 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-    <h1>Search</h1>
+    <div class="ui stackable grid">
+        <div class="thirteen wide column">
+            <h1 class="ui dividing header">Search results</h1>
 
-    <form action="{% url 'search' %}" method="get">
-        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search">
-    </form>
+            {% if search_results %}
+                <ul>
+                    {% for result in search_results %}
+                        <li>
+                            <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
+                            {% if result.search_description %}
+                                {{ result.search_description|safe }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
 
-    {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-                    {% if result.search_description %}
-                        {{ result.search_description|safe }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+                {% if search_results.has_previous %}
+                    <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
+                {% endif %}
 
-        {% if search_results.has_previous %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-        {% endif %}
+                {% if search_results.has_next %}
+                    <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
+                {% endif %}
+            {% elif search_query %}
+                No results found
+            {% else %}
+                Please type something into the search box
+            {% endif %}
+        </div>
+        <div class="three wide column">
 
-        {% if search_results.has_next %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-        {% endif %}
-    {% elif search_query %}
-        No results found
-    {% endif %}
+            <div class="ui vertical menu">
+                <div class="item">
+                    <h4>Refine Search</h4>
+                    <form action="{% url 'search' %}" method="get">
+                        <div class="ui form">
+                            <div class="field">
+                                 <input type="text" name="query" placeholder="Enter search phrase..."{% if search_query %} value="{{ search_query }}"{% endif %}>
+                            </div>
+                            <div class="inline field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" tabindex="0" class="hidden" checked="checked">
+                                    <label>Search site wide</label>
+                                </div>
+                            </div>
+
+                            <div class="inline field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" tabindex="0" class="hidden">
+                                    <label>Blog</label>
+                                </div>
+                            </div>
+
+                            <div class="inline field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" tabindex="0" class="hidden">
+                                    <label>Products</label>
+                                </div>
+                            </div>
+
+                            <div class="inline field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" tabindex="0" class="hidden">
+                                    <label>Projects</label>
+                                </div>
+                            </div>
+
+                            <button class="ui purple button"><i class="search icon"></i> Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

@@ -6,7 +6,8 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 
-from search import views as search_views
+from search.views import search
+from fundraiser.views import project_search, product_search
 
 
 urlpatterns = [
@@ -16,7 +17,9 @@ urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^search/$', search_views.search, name='search'),
+    url(r'^search/$', search, name='search'),
+    url(r'^projects/search/$', project_search, name='project_search'),
+    url(r'^products/search/$', product_search, name='product_search'),
     url(r'', include(wagtail_urls)),
 ]
 
