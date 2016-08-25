@@ -11,7 +11,7 @@ from .models import (BlogPage, BlogTag, BlogPageTag, BlogIndexPage,
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Group
-django.setup()
+
 
 class BlogTests(TestCase):
     def setUp(self):
