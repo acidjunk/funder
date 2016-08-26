@@ -57,14 +57,11 @@
                             <div class="blurring dimmable image">
                                 <div class="ui dimmer">
                                     <div class="content">
-                                        <div class="center">
-                                            <a href="../start-payment/{{ bank.id }}"><div class="ui huge inverted icon button"><i class="trophy icon"></i> Checkout</div></a>
-                                        </div>
                                     </div>
                                 </div>
                                 <img src="/static/images/sisow/providers/{{ bank.name }}.png">
                             </div>
-                        </div>
+                      </div>
                     {% endfor %}
                 </div>
             {% endif %}
@@ -132,9 +129,6 @@
 
 {% block extra_js %}
 <script>
-$('.ui.cards .image').dimmer({
-    on: 'hover'
-});
 $('.ui.card').on("click", function () {
     var provider_id = $(this).attr('data-value');
     $('input[name="provider_id"]').val(provider_id)
