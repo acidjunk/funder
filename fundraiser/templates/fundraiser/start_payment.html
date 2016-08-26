@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+
+<div class="ui raised segment">
+    <h1 class="ui divided header">Temp redirect page</h1>
+    <table class="ui definition table">
+        <tr>
+            <td>Cart</td>
+            <td>
+                <table class="ui very basic collapsing celled table">
+                    <tr>
+                        <th>Product/Project</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for item in cart.cart %}
+                    <tr>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.total_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Order</td><td>{{ order.order_nr }}</td>
+        </tr>
+        <tr>
+            <td>Name</td><td>{{ order.billing_name }}</td>
+        </tr>
+        <tr>
+            <td>Organisation</td><td>{{ order.billing_company }}</td>
+        </tr>
+        <tr>
+            <td>Provider ID</td><td>{{ provider_id }}</td>
+        </tr>
+        <tr>
+            <td>Redirect URL</td><td><a href="{{ url_ideal }}">{{ url_ideal }}</a></td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

@@ -16,6 +16,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DISQUS_API_KEY = 'h4Cu1Eo53R34Q9QAsBInvU2p62wVi8rKCXVhqaMSNHLUbSQhv3wvueiBUFafwtPq'
 DISQUS_WEBSITE_SHORTNAME = 'Funder DEMO site'
 
+INSTALLED_APPS.append('debug_toolbar')
 try:
     from .local import *
 except ImportError:

@@ -83,11 +83,9 @@ class OrderIndexPage(RoutablePageMixin, Page):
         url_ideal = urllib.url2pathname(response.issuerurl)
         return TemplateResponse(
           request,
-           'fundraiser/redirect_to_sisow.html',
+           'fundraiser/start_payment.html',
             {
-                "name": name,
                 "order": order,
-                "organisation": organisation,
                 "provider_id": provider_id,
                 "url_ideal": url_ideal,
                 "cart": Cart(request),
@@ -155,7 +153,7 @@ class Order(models.Model):
     billing_company = models.CharField(max_length=250, blank=True)
     billing_email = models.EmailField(blank=True)
     billing_date = models.DateField(auto_now_add=True)
-    paid_date = models.DateField(editable=False, blank=True)
+    paid_date = models.DateField(editable=False, blank=True, null=True)
     paid_issuer = models.CharField(max_length=250, editable=False)
     paid_id = models.CharField(max_length=250, editable=False)
     anonymous = models.BooleanField(default=False)
