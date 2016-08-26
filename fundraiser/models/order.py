@@ -90,8 +90,8 @@ class OrderIndexPage(RoutablePageMixin, Page):
         t = Transaction(entrance, total_with_vat, '06', entrance, 'Funder donation')
         # Send transaction
         # Todo live URL
-        #urls = WebshopURLs('https://funder.formatics.nl/order/thanks')
-        urls = WebshopURLs('https://0.0.0.0:8000/order/thanks/?order_nr={}'.format(order.order_nr))
+        #urls = WebshopURLs('https://funder.formatics.nl/order/thanks/?order_nr={}'.format(order.order_nr)')
+        urls = WebshopURLs('http://0.0.0.0:8000/order/thanks/?order_nr={}'.format(order.order_nr))
         response = api.start_transaction(t, urls)
         if not response.is_valid(merchantid, merchantkey):
             raise ValueError('Invalid SHA1')
@@ -105,7 +105,6 @@ class OrderIndexPage(RoutablePageMixin, Page):
                 "total_with_vat": total_with_vat,
                 "provider_id": provider_id,
                 "url_ideal": url_ideal,
-                #"cart": Cart(request),
             }
         )
 
@@ -114,13 +113,20 @@ class OrderIndexPage(RoutablePageMixin, Page):
         status = request.GET.get('status')
         order_nr = request.GET.get('order_nr')
 
-        if status == "Success" and order_nr:
+        if status == "Success" and order_nr:  # todo add extra checks for trxid/ec/order_nr in session for reliable checkout
             print("Payment complete for order_nr {}".format(order_nr))
             order = Order.objects.get(order_nr=order_nr)
             order.paid_date=datetime.datetime.now()
             order.save()
             del request.session['CART-ID']
-
+            # look for items in order and deal with product stock change + project amount
+            for item in order.cart.item_set.all():
+                wagtail_page = item.get_product()
+                if wagtail_page.__class__.__name__ == "ProductPage":
+                    wagtail_page.stock -= item.quantity
+                if wagtail_page.__class__.__name__ == "ProjectPage":
+                    wagtail_page.amount += item.total_price
+                wagtail_page.save()
 
         return TemplateResponse(
           request,
