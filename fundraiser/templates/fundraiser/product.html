@@ -24,6 +24,12 @@
 
                 <div class="ui divider"></div>
                 {{ page.description|richtext }}
+
+                <div class="ui divider"></div>
+                <h2 class="ui sub header">
+                  Current stock: {{ product.stock }}
+                </h2>
+
                 <div class="ui divider"></div>
                 <h3 class="ui header">Share on</h3>
                 <button class="ui circular linkedin icon button" st_title="{{ product.title }}"

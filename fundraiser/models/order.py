@@ -89,9 +89,9 @@ class OrderIndexPage(RoutablePageMixin, Page):
         entrance = datetime.datetime.now().strftime("E%Y%m%dT%H%M")
         t = Transaction(entrance, total_with_vat, '06', entrance, 'Funder donation')
         # Send transaction
-        # Todo live URL
-        #urls = WebshopURLs('https://funder.formatics.nl/order/thanks/?order_nr={}'.format(order.order_nr)')
-        urls = WebshopURLs('http://0.0.0.0:8000/order/thanks/?order_nr={}'.format(order.order_nr))
+        # Todo: create something with a setting:
+        urls = WebshopURLs('https://funder.formatics.nl/order/thanks/?order_nr={}'.format(order.order_nr))
+        #urls = WebshopURLs('http://0.0.0.0:8000/order/thanks/?order_nr={}'.format(order.order_nr))
         response = api.start_transaction(t, urls)
         if not response.is_valid(merchantid, merchantkey):
             raise ValueError('Invalid SHA1')
@@ -113,6 +113,7 @@ class OrderIndexPage(RoutablePageMixin, Page):
         status = request.GET.get('status')
         order_nr = request.GET.get('order_nr')
 
+        # Todo add check so closed order will raise an Exception
         if status == "Success" and order_nr:  # todo add extra checks for trxid/ec/order_nr in session for reliable checkout
             print("Payment complete for order_nr {}".format(order_nr))
             order = Order.objects.get(order_nr=order_nr)
@@ -124,9 +125,10 @@ class OrderIndexPage(RoutablePageMixin, Page):
                 wagtail_page = item.get_product()
                 if wagtail_page.__class__.__name__ == "ProductPage":
                     wagtail_page.stock -= item.quantity
-                if wagtail_page.__class__.__name__ == "ProjectPage":
-                    wagtail_page.amount += item.total_price
-                wagtail_page.save()
+                    wagtail_page.save()
+                elif wagtail_page.__class__.__name__ == "ProjectPage":
+                    wagtail_page.amount_raised += item.total_price
+                    wagtail_page.save()
 
         return TemplateResponse(
           request,

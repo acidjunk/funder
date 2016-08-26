@@ -15,7 +15,7 @@ class ProductPageModelAdmin(ModelAdmin):
 class ProjectPageModelAdmin(ModelAdmin):
     model = ProjectPage
     menu_icon = 'doc-full-inverse'  # change as required
-    list_display = ('title', 'organisation', 'teaser', 'amount', 'live')
+    list_display = ('title', 'organisation', 'teaser', 'amount_needed', 'amount_raised', 'live')
     # list_filter = ('live', 'organisation', 'tags')
     search_fields = ('title',)
 

@@ -201,7 +201,8 @@ class ProjectPage(RoutablePageMixin, Page):
     teaser = models.TextField()
     description = RichTextField(blank=True)
     organisation = models.CharField(max_length=250, blank=True)
-    amount = models.IntegerField()
+    amount_needed = models.IntegerField()
+    amount_raised = models.IntegerField(default=0)
     show_comments = models.BooleanField(default=True)
     tags = ClusterTaggableManager(through=ProjectPageTag, blank=True)
 
@@ -278,6 +279,6 @@ ProjectPage.content_panels = [
     FieldPanel('teaser', classname="full intro"),
     FieldPanel('description', classname="full"),
     FieldPanel('organisation', classname="full organisation"),
-    FieldPanel('amount', classname="full amount"),
+    FieldPanel('amount_needed', classname="full amount needed"),
     FieldPanel('show_comments')
 ]

@@ -6,7 +6,7 @@
     Checkout
 </h1>
 
-<form method="post" id="funder_checkout_form" action="/order/start-payment/">
+<form method="post" class="ui form" id="funder_checkout_form" action="/order/start-payment/">
     {% csrf_token %}
     <input type="hidden" name="provider_id">
 
@@ -30,22 +30,23 @@
                     <div class="fields">
                         <div class="field">
                             <label>E-mail</label>
-                            <input type="text" placeholder="Email">
+                            <input type="text" name="email" placeholder="Email">
                         </div>
                         <div class="field"><label>Anonymous?</label>
 
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="gift" tabindex="0" class="hidden">
+                                <input type="checkbox" name="anonymous" tabindex="0" class="hidden">
                                 <label>Do not show my name on the project pages</label>
                             </div>
                         </div>
                     </div>
                     <div class="field">
                       <label>I agree to the <a href="">terms and conditions</a></label>
-                      <input type="checkbox" placeholder="Last Name">
+                      <input type="checkbox" name="terms">
                     </div>
                 </div>
             </div>
+            <div class="ui error message"></div>
 
             <h2 class="ui dividing header">Choose a bank to continue</h2>
             {% if banks %}
@@ -131,48 +132,77 @@
 
 {% block extra_js %}
 <script>
-    $('.ui.cards .image').dimmer({
-        on: 'hover'
-    });
-    $('.ui.card').on("click", function () {
-        var provider_id = $(this).attr('data-value');
-        $('input[name="provider_id"]').val(provider_id)
-        $('#funder_checkout_form').submit();
+$('.ui.cards .image').dimmer({
+    on: 'hover'
+});
+$('.ui.card').on("click", function () {
+    var provider_id = $(this).attr('data-value');
+    $('input[name="provider_id"]').val(provider_id)
+    $('#funder_checkout_form').submit();
+});
+
+
+$(document).ready(function() {
+
+    // validation
+    $('.ui.form').form({
+        fields: {
+            name: {
+                identifier: 'name',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: 'Please enter an name'
+                    }
+                ]
+            },
+
+            email: {
+                identifier: 'email',
+                optional: true,
+                rules: [
+                    {
+                        type: 'email',
+                        prompt: 'Please enter an email'
+                    }
+                ]
+            },
+
+            terms: {
+                identifier: 'terms',
+                rules: [
+                    {
+                        type: 'checked',
+                        prompt: 'You must agree to the terms and conditions'
+                    }
+                ]
+            }
+        }
     });
 
-$('.ui.form')
-  .form({
-    fields: {
-      name: {
-        identifier: 'name',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please enter your name'
-          }
-        ]
-      },
-      skills: {
-        identifier: 'bank',
-        rules: [
-          {
-            type   : 'empty',
-            prompt : 'Please select a bank'
-          }
-        ]
-      },
-      terms: {
-        identifier: 'terms',
-        rules: [
-          {
-            type   : 'checked',
-            prompt : 'You must agree to the terms and conditions'
-          }
-        ]
-      }
+    // called if correct data added to form
+    function validationpassed() {
+
+        // Multiple instances may have been bound to the form, only submit one.
+        // This is a workaround and not ideal.
+        // Improvements welcomed.
+
+        if (window.lock != "locked") {
+            var myform = $('.ui.form');
+            $.ajax({
+                type: myform.attr('method'),
+                url: myform.attr('action'),
+                data: myform.serialize(),
+                success: function (data) {
+                    //if successful at posting the form via ajax.
+                    myformposted(data);
+                    window.lock = "";
+                }
+            });
+        }
+        window.lock = "locked";
     }
-  })
-;
+});
 </script>
 {% endblock %}
 

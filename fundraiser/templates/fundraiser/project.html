@@ -25,7 +25,11 @@
                     <table class="ui definition table">
                         <tr>
                             <td>Amount needed</td>
-                            <td>{{ project.amount }}</td>
+                            <td>{{ project.amount_needed }}</td>
+                        </tr>
+                        <tr>
+                            <td>Amount raised</td>
+                            <td>{{ project.amount_raised }}</td>
                         </tr>
                         <tr>
                             <td>Organisation</td>
@@ -155,7 +159,7 @@
                         Status
                     </div>
                     <div class="value">
-                        54,-
+                        {{ project.amount_raised }}
                     </div>
                 </div>
 
@@ -193,9 +197,10 @@
 
 {% block extra_js %}
     <script>
+        var percentage = (({{ project.amount_raised }} / {{ project.amount_needed }}) * 100).toFixed(2);
         $(document).ready(function () {
             $('#project').progress({
-                percent: Math.floor((Math.random() * 100) + 1),
+                percent: percentage,
             });
         });
     </script>
