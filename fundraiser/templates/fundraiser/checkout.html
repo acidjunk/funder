@@ -12,32 +12,34 @@
 
     <div class="ui stackable grid">
         <div class="eleven wide column">
-            <div class="ui segment">Check the form, and then click one of the banks to complete your donation.
+            <div class="ui segment"><p>Check the form, and then click one of the banks to complete your donation.</p>
                 <div class="ui equal width form">
                     <div class="fields">
-                    <div class="field">
-                      <label>Name</label>
-                      <input name="name" type="text" placeholder="Your name"{% if request.session.funder_name %} value="{{ request.session.funder_name }}"{% endif %}>
+                        <div class="required field">
+                            <label>Name</label>
+                            <input name="name" type="text" placeholder="Your name"{% if request.session.funder_name %}
+                                   value="{{ request.session.funder_name }}"{% endif %}>
+                        </div>
+                        <div class="field">
+                            <label>Organisation</label>
+                            <input name="organisation" type="text" placeholder="Your organisation's name if any"
+                                    {% if request.session.funder_organisation %}
+                                   value="{{ request.session.funder_organisation }}"{% endif %}>
+                        </div>
                     </div>
-                    <div class="field">
-                      <label>Organisation</label>
-                      <input name="organisation" type="text" placeholder="Your organisation's name if any"{% if request.session.funder_organisation %} value="{{ request.session.funder_organisation }}"{% endif %}>
+                    <div class="fields">
+                        <div class="field">
+                            <label>E-mail</label>
+                            <input type="text" placeholder="Email">
+                        </div>
+                        <div class="field"><label>Anonymous?</label>
+
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="gift" tabindex="0" class="hidden">
+                                <label>Do not show my name on the project pages</label>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="fields">
-                    <div class="field">
-                      <label>E-mail</label>
-                      <input type="text" placeholder="Email">
-                    </div>
-                    <div class="field">
-                      <label>Amount</label>
-                      <input type="text" placeholder="Amount">
-                    </div>
-                    <div class="field">
-                      <label>Anonymous</label>
-                      <input type="checkbox" placeholder="Last Name">
-                    </div>
-                  </div>
                     <div class="field">
                       <label>I agree to the <a href="">terms and conditions</a></label>
                       <input type="checkbox" placeholder="Last Name">
@@ -75,18 +77,33 @@
                 </h1>
 
                 <table class="ui very basic collapsing celled table">
-                    <tr>
-                        <th>Product/Project</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
-                    {% for item in cart %}
-                    <tr>
-                        <td>{{ item.product }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.total_price }}</td>
-                    </tr>
-                    {% endfor %}
+                    <thead>
+                        <tr>
+                            <th>Product/Project</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart %}
+                        <tr>
+                            <td>{{ item.product }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.total_price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">
+                                <div class="ui right floated basic segment">
+                                    <i>Total ex VAT: </i>{{ total_without_vat }}<br>
+                                    <div align="right"><i>VAT:</i>21%<br></div>
+                                    <i>Total with VAT:</i>{{ total_with_vat }}<br>
+                                </div>
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 

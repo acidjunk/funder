@@ -172,7 +172,7 @@
                     <input type="hidden" name="project_id" value="{{ project.id }}">
                     <div class="required field">
                         <label>Name</label>
-                        <input type="text" name="name" placeholder="Your name">
+                        <input type="text" name="name" placeholder="Your name"{% if request.session.funder_name %} value="{{ request.session.funder_name }}"{% endif %}>
                     </div>
                     <div class="required field">
                         <label>Amount</label>
@@ -180,7 +180,7 @@
                     </div>
                     <div class="field">
                         <label>Organisation</label>
-                        <input type="text" name="organisation" placeholder="Organisation">
+                        <input type="text" name="organisation" placeholder="Organisation"{% if request.session.funder_organisation %} value="{{ request.session.funder_organisation }}"{% endif %}>
                     </div>
                     <button class="ui purple button" type="submit">Donate</button>
                 </form>

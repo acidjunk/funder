@@ -2,6 +2,7 @@ import datetime
 import urllib
 import uuid
 
+import decimal
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.db import models
@@ -40,13 +41,21 @@ class OrderIndexPage(RoutablePageMixin, Page):
     @route(r'^checkout/$')
     def checkout(self, request):
         api = SisowAPI(None, None)
+        cart = Cart(request)
+
+        total_without_vat = 0
+        for item in cart:
+            total_without_vat += item.total_price
+        total_with_vat = int(total_without_vat* decimal.Decimal(1.21))*100
 
         return TemplateResponse(
             request,
             'fundraiser/checkout.html',
             {
                 "banks": api.providers,
-                "cart": Cart(request),
+                "cart": cart,
+                "total_without_vat": total_without_vat,
+                "total_with_vat": total_with_vat,
              }
         )
 
@@ -71,10 +80,15 @@ class OrderIndexPage(RoutablePageMixin, Page):
         (merchantid, merchantkey) = _account_from_file('account-sisow.secret')
         api = SisowAPI(merchantid, merchantkey, testmode=True)
 
+        total_without_vat = 0
+        for item in order.cart.item_set.all():
+            total_without_vat += item.total_price
+        total_with_vat = int(total_without_vat* decimal.Decimal(1.21))*100
+
         # Build transaction
         entrance = datetime.datetime.now().strftime("E%Y%m%dT%H%M")
-        t = Transaction(entrance, 100, '06', entrance, 'Funder donation')
-
+        t = Transaction(entrance, total_with_vat, '06', entrance, 'Funder donation')
+        print order.cart.__dict__
         # Send transaction
         urls = WebshopURLs('https://funder.formatics.nl/order/thanks')
         response = api.start_transaction(t, urls)
@@ -86,9 +100,11 @@ class OrderIndexPage(RoutablePageMixin, Page):
            'fundraiser/start_payment.html',
             {
                 "order": order,
+                "total_without_vat": total_without_vat,
+                "total_with_vat": total_with_vat,
                 "provider_id": provider_id,
                 "url_ideal": url_ideal,
-                "cart": Cart(request),
+                #"cart": Cart(request),
             }
         )
 
