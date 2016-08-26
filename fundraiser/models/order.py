@@ -88,9 +88,10 @@ class OrderIndexPage(RoutablePageMixin, Page):
         # Build transaction
         entrance = datetime.datetime.now().strftime("E%Y%m%dT%H%M")
         t = Transaction(entrance, total_with_vat, '06', entrance, 'Funder donation')
-        print order.cart.__dict__
         # Send transaction
-        urls = WebshopURLs('https://funder.formatics.nl/order/thanks')
+        # Todo live URL
+        #urls = WebshopURLs('https://funder.formatics.nl/order/thanks')
+        urls = WebshopURLs('https://0.0.0.0:8000/order/thanks/?order_nr={}'.format(order.order_nr))
         response = api.start_transaction(t, urls)
         if not response.is_valid(merchantid, merchantkey):
             raise ValueError('Invalid SHA1')
@@ -110,13 +111,25 @@ class OrderIndexPage(RoutablePageMixin, Page):
 
     @route(r'^thanks/$')
     def thanks(self, request, *args, **kwargs):
+        status = request.GET.get('status')
+        order_nr = request.GET.get('order_nr')
+
+        if status == "Success" and order_nr:
+            print("Payment complete for order_nr {}".format(order_nr))
+            order = Order.objects.get(order_nr=order_nr)
+            order.paid_date=datetime.datetime.now()
+            order.save()
+            del request.session['CART-ID']
+
+
         return TemplateResponse(
           request,
            'fundraiser/thanks.html',
            {
-               "status": request.GET.get('status'),
+               "status": status,
                "trxid": request.GET.get('trxid'),
-               "ec": request.GET.get('ec')
+               "ec": request.GET.get('ec'),
+               "order_nr": order_nr
            }
         )
 
