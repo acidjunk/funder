@@ -52,7 +52,7 @@
                             </div>
                             <a class="item" href="/order/checkout">
                                 <i class="shopping cart icon"></i>
-                                <div id="number_of_cart_items" class="floating ui tiny red circular label" style="top: 5px;">
+                                <div class="floating ui tiny red circular label number_of_cart_items" style="top: 5px;">
                                     {{ number_of_cart_items }}
                                 </div>
                             </a>
@@ -76,7 +76,7 @@
                     <a class="item" href="/projects">Projects</a>
                     <a class="item" href="/order/checkout">
                         <i class="shopping cart icon"></i>
-                        <div id="number_of_cart_items" class="floating ui tiny red circular label" style="top: 5px; left: 45px;">
+                        <div class="floating ui tiny red circular label number_of_cart_items" style="top: 5px; left: 45px;">
                             {{ number_of_cart_items }}
                         </div>
                     </a>
@@ -92,8 +92,7 @@
                     <a href="" class="item">Blog</a>
                     <a href="" class="item">Contact</a>
                     <div class="item">
-                        <input type="text" name="query" placeholder="Search..."{% if search_query %}
-                               value="{{ search_query }}"{% endif %}>
+                        <input type="text" name="query" placeholder="Search..."{% if search_query %} value="{{ search_query }}"{% endif %}>
                         <i class="search link icon"></i>
                     </div>
                 </div>

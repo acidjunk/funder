@@ -2,21 +2,26 @@
 {% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
 {% block content %}
 
-    <h1 class="ui dividing header">
-        Checkout
-    </h1>
+<h1 class="ui dividing header">
+    Checkout
+</h1>
+
+<form method="post" id="funder_checkout_form" action="/order/start-payment/">
+    {% csrf_token %}
+    <input type="hidden" name="provider_id">
+
     <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui segment">Check the form, and then click one of the banks to complete your donation.
                 <div class="ui equal width form">
-                  <div class="fields">
+                    <div class="fields">
                     <div class="field">
                       <label>Name</label>
-                      <input type="text" placeholder="Your name">
+                      <input name="name" type="text" placeholder="Your name"{% if request.session.funder_name %} value="{{ request.session.funder_name }}"{% endif %}>
                     </div>
                     <div class="field">
                       <label>Organisation</label>
-                      <input type="text" placeholder="You organisation's name if any">
+                      <input name="organisation" type="text" placeholder="Your organisation's name if any"{% if request.session.funder_organisation %} value="{{ request.session.funder_organisation }}"{% endif %}>
                     </div>
                   </div>
                   <div class="fields">
@@ -44,7 +49,7 @@
             {% if banks %}
                 <div class="ui three doubling link cards">
                     {% for bank in banks %}
-                        <div class="ui card">
+                        <div class="ui card" data-value="{{ bank.id }}">
                             <div class="content">{{ bank.name }}</div>
                             <div class="blurring dimmable image">
                                 <div class="ui dimmer">
@@ -104,7 +109,7 @@
         </div>
 
     </div>
-
+</form>
 {% endblock %}
 
 {% block extra_js %}
@@ -112,5 +117,46 @@
     $('.ui.cards .image').dimmer({
         on: 'hover'
     });
+    $('.ui.card').on("click", function () {
+        var provider_id = $(this).attr('data-value');
+        $('input[name="provider_id"]').val(provider_id)
+        $('#funder_checkout_form').submit();
+    });
+
+$('.ui.form')
+  .form({
+    fields: {
+      name: {
+        identifier: 'name',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter your name'
+          }
+        ]
+      },
+      skills: {
+        identifier: 'bank',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please select a bank'
+          }
+        ]
+      },
+      terms: {
+        identifier: 'terms',
+        rules: [
+          {
+            type   : 'checked',
+            prompt : 'You must agree to the terms and conditions'
+          }
+        ]
+      }
+    }
+  })
+;
 </script>
 {% endblock %}
+
+

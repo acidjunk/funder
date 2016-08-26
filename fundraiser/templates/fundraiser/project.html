@@ -19,7 +19,6 @@
                     </div>
                 </h1>
 
-
                 {% image self.header_image width-800 class="ui fluid image" %}
 
                 <div class="ui purple inverted segment">
@@ -171,13 +170,17 @@
                 <form class="ui form" method="post" action="/order/add-project/">
                     {% csrf_token %}
                     <input type="hidden" name="project_id" value="{{ project.id }}">
-                    <div class="field">
+                    <div class="required field">
                         <label>Name</label>
-                        <input type="text" name="name" value="Testuser">
+                        <input type="text" name="name" placeholder="Your name">
                     </div>
-                    <div class="field">
+                    <div class="required field">
                         <label>Amount</label>
                         <input type="text" name="amount" value="50">
+                    </div>
+                    <div class="field">
+                        <label>Organisation</label>
+                        <input type="text" name="organisation" placeholder="Organisation">
                     </div>
                     <button class="ui purple button" type="submit">Donate</button>
                 </form>
