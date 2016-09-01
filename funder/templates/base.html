@@ -1,5 +1,6 @@
 {% load static wagtailuserbar %}
 {% load staticfiles %}
+{% load i18n %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -39,14 +40,14 @@
                         <a href="/" class="header item">
                             <img class="logo" src="{% static "images/logo.png" %}" style="height: 30px; width: 115px;">
                         </a>
-                        <a class="item" href="/blog">Blog</a>
-                        <a class="item" href="/products">Products</a>
-                        <a class="item" href="/projects">Projects</a>
-                        <a class="item" href="/contact">Contact</a>
+                        <a class="item" href="/blog">{% trans "Blog" %}</a>
+                        <a class="item" href="/products">{% trans "Products" %}</a>
+                        <a class="item" href="/projects">{% trans "Projects" %}</a>
+                        <a class="item" href="/contact">{% trans "Contact" %}</a>
                         <div class="right menu">
                             <div class="item">
                                 <div class="ui icon input">
-                                    <input type="text" name="query" placeholder="Search..."{% if search_query %} value="{{ search_query }}"{% endif %}>
+                                    <input type="text" name="query" placeholder="{% trans "Search..." %}"{% if search_query %} value="{{ search_query }}"{% endif %}>
                                     <i class="search link icon"></i>
                                 </div>
                             </div>
