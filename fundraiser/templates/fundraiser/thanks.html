@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
+{% load gravatar humanize wagtailcore_tags wagtailimages_tags static i18n %}
 {% block content %}
 
     <div class="ui raised segment">
         <h1 class="ui dividing header">
-            Thanks
-            <div class="sub header">Thanks for your donation</div>
+            {% trans "Thanks" %}
+            <div class="sub header">{% trans "Thanks for your donation" %}</div>
         </h1>
-        <p>Payment successfully processed</p>
+        <p>{% trans "Payment successfully processed" %}</p>
 
         <table class="ui definition table">
             <tr>
-                <td>Status</td>
+                <td>{% trans "Status" %}</td>
                 <td>
                     <div class="ui {% if status|lower == 'success' %}green{% else %}red{% endif %} label">{{ status|lower }}</div>
                 </td>
@@ -25,7 +25,7 @@
                 <td>{{ ec }}</td>
             </tr>
             <tr>
-                <td>Order Nr</td>
+                <td>{% trans "Order number" %}</td>
                 <td>{{ order_nr }}</td>
             </tr>
         </table>

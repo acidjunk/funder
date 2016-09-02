@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
+{% load gravatar humanize wagtailcore_tags wagtailimages_tags static i18n %}
 
 {% block content %}
     {% for rl in self.related_links.all %}
@@ -9,21 +9,21 @@
 
     <div class="ui stackable grid">
         <div class="thirteen wide column">
-        <h1 class="ui dividing header">Projects</h1>
+        <h1 class="ui dividing header">{% trans "Projects" %}</h1>
         {% if category %}
             <div class="ui info message">
-                <div class="header">Filtered on category</div>
-                Showing only projects in '{{ category }}'
+                <div class="header">{% trans "Filtered on category" %}</div>
+                {% trans "Showing only projects in" %} '{{ category }}'
                 <br>
-                <a href="/projects">Reset</a>
+                <a href="/projects">{% trans "Reset" %}</a>
             </div>
         {% endif %}
         {% if tag %}
             <div class="ui info message">
-            <div class="header">Filtered on tags</div>
-                Showing only projects tagged with '{{ tag }}'
+            <div class="header">{% trans "Filtered on tags" %}</div>
+                {% trans "Showing only projects tagged with" %} '{{ tag }}'
                 <br>
-                <a href="/projects">Reset</a>
+                <a href="/projects">{% trans "Reset" %}</a>
             </div>
         {% endif %}
 
@@ -45,7 +45,7 @@
                         <div class="ui inverted dimmer">
                             <div class="content">
                                 <div class="center">
-                                    <a href="{% pageurl project %}" class="ui primary button"><i class="search icon"></i> View</a>
+                                    <a href="{% pageurl project %}" class="ui primary button"><i class="search icon"></i> {% trans "View" %}</a>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                         {% endif %}
 
                         {% if not project.categories.all and not project.tags.all %}
-                            No tags or categories
+                            {% trans "No tags or categories" %}
                         {% endif %}
                     </div>
 
@@ -112,7 +112,7 @@
             </div>
 
         {% else %}
-            <p>There are currently no projects</p>
+            <p>{% trans "There are currently no projects" %}.</p>
         {% endif %}
 
         </div>
@@ -121,13 +121,13 @@
             <form action="{% url 'project_search' %}" method="get">
                 <div class="ui vertical menu">
                     <a class="{% if not category and not tag %}active {% endif %}teal item">
-                        All
+                        {% trans "All" %}
                         <div class="ui teal left pointing label">{{ number_of_projects }}</div>
                     </a>
 
                     <div class="item">
-                        <h4>Tags</h4>
-                        <p>Select a tag to filter:</p>
+                        <h4>{% trans "Tags" %}</h4>
+                        <p>{% trans "Select a tag to filter" %}:</p>
                         {% if tags %}
                             {% for tag_item in tags %}
                                 <a class="{% if tag == tag_item.slug %}active {% endif %}teal item" href="{% url 'project:project_tag' tag_item.slug %}/">{{ tag_item }}</a>
@@ -136,8 +136,8 @@
                     </div>
 
                     <div class="item">
-                        <h4>Categories</h4>
-                        <p>Select a category to filter:</p>
+                        <h4>{% trans "Categories" %}</h4>
+                        <p>{% trans "Select a category to filter" %}:</p>
                         {% if categories %}
                             {% for category_item in categories %}
                                 <a class="{% if category == category_item %}active {% endif %}teal item" href="{% url 'project:project_category' category_item.slug %}/">{{ category_item }}</a>
@@ -146,9 +146,9 @@
                     </div>
 
                     <div class="item">
-                        <h4>Search</h4>
+                        <h4>{% trans "Search" %}</h4>
                         <div class="ui transparent icon input">
-                            <input type="text" name="query" placeholder="Search projects...">
+                            <input type="text" name="query" placeholder="{% trans "Search products..." %}">
                             <i class="search icon"></i>
                         </div>
                     </div>

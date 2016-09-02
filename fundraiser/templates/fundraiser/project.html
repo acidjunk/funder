@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
 {% load staticfiles %}
 
 {% block content %}
@@ -13,8 +13,8 @@
                         <div class="sub header">
 
                             <a href="javascript: history.go(-1)" class="icon button"><i
-                                    class="double angle left icon"></i>back</a>
-                            By {{ project.author }} on {{ project.date|date:"F jS, Y" }}
+                                    class="double angle left icon"></i>{% trans "back" %}</a>
+                            {% trans "By" %} {{ project.author }} {% trans "on" %} {{ project.date|date:"F jS, Y" }}
                         </div>
                     </div>
                 </h1>
@@ -24,15 +24,15 @@
                 <div class="ui purple inverted segment">
                     <table class="ui definition table">
                         <tr>
-                            <td>Amount needed</td>
+                            <td>{% trans "Amount needed" %}</td>
                             <td>{{ project.amount_needed }}</td>
                         </tr>
                         <tr>
-                            <td>Amount raised</td>
+                            <td>{% trans "Amount raised" %}</td>
                             <td>{{ project.amount_raised }}</td>
                         </tr>
                         <tr>
-                            <td>Organisation</td>
+                            <td>{% trans "Organisation" %}</td>
                             <td>{{ project.organisation }}</td>
                         </tr>
                     </table>
@@ -41,7 +41,7 @@
                 <div class="ui divider"></div>
                 {{ page.description|richtext }}
                 <div class="ui divider"></div>
-                <h3 class="ui header">Share on</h3>
+                <h3 class="ui header">{% trans "Share on" %}</h3>
                 <button class="ui circular linkedin icon button" st_title="{{ project.title }}"
                         st_url="{{ SITE_URL }}{% pageurl project %}" displayText="LinkedIn"><i
                         class="linkedin icon"></i>
@@ -64,7 +64,7 @@
 
                 <div class="ui divider"></div>
 
-                <h3 class="ui header">Activity</h3>
+                <h3 class="ui header">{% trans "Activity" %}</h3>
 
                 <div class="ui feed">
                     <div class="event">
@@ -118,7 +118,7 @@
 
                 <div class="ui divider"></div>
 
-                <h3 class="ui header">Comments</h3>
+                <h3 class="ui header">{% trans "Comments" %}</h3>
                 {% if project.show_comments %}
                     <div id="disqus_thread"></div>
                     <script>
@@ -145,7 +145,7 @@
                                                                       rel="nofollow">comments powered by Disqus.</a>
                     </noscript>
                 {% else %}
-                    <p>Comments are disabled for this project</p>
+                    <p>{% trans "Comments are disabled for this project" %}</p>
                 {% endif %}
 
 
@@ -156,7 +156,7 @@
 
                 <div class="ui statistic">
                     <div class="label">
-                        Status
+                        {% trans "Status" %}
                     </div>
                     <div class="value">
                         {{ project.amount_raised }}
@@ -165,28 +165,28 @@
 
                 <div class="ui indicating progress" id="project">
                     <div class="bar"></div>
-                    <div class="label">Gedoneerd</div>
+                    <div class="label">{% trans "Donated" %}</div>
                 </div>
             </div>
 
             <div class="ui raised segment">
-                <a class="ui purple ribbon label">Donate now!</a>
+                <a class="ui purple ribbon label">{% trans "Donate now!" %}</a>
                 <form class="ui form" method="post" action="/order/add-project/">
                     {% csrf_token %}
                     <input type="hidden" name="project_id" value="{{ project.id }}">
                     <div class="required field">
-                        <label>Name</label>
-                        <input type="text" name="name" placeholder="Your name"{% if request.session.funder_name %} value="{{ request.session.funder_name }}"{% endif %}>
+                        <label>{% trans "Name" %}</label>
+                        <input type="text" name="name" placeholder="{% trans "Your name" %}"{% if request.session.funder_name %} value="{{ request.session.funder_name }}"{% endif %}>
                     </div>
                     <div class="required field">
-                        <label>Amount</label>
+                        <label>{% trans "Amount" %}</label>
                         <input type="text" name="amount" value="50">
                     </div>
                     <div class="field">
-                        <label>Organisation</label>
-                        <input type="text" name="organisation" placeholder="Organisation"{% if request.session.funder_organisation %} value="{{ request.session.funder_organisation }}"{% endif %}>
+                        <label>{% trans "Organisation" %}</label>
+                        <input type="text" name="organisation" placeholder="{% trans "Organisation" %}"{% if request.session.funder_organisation %} value="{{ request.session.funder_organisation }}"{% endif %}>
                     </div>
-                    <button class="ui purple button" type="submit">Donate</button>
+                    <button class="ui purple button" type="submit">{% trans "Donate" %}</button>
                 </form>
             </div>
 

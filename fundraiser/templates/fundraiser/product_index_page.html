@@ -89,7 +89,7 @@
                         {% endif %}
 
                         {% if not product.categories.all and not product.tags.all %}
-                            No tags or categories
+                            {% trans "No tags or categories" %}
                         {% endif %}
                     </div>
 
@@ -112,7 +112,7 @@
             </div>
 
         {% else %}
-            <p>{% trans "There are currently no products" %}</p>
+            <p>{% trans "There are currently no products" %}.</p>
         {% endif %}
 
         </div>

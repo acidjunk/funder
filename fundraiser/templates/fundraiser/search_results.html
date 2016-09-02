@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags i18n %}
 
-{% block title %}Search{% endblock %}
+{% block title %}{% trans "Search results" %}{% endblock %}
 
 {% block content %}
     <div class="ui stackable grid">
@@ -21,9 +21,9 @@
                 {% endfor %}
             </ul>
         {% elif search_query %}
-            No results found
+            {% trans "No results found" %}
         {% else %}
-            Please type something into the search box
+            {% trans "Please type something into the search box" %}
         {% endif %}
 
         </div>
@@ -31,7 +31,7 @@
 
             <div class="ui vertical menu">
                 <div class="item">
-                    <h4>Refine Search</h4>
+                    <h4>{% trans "Refine search" %}</h4>
                     <form action="{% url 'search' %}" method="get">
                         <div class="ui form">
                             <div class="field">
@@ -40,11 +40,11 @@
                             <div class="inline field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" tabindex="0" class="hidden">
-                                    <label>Search site wide</label>
+                                    <label>{% trans "Search site wide" %}</label>
                                 </div>
                             </div>
 
-                            <button class="ui purple button"><i class="search icon"></i> Search</button>
+                            <button class="ui purple button"><i class="search icon"></i> {% trans "Search" %}</button>
                         </div>
                     </form>
                 </div>
