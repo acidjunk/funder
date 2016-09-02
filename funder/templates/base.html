@@ -73,8 +73,8 @@
 
                 <div class="ui inverted menu">
                     <a class="item" href="/"><i class="home icon"></i></a>
-                    <a class="item" href="/products">Products</a>
-                    <a class="item" href="/projects">Projects</a>
+                    <a class="item" href="/products">{% trans "Products" %}</a>
+                    <a class="item" href="/projects">{% trans "Projects" %}</a>
                     <a class="item" href="/order/checkout">
                         <i class="shopping cart icon"></i>
                         <div class="floating ui tiny red circular label number_of_cart_items" style="top: 5px; left: 45px;">
@@ -90,10 +90,10 @@
                 </div>
 
                 <div class="ui vertical fluid menu" style="margin-top: -14px;">
-                    <a href="" class="item">Blog</a>
-                    <a href="" class="item">Contact</a>
+                    <a href="" class="item">{% trans "Blog" %}</a>
+                    <a href="" class="item">{% trans "Contact" %}</a>
                     <div class="item">
-                        <input type="text" name="query" placeholder="Search..."{% if search_query %} value="{{ search_query }}"{% endif %}>
+                        <input type="text" name="query" placeholder="{% trans "Search..." %}"{% if search_query %} value="{{ search_query }}"{% endif %}>
                         <i class="search link icon"></i>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
             <div class="ui center aligned container">
                 <div class="ui stackable inverted divided grid">
                     <div class="three wide column">
-                        <h4 class="ui inverted header"><i class="rss icon"></i>Product Feeds</h4>
+                        <h4 class="ui inverted header"><i class="rss icon"></i>{% trans "Product Feeds" %}</h4>
                         <div class="ui inverted link list">
                             <a href="/products/products-category/animal/feed/" class="item">Animal</a>
                             <a href="/products/productst-category/neighborhood/feed/" class="item">Neighborhood</a>
@@ -120,31 +120,32 @@
                         </div>
                     </div>
                     <div class="three wide column">
-                        <h4 class="ui inverted header"><i class="rss icon"></i>Project Feeds</h4>
+                        <h4 class="ui inverted header"><i class="rss icon"></i>{% trans "Project Feeds" %}</h4>
                         <div class="ui inverted link list">
                             <a href="/projects/project-category/international/feed/" class="item">International</a>
                             <a href="/projects/project-category/local-area/feed/" class="item">Local Area</a>
                         </div>
                     </div>
                     <div class="three wide column">
-                        <h4 class="ui inverted header"><i class="rss icon"></i>Blog Feeds</h4>
+                        <h4 class="ui inverted header"><i class="rss icon"></i>{% trans "Blog Feeds" %}</h4>
                         <div class="ui inverted link list">
                             <a href="/blog/category/live/feed/" class="item">Category Live</a>
                         </div>
                     </div>
                     <div class="seven wide column">
-                        <h4 class="ui inverted header">Want to add your own project or product?</h4>
-                        <p>We are always open for suggestions. If you are running your own non profit organisation and
-                            want to join us, please fill out the <a href="/contact">form</a>.</p>
+                        <h4 class="ui inverted header">{% trans "Want to add your own project or product?" %}</h4>
+                        <p>
+                            {% trans "We are always open for suggestions. If you are running your own non profit organisation and want to join us, please fill out the" %} <a href="/contact">{% trans "form" %}</a>.
+                        </p>
                     </div>
                 </div>
                 <div class="ui inverted section divider"></div>
                 <img src="{% static "images/logo.png" %}" class="ui centered mini image">
                 <div class="ui horizontal inverted small divided link list">
-                    <a class="item" href="#">Site Map</a>
-                    <a class="item" href="/contact">Contact Us</a>
-                    <a class="item" href="#">Terms and Conditions</a>
-                    <a class="item" href="#">Privacy Policy</a>
+                    <a class="item" href="#">{% trans "Site Map" %}</a>
+                    <a class="item" href="/contact">{% trans "Contact" %}</a>
+                    <a class="item" href="#">{% trans "Terms and Conditions" %}</a>
+                    <a class="item" href="#">{% trans "Privacy Policy" %}</a>
                 </div>
             </div>
         </div>

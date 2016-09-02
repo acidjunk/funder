@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
 {% load staticfiles %}
 
 {% block content %}
@@ -13,8 +13,8 @@
                         <div class="sub header">
 
                             <a href="javascript: history.go(-1)" class="icon button"><i
-                                    class="double angle left icon"></i>back</a>
-                            By {{ product.author }} on {{ product.date|date:"F jS, Y" }}
+                                    class="double angle left icon"></i>{% trans "back" %}</a>
+                            {% trans "By" %} {{ product.author }} {% trans "on" %} {{ product.date|date:"F jS, Y" }}
                         </div>
                     </div>
                 </h1>
@@ -27,11 +27,11 @@
 
                 <div class="ui divider"></div>
                 <h2 class="ui sub header">
-                  Current stock: {{ product.stock }}
+                  {% trans "Current stock" %}: {{ product.stock }}
                 </h2>
 
                 <div class="ui divider"></div>
-                <h3 class="ui header">Share on</h3>
+                <h3 class="ui header">{% trans "Share on" %}</h3>
                 <button class="ui circular linkedin icon button" st_title="{{ product.title }}"
                         st_url="{{ SITE_URL }}{% pageurl product %}" displayText="LinkedIn"><i
                         class="linkedin icon"></i>
@@ -58,7 +58,7 @@
 
                 <div class="ui statistic">
                     <div class="label">
-                        Prize
+                        {% trans "Prize" %}
                     </div>
                     <div class="value">
                         &euro; {{ product.prize }},-
@@ -69,10 +69,10 @@
                     {% csrf_token %}
                     <input type="hidden" name="product_id" value="{{ product.id }}">
                     <div class="field">
-                        <label>Quantity</label>
+                        <label>{% trans "Quantity" %}</label>
                         <input type="text" name="quantity" value="1">
                     </div>
-                    <button class="ui purple button" type="submit">Add to shopping basket</button>
+                    <button class="ui purple button" type="submit">{% trans "Add to shopping basket" %}</button>
                 </form>
             </div>
 

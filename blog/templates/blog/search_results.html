@@ -1,43 +1,42 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags i18n %}
 
-{% block title %}Search{% endblock %}
+{% block title %}{% trans "Search" %}{% endblock %}
 
 {% block content %}
     <div class="ui stackable grid">
         <div class="thirteen wide column">
-            <h1 class="ui dividing header">Blog search results</h1>
+            <h1 class="ui dividing header">{% trans "Blog search results" %}</h1>
 
-
-        {% if search_results %}
-            <ul>
-                {% for result in search_results %}
-                    <li>
-                        <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-                        {% if result.search_description %}
-                            {{ result.search_description|safe }}
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% elif search_query %}
-            No results found
-        {% else %}
-            Please type something into the search box
-        {% endif %}
+            {% if search_results %}
+                <ul>
+                    {% for result in search_results %}
+                        <li>
+                            <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
+                            {% if result.search_description %}
+                                {{ result.search_description|safe }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% elif search_query %}
+                {% trans "No results found" %}
+            {% else %}
+                {% trans "Please type something into the search box" %}
+            {% endif %}
 
         </div>
         <div class="three wide column">
 
             <div class="ui vertical menu">
                 <div class="item">
-                    <h4>Refine Search</h4>
+                    <h4>{% trans "Refine search" %}</h4>
                     <form action="{% url 'blog:search' %}" method="get">
                         <div class="ui form">
                             <div class="field">
                                  <input type="text" name="query" placeholder="Enter search phrase..."{% if search_query %} value="{{ search_query }}"{% endif %}>
                             </div>
-                            <button class="ui purple button"><i class="search icon"></i> Search</button>
+                            <button class="ui purple button"><i class="search icon"></i> {% trans "Search" %}</button>
                         </div>
                     </form>
                 </div>

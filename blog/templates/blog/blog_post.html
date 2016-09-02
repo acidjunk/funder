@@ -1,4 +1,4 @@
-{% load gravatar humanize wagtailcore_tags wagtailimages_tags static %}
+{% load gravatar humanize wagtailcore_tags wagtailimages_tags static i18n %}
 
 {% block content %}
 
@@ -8,9 +8,8 @@
                 <div class="content">
                     {{ blog.title }}
                     <div class="sub header">
-
-                        <a href="javascript: history.go(-1)" class="icon button"><i class="double angle left icon"></i>back</a>
-By {{ blog.author }} on {{ blog.date|date:"F jS, Y" }}
+                        <a href="javascript: history.go(-1)" class="icon button"><i class="double angle left icon"></i>{% trans "back" %}</a>
+                        {% trans "By" %} {{ blog.author }} {% trans "on" %} {{ blog.date|date:"F jS, Y" }}
                     </div>
                 </div>
             </h1>
@@ -19,11 +18,10 @@ By {{ blog.author }} on {{ blog.date|date:"F jS, Y" }}
                 {% image blog.header_image width-800 class="ui fluid image" %}
             </div>
 
-
             <div class="content">
                 <div class="description">{{ blog.body|richtext }}</div>
                 <div class="ui divider"></div>
-                <h3 class="ui header">Share on</h3>
+                <h3 class="ui header">{% trans "Share on" %}</h3>
                 <button class="ui circular linkedin icon button" st_title="{{ blog.title }}"
                         st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="LinkedIn"><i class="linkedin icon"></i>
                 </button>
@@ -41,63 +39,65 @@ By {{ blog.author }} on {{ blog.date|date:"F jS, Y" }}
                 </button>
             </div>
 
-                <div class="ui divider"></div>
-                <h3 class="ui header">Comments</h3>
-                {% if blog.show_comments %}
-                    <div id="disqus_thread"></div>
-                    <script>
-                        /**
-                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-                         */
-                        /*
-                        var disqus_config = function () {
-                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                            this.page.identifier = '{{ blog.slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                        };
-                        */
-                        (function() {  // DON'T EDIT BELOW THIS LINE
-                            var d = document, s = d.createElement('script');
+            <div class="ui divider"></div>
+            <h3 class="ui header">{% trans "Comments" %}</h3>
+            {% if blog.show_comments %}
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                     */
+                    /*
+                    var disqus_config = function () {
+                        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = '{{ blog.slug }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function() {  // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
 
-                            s.src = '//funderdemosite.disqus.com/embed.js';
+                        s.src = '//funderdemosite.disqus.com/embed.js';
 
-                            s.setAttribute('data-timestamp', +new Date());
-                            (d.head || d.body).appendChild(s);
-                        })();
-                    </script>
-                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-                {% else %}
-                    <p>Comments are disabled for this blog post</p>
-                {% endif %}
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            {% else %}
+                <p>{% trans "Comments are disabled for this blog post" %}</p>
+            {% endif %}
         </div>
         <div class="four wide column">
 
-            <div class="ui fluid vertical menu">
-                <div class="item">
-                    <h4><i class="tags icon"></i> Tags</h4>
+            <form action="{% url 'blog:search' %}" method="get">
+                <div class="ui vertical menu">
+                    <div class="item">
+                        <h4><i class="tags icon"></i> {% trans "Tags" %}</h4>
 
-                    {% if blog.tags.all %}
-                        Tags:
-                        {% for tag in blog.tags.all %}
-                            <a href="{% url 'blog:tag' tag.slug %}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                        {% if blog.tags.all %}
+                            Tags:
+                            {% for tag in blog.tags.all %}
+                                <a href="{% url 'blog:tag' tag.slug %}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="item">
+                        <h4><i class="ticket icon"></i> {% trans "Categories" %}</h4>
+                        {% for cat in blog.categories.all %}
+                            <a href="{% url 'blog:category' cat.category.slug %}/">{{ cat.category.name }}</a>{% if not forloop.last %}, {% endif %}
                         {% endfor %}
-                    {% endif %}
-                </div>
-
-                <div class="item">
-                    <h4><i class="ticket icon"></i> Categories</h4>
-                    {% for cat in blog.categories.all %}
-                        <a href="{% url 'blog:category' cat.category.slug %}/">{{ cat.category.name }}</a>{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </div>
-                <div class="item">
-                    <h4>Search</h4>
-                    <div class="ui transparent icon input">
-                        <input type="text" placeholder="Search posts...">
-                        <i class="search icon"></i>
+                    </div>
+                    <div class="item">
+                        <h4>{% trans "Search" %}</h4>
+                        <div class="ui transparent icon input">
+                            <input type="text" name="query" placeholder="{% trans "Search posts..." %}">
+                            <i class="search icon"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
         </div>
 
