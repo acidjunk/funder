@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-02 21:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/templates/blog/blog_index_page.html:14
+msgid "Filtered on category"
+msgstr "Gefilterd op categorie"
+
+#: blog/templates/blog/blog_index_page.html:15
+msgid "Showing only post in"
+msgstr "Toon alleen berichten in"
+
+#: blog/templates/blog/blog_index_page.html:17
+#: blog/templates/blog/blog_index_page.html:25
+msgid "Reset"
+msgstr "Herstel"
+
+#: blog/templates/blog/blog_index_page.html:22
+msgid "Filtered on tags"
+msgstr "Gefilterd op tags"
+
+#: blog/templates/blog/blog_index_page.html:23
+msgid "Showing only posts tagged with"
+msgstr "Toon alleen berichten met tag"
+
+#: blog/templates/blog/blog_index_page.html:47
+msgid "View"
+msgstr "Bekijk"
+
+#: blog/templates/blog/blog_index_page.html:56
+msgid "Read more"
+msgstr "Lees meer"
+
+#: blog/templates/blog/blog_index_page.html:91
+msgid "No tags or categories"
+msgstr "Geen tags of categorieën"
+
+#: blog/templates/blog/blog_index_page.html:114
+msgid "There are currently no blog posts"
+msgstr "Er zijn momenteel geen blog berichten"
+
+#: blog/templates/blog/blog_index_page.html:122
+msgid "All"
+msgstr "Alles"
+
+#: blog/templates/blog/blog_index_page.html:127
+msgid "Tags"
+msgstr "Tags"
+
+#: blog/templates/blog/blog_index_page.html:128
+msgid "Select a tag to filter"
+msgstr "Selecteer een tag om te filteren"
+
+#: blog/templates/blog/blog_index_page.html:137
+msgid "Categories"
+msgstr "Categorieën"
+
+#: blog/templates/blog/blog_index_page.html:138
+msgid "Select a category to filter"
+msgstr "Selecteer een categorie om te filteren"
+
+#: blog/templates/blog/blog_index_page.html:147
+msgid "Search"
+msgstr "Zoeken"
+
+#: blog/templates/blog/blog_index_page.html:149
+msgid "Search posts..."
+msgstr "Zoek berichten..."

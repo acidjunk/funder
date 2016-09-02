@@ -111,7 +111,7 @@
             </div>
 
         {% else %}
-            <p>There are currently no blog posts</p>
+            <p>{% trans "There are currently no blog posts" %}</p>
         {% endif %}
         </div>
         <div class="three wide column">
@@ -119,13 +119,13 @@
             <form action="{% url 'blog:search' %}" method="get">
                 <div class="ui vertical menu">
                     <a class="{% if not category and not tag %}active {% endif %}teal item">
-                        All
+                        {% trans "All" %}
                         <div class="ui teal left pointing label">{{ number_of_blog_posts }}</div>
                     </a>
 
                     <div class="item">
-                        <h4>Tags</h4>
-                        <p>Select a tag to filter:</p>
+                        <h4>{% trans "Tags" %}</h4>
+                        <p>{% trans "Select a tag to filter" %}:</p>
                         {% if tags %}
                             {% for tag_item in tags %}
                                 <a class="{% if tag == tag_item.slug %}active {% endif %}teal item" href="{% url 'blog:tag' tag_item.slug %}/">{{ tag_item }}</a>
@@ -134,8 +134,8 @@
                     </div>
 
                     <div class="item">
-                        <h4>Categories</h4>
-                        <p>Select a category to filter:</p>
+                        <h4>{% trans "Categories" %}</h4>
+                        <p>{% trans "Select a category to filter" %}:</p>
                         {% if categories %}
                             {% for category_item in categories %}
                                 <a class="{% if category == category_item %}active {% endif %}teal item" href="{% url 'blog:category' category_item.slug %}/">{{ category_item }}</a>
@@ -144,9 +144,9 @@
                     </div>
 
                     <div class="item">
-                        <h4>Search</h4>
+                        <h4>{% trans "Search" %}</h4>
                         <div class="ui transparent icon input">
-                            <input type="text" name="query" placeholder="Search posts...">
+                            <input type="text" name="query" placeholder="{% trans "Search posts..." %}">
                             <i class="search icon"></i>
                         </div>
                     </div>
