@@ -20,7 +20,6 @@ urlpatterns = [
     url(r'^search/$', search, name='search'),
     url(r'^projects/search/$', project_search, name='project_search'),
     url(r'^products/search/$', product_search, name='product_search'),
-    url(r'^rosetta/', include('rosetta.urls')),
     url(r'', include(wagtail_urls)),
 ]
 

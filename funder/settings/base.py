@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     # TODO: find out why tags/site is not working ok
     #'disqus',
 
-    'rosetta',
     'django.contrib.humanize',
     'django_gravatar',
     'cart',
@@ -115,9 +114,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-#LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'nl-nl'
-
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
