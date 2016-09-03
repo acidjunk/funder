@@ -85,6 +85,7 @@ unittest_results.xml
 
 # Django stuff:
 *.log
+local.py
 
 # Sphinx documentation
 docs/_build/
