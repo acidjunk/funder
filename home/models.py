@@ -7,7 +7,7 @@ from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel)
 
-from fundraiser.models import ProjectPage
+from fundraiser.models import ProductPage, ProjectPage
 
 class HomePage(Page):
     body = RichTextField(blank=True)
@@ -18,6 +18,7 @@ class HomePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request, *args, **kwargs)
+        context['recent_products'] = ProductPage.objects.all().order_by('-id')[0:5]
         context['recent_projects'] = ProjectPage.objects.all().order_by('-id')[0:5]
         return context
 

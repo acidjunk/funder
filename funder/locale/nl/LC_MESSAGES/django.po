@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-02 21:24+0000\n"
+"POT-Creation-Date: 2016-09-03 11:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,22 +18,490 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: funder/templates/base.html:43
+#: blog/templates/blog/blog_index_page.html:11 funder/templates/base.html:41
+#: funder/templates/base.html:93 search/templates/search/search.html:58
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
-#: funder/templates/base.html:44
+#: blog/templates/blog/blog_index_page.html:14
+#: fundraiser/templates/fundraiser/product_index_page.html:15
+#: fundraiser/templates/fundraiser/project_index_page.html:15
+msgid "Filtered on category"
+msgstr "Gefilterd op categorie"
+
+#: blog/templates/blog/blog_index_page.html:15
+msgid "Showing only post in"
+msgstr "Alleen berichten in"
+
+#: blog/templates/blog/blog_index_page.html:17
+#: blog/templates/blog/blog_index_page.html:25
+#: fundraiser/templates/fundraiser/product_index_page.html:18
+#: fundraiser/templates/fundraiser/product_index_page.html:26
+#: fundraiser/templates/fundraiser/project_index_page.html:18
+#: fundraiser/templates/fundraiser/project_index_page.html:26
+msgid "Reset"
+msgstr "Herstel"
+
+#: blog/templates/blog/blog_index_page.html:22
+#: fundraiser/templates/fundraiser/product_index_page.html:23
+#: fundraiser/templates/fundraiser/project_index_page.html:23
+msgid "Filtered on tags"
+msgstr "Gefilterd op tags"
+
+#: blog/templates/blog/blog_index_page.html:23
+msgid "Showing only posts tagged with"
+msgstr "Gefilterd op categorie"
+
+#: blog/templates/blog/blog_index_page.html:47
+#: fundraiser/templates/fundraiser/product_index_page.html:48
+#: fundraiser/templates/fundraiser/project_index_page.html:48
+msgid "View"
+msgstr "Bekijk"
+
+#: blog/templates/blog/blog_index_page.html:56
+#: fundraiser/templates/fundraiser/product_index_page.html:57
+msgid "Read more"
+msgstr "Lees meer"
+
+#: blog/templates/blog/blog_index_page.html:91
+#: fundraiser/templates/fundraiser/product_index_page.html:92
+#: fundraiser/templates/fundraiser/project_index_page.html:92
+msgid "No tags or categories"
+msgstr "Geen tags of categorieën"
+
+#: blog/templates/blog/blog_index_page.html:114
+msgid "There are currently no blog posts"
+msgstr "Er zijn momenteel geen blog berichten"
+
+#: blog/templates/blog/blog_index_page.html:122
+#: fundraiser/templates/fundraiser/product_index_page.html:124
+#: fundraiser/templates/fundraiser/project_index_page.html:124
+msgid "All"
+msgstr "Alles"
+
+#: blog/templates/blog/blog_index_page.html:127
+#: blog/templates/blog/blog_post.html:76
+#: fundraiser/templates/fundraiser/product_index_page.html:129
+#: fundraiser/templates/fundraiser/project_index_page.html:129
+msgid "Tags"
+msgstr "Tags"
+
+#: blog/templates/blog/blog_index_page.html:128
+#: fundraiser/templates/fundraiser/product_index_page.html:130
+#: fundraiser/templates/fundraiser/project_index_page.html:130
+msgid "Select a tag to filter"
+msgstr "Selecteer een tag om te filteren"
+
+#: blog/templates/blog/blog_index_page.html:137
+#: blog/templates/blog/blog_post.html:87
+#: fundraiser/templates/fundraiser/product_index_page.html:139
+#: fundraiser/templates/fundraiser/project_index_page.html:139
+msgid "Categories"
+msgstr "Categorieën"
+
+#: blog/templates/blog/blog_index_page.html:138
+#: fundraiser/templates/fundraiser/product_index_page.html:140
+#: fundraiser/templates/fundraiser/project_index_page.html:140
+msgid "Select a category to filter"
+msgstr "Selecteer een categorie om te filteren"
+
+#: blog/templates/blog/blog_index_page.html:147
+#: blog/templates/blog/blog_post.html:93
+#: blog/templates/blog/search_results.html:4
+#: blog/templates/blog/search_results.html:39
+#: fundraiser/templates/fundraiser/product_index_page.html:149
+#: fundraiser/templates/fundraiser/project_index_page.html:149
+#: fundraiser/templates/fundraiser/search_results.html:47
+#: search/templates/search/search.html:76
+msgid "Search"
+msgstr "Zoek"
+
+#: blog/templates/blog/blog_index_page.html:149
+#: blog/templates/blog/blog_post.html:95
+msgid "Search posts..."
+msgstr "Zoek berichten..."
+
+#: blog/templates/blog/blog_post.html:11
+#: fundraiser/templates/fundraiser/product.html:16
+#: fundraiser/templates/fundraiser/project.html:16
+msgid "back"
+msgstr "terug"
+
+#: blog/templates/blog/blog_post.html:12
+#: fundraiser/templates/fundraiser/product.html:17
+#: fundraiser/templates/fundraiser/project.html:17
+msgid "By"
+msgstr "Door"
+
+#: blog/templates/blog/blog_post.html:12
+#: fundraiser/templates/fundraiser/product.html:17
+#: fundraiser/templates/fundraiser/project.html:17
+msgid "on"
+msgstr "op"
+
+#: blog/templates/blog/blog_post.html:24
+#: fundraiser/templates/fundraiser/product.html:34
+#: fundraiser/templates/fundraiser/project.html:44
+msgid "Share on"
+msgstr "Deel via"
+
+#: blog/templates/blog/blog_post.html:43
+#: fundraiser/templates/fundraiser/project.html:121
+msgid "Comments"
+msgstr "Reacties"
+
+#: blog/templates/blog/blog_post.html:68
+msgid "Comments are disabled for this blog post"
+msgstr "Reacties zijn uitgeschakeld voor dit blog bericht"
+
+#: blog/templates/blog/search_results.html:9
+msgid "Blog search results"
+msgstr "Blog zoek resultaten"
+
+#: blog/templates/blog/search_results.html:23
+#: fundraiser/templates/fundraiser/search_results.html:24
+#: search/templates/search/search.html:33
+msgid "No results found"
+msgstr "Geen resultaten gevonden"
+
+#: blog/templates/blog/search_results.html:25
+#: fundraiser/templates/fundraiser/search_results.html:26
+#: search/templates/search/search.html:35
+msgid "Please type something into the search box"
+msgstr "Voer a.u.b. een zoekopdracht in"
+
+#: blog/templates/blog/search_results.html:33
+#: fundraiser/templates/fundraiser/search_results.html:34
+msgid "Refine search"
+msgstr "Verfijn zoekopdracht"
+
+#: funder/templates/base.html:42 funder/templates/base.html:76
+#: fundraiser/templates/fundraiser/product_index_page.html:12
+#: search/templates/search/search.html:65
 msgid "Products"
-msgstr ""
+msgstr "Producten"
 
-#: funder/templates/base.html:45
+#: funder/templates/base.html:43 funder/templates/base.html:77
+#: fundraiser/templates/fundraiser/project_index_page.html:12
+#: search/templates/search/search.html:72
 msgid "Projects"
-msgstr ""
+msgstr "Projecten"
 
-#: funder/templates/base.html:46
+#: funder/templates/base.html:44 funder/templates/base.html:94
+#: funder/templates/base.html:146
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
-#: funder/templates/base.html:50
+#: funder/templates/base.html:48 funder/templates/base.html:96
 msgid "Search..."
+msgstr "Zoek..."
+
+#: funder/templates/base.html:115
+msgid "Product Feeds"
+msgstr "Producten Feeds"
+
+#: funder/templates/base.html:123
+msgid "Project Feeds"
+msgstr "Projecten Feeds"
+
+#: funder/templates/base.html:130
+msgid "Blog Feeds"
+msgstr "Blog Feeds"
+
+#: funder/templates/base.html:136
+msgid "Want to add your own project or product?"
+msgstr "Uw eigen project of product toevoegen?"
+
+#: funder/templates/base.html:138
+msgid ""
+"We are always open for suggestions. If you are running your own non profit "
+"organisation and want to join us, please fill out the"
 msgstr ""
+"We staan altijd open voor suggesties. Wanneer u zelf een non profit organisatie "
+"bestuurt en mee wilt doen, gebruik dan dit"
+
+#: funder/templates/base.html:138
+msgid "form"
+msgstr "formulier"
+
+#: funder/templates/base.html:145
+msgid "Site Map"
+msgstr "Site Map"
+
+#: funder/templates/base.html:147
+msgid "Terms and Conditions"
+msgstr "Algemene voorwaarden"
+
+#: funder/templates/base.html:148
+msgid "Privacy Policy"
+msgstr "Privacy statement"
+
+#: fundraiser/templates/fundraiser/checkout.html:6
+msgid "Checkout"
+msgstr "Afrekenen"
+
+#: fundraiser/templates/fundraiser/checkout.html:15
+msgid ""
+"Check the form, and then click one of the banks to complete your donation."
+msgstr "Vul het formulier aan en klik dan op een van de banken om uw donatie af te ronden. "
+
+#: fundraiser/templates/fundraiser/checkout.html:19
+#: fundraiser/templates/fundraiser/project.html:178
+msgid "Name"
+msgstr "Naam"
+
+#: fundraiser/templates/fundraiser/checkout.html:20
+#: fundraiser/templates/fundraiser/project.html:179
+msgid "Your name"
+msgstr "Uw naam"
+
+#: fundraiser/templates/fundraiser/checkout.html:25
+#: fundraiser/templates/fundraiser/project.html:35
+#: fundraiser/templates/fundraiser/project.html:186
+#: fundraiser/templates/fundraiser/project.html:187
+msgid "Organisation"
+msgstr "Organisatie"
+
+#: fundraiser/templates/fundraiser/checkout.html:26
+msgid "Your organisation's name if any"
+msgstr "Uw organisatie"
+
+#: fundraiser/templates/fundraiser/checkout.html:33
+#: fundraiser/templates/fundraiser/checkout.html:34
+msgid "Email"
+msgstr "E-mail"
+
+#: fundraiser/templates/fundraiser/checkout.html:36
+msgid "Anonymous?"
+msgstr "Anoniem?"
+
+#: fundraiser/templates/fundraiser/checkout.html:40
+msgid "Do not show my name on the project pages"
+msgstr "Laat mijn naam niet op de projecten pagina's zien"
+
+#: fundraiser/templates/fundraiser/checkout.html:45
+msgid "I agree to the"
+msgstr "I ga akkoord met de"
+
+#: fundraiser/templates/fundraiser/checkout.html:45
+msgid "terms and conditions"
+msgstr "algemene voorwaarden"
+
+#: fundraiser/templates/fundraiser/checkout.html:52
+msgid "Choose a bank to continue"
+msgstr "Kies een bank om verder te gaan"
+
+#: fundraiser/templates/fundraiser/checkout.html:81
+msgid "Product/Project"
+msgstr "Item"
+
+#: fundraiser/templates/fundraiser/checkout.html:82
+#: fundraiser/templates/fundraiser/product.html:72
+msgid "Quantity"
+msgstr "Hoeveelheid"
+
+#: fundraiser/templates/fundraiser/checkout.html:83
+msgid "Price"
+msgstr "Prijs"
+
+#: fundraiser/templates/fundraiser/checkout.html:99
+msgid "Total ex VAT"
+msgstr "Totaal ex BTW"
+
+#: fundraiser/templates/fundraiser/checkout.html:100
+msgid "VAT"
+msgstr "BTW"
+
+#: fundraiser/templates/fundraiser/checkout.html:101
+msgid "Total with VAT"
+msgstr "Totaal inclusief BTW"
+
+#: fundraiser/templates/fundraiser/checkout.html:110
+msgid "Newsletter"
+msgstr "Nieuwsbrief"
+
+#: fundraiser/templates/fundraiser/checkout.html:111
+msgid "Also subscribe to the newsletter?"
+msgstr "Tegelijkertijd abboneren op de nieuwsbrief?"
+
+#: fundraiser/templates/fundraiser/checkout.html:118
+msgid "Sign me up for the newsletter"
+msgstr "Abboneer mij op de nieuwsbrief"
+
+#: fundraiser/templates/fundraiser/checkout.html:150
+msgid "Please enter a name"
+msgstr "Voer a.u.b. een naam in"
+
+#: fundraiser/templates/fundraiser/checkout.html:161
+msgid "Please enter a valid email address"
+msgstr "Voer a.u.b. een geldig e-mail adres in"
+
+#: fundraiser/templates/fundraiser/checkout.html:171
+msgid "You must agree to the terms and conditions"
+msgstr "U moet akkoord gaan met de algemene voorwaarden"
+
+#: fundraiser/templates/fundraiser/product.html:30
+msgid "Current stock"
+msgstr "Huidige voorraad"
+
+#: fundraiser/templates/fundraiser/product.html:61
+msgid "Prize"
+msgstr "Prijs"
+
+#: fundraiser/templates/fundraiser/product.html:75
+msgid "Add to shopping basket"
+msgstr "Voeg toe aan mandje"
+
+#: fundraiser/templates/fundraiser/product_index_page.html:16
+msgid "Showing only products in"
+msgstr "Getoond worden alleen producten in"
+
+#: fundraiser/templates/fundraiser/product_index_page.html:24
+msgid "Showing only products tagged with"
+msgstr "Getoond worden alleen producten getagged met"
+
+#: fundraiser/templates/fundraiser/product_index_page.html:115
+msgid "There are currently no products"
+msgstr "Er zijn momenteel geen producten"
+
+#: fundraiser/templates/fundraiser/product_index_page.html:151
+#: fundraiser/templates/fundraiser/project_index_page.html:151
+msgid "Search products..."
+msgstr "Zoek producten..."
+
+#: fundraiser/templates/fundraiser/project.html:27
+msgid "Amount needed"
+msgstr "Benodigd bedrag"
+
+#: fundraiser/templates/fundraiser/project.html:31
+msgid "Amount raised"
+msgstr "Opgehaald bedrag"
+
+#: fundraiser/templates/fundraiser/project.html:67
+msgid "Activity"
+msgstr "Activiteit"
+
+#: fundraiser/templates/fundraiser/project.html:148
+msgid "Comments are disabled for this project"
+msgstr "Reacties zinn uitgeschakeld voor dit project"
+
+#: fundraiser/templates/fundraiser/project.html:159
+#: fundraiser/templates/fundraiser/thanks.html:14
+msgid "Status"
+msgstr "Status"
+
+#: fundraiser/templates/fundraiser/project.html:168
+msgid "Donated"
+msgstr "Gedoneerd"
+
+#: fundraiser/templates/fundraiser/project.html:173
+msgid "Donate now!"
+msgstr "Doneer nu!"
+
+#: fundraiser/templates/fundraiser/project.html:182
+msgid "Amount"
+msgstr "Bedrag"
+
+#: fundraiser/templates/fundraiser/project.html:189
+msgid "Donate"
+msgstr "Doneer"
+
+#: fundraiser/templates/fundraiser/project_index_page.html:16
+msgid "Showing only projects in"
+msgstr "Getoond worden alleen projecten in"
+
+#: fundraiser/templates/fundraiser/project_index_page.html:24
+msgid "Showing only projects tagged with"
+msgstr "Getoond worden alleen projecten getagged met"
+
+#: fundraiser/templates/fundraiser/project_index_page.html:115
+msgid "There are currently no projects"
+msgstr "Er zijn momenteel geen projecten"
+
+#: fundraiser/templates/fundraiser/search_results.html:4
+#: search/templates/search/search.html:11
+msgid "Search results"
+msgstr "Zoek resultaten"
+
+#: fundraiser/templates/fundraiser/search_results.html:43
+#: search/templates/search/search.html:51
+msgid "Search site wide"
+msgstr "Doorzoek de hele site"
+
+#: fundraiser/templates/fundraiser/thanks.html:7
+msgid "Thanks"
+msgstr "Bedankt"
+
+#: fundraiser/templates/fundraiser/thanks.html:8
+msgid "Thanks for your donation"
+msgstr "Bedankt voor uw donatie"
+
+#: fundraiser/templates/fundraiser/thanks.html:10
+msgid "Payment successfully processed"
+msgstr "Betaling succesvol verwerkt"
+
+#: fundraiser/templates/fundraiser/thanks.html:28
+msgid "Order number"
+msgstr "Order nummer"
+
+#: home/templates/home/form_page.html:25
+msgid "submit"
+msgstr "verstuur"
+
+#: home/templates/home/form_page.html:34
+#: home/templates/home/form_page_landing.html:15
+msgid "Get involved"
+msgstr "Doe mee"
+
+#: home/templates/home/form_page.html:37
+#: home/templates/home/form_page_landing.html:18
+msgid "A couple of ways to get involved"
+msgstr "Een aantal manieren om mee te doen"
+
+#: home/templates/home/form_page.html:42
+#: home/templates/home/form_page_landing.html:23
+msgid "Clone the project at"
+msgstr "Clone het project van"
+
+#: home/templates/home/form_page.html:49
+#: home/templates/home/form_page_landing.html:30
+msgid "Start translating"
+msgstr "Begin met vertalen"
+
+#: home/templates/home/form_page.html:49
+#: home/templates/home/form_page_landing.html:30
+msgid "all translations welcome"
+msgstr "want alle vertalingen zijn welkom"
+
+#: home/templates/home/form_page.html:56
+#: home/templates/home/form_page_landing.html:37
+msgid "Join Project"
+msgstr "Wordt lid"
+
+#: home/templates/home/home_page.html:11
+msgid "We support nonprofits"
+msgstr "Wij helpen vrijwilligers organisaties"
+
+#: home/templates/home/home_page.html:12
+msgid "An free platform ready to support millions of nonprofits worldwide."
+msgstr "Een gratis platform klaar om wereldwijd alle vrijwilligersoranisaties te ondersteunen"
+
+#: home/templates/home/home_page.html:15
+msgid "Contribute"
+msgstr "Help ons"
+
+#: home/templates/home/home_page.html:29
+msgid ""
+"To show how this application can be used in some real world scenario's we "
+"added some demo projects."
+msgstr ""
+"Om te demonstreren dat deze applicatie gebruikt kan worden in een aantal praktische scenario's "
+"hebben we een aantal demo projecten toegevoegd"
+
+#: home/templates/home/home_page.html:38
+msgid "Recent projects"
+msgstr "Recente projecten"
+
+#: home/templates/home/home_page.html:59
+msgid "Recent products"
+msgstr "Recente producten"

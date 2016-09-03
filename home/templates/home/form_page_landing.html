@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags i18n %}
 {% block content %}
 
     <div class="ui stackable grid">
@@ -12,29 +12,29 @@
 
             <div class="ui card">
                 <div class="content">
-                    <div class="header">Get involved</div>
+                    <div class="header">{% trans "Get involved" %}</div>
                 </div>
                 <div class="content">
-                    <h4 class="ui sub header">A couple of ways to get involved:</h4>
+                    <h4 class="ui sub header">{% trans "A couple of ways to get involved" %}:</h4>
                     <div class="ui small feed">
                         <div class="event">
                             <div class="content">
                                 <div class="summary">
-                                    Clone the project at <a href="https://github.com/acidjunk/funder">Github</a>
+                                    {% trans "Clone the project at" %} <a href="https://github.com/acidjunk/funder">Github</a>
                                 </div>
                             </div>
                         </div>
                         <div class="event">
                             <div class="content">
                                 <div class="summary">
-                                    <a>Start translating</a> all translations welcome
+                                    <a>{% trans "Start translating" %}</a> {% trans "all translations welcome" %}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="extra content">
-                    <button class="ui button">Join Project</button>
+                    <button class="ui button">{% trans "Join Project" %}</button>
                 </div>
             </div>
 

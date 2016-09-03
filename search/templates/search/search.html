@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags i18n %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
@@ -8,7 +8,7 @@
 {% block content %}
     <div class="ui stackable grid">
         <div class="thirteen wide column">
-            <h1 class="ui dividing header">Search results</h1>
+            <h1 class="ui dividing header">{% trans "Search results" %}</h1>
 
             {% if search_results %}
                 <ul>
@@ -30,9 +30,9 @@
                     <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
                 {% endif %}
             {% elif search_query %}
-                No results found
+                {% trans "No results found" %}
             {% else %}
-                Please type something into the search box
+                {% trans "Please type something into the search box" %}
             {% endif %}
         </div>
         <div class="three wide column">
@@ -48,32 +48,32 @@
                             <div class="inline field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" tabindex="0" class="hidden" checked="checked">
-                                    <label>Search site wide</label>
+                                    <label>{% trans "Search site wide" %}</label>
                                 </div>
                             </div>
 
                             <div class="inline field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" tabindex="0" class="hidden">
-                                    <label>Blog</label>
+                                    <label>{% trans "Blog" %}</label>
                                 </div>
                             </div>
 
                             <div class="inline field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" tabindex="0" class="hidden">
-                                    <label>Products</label>
+                                    <label>{% trans "Products" %}</label>
                                 </div>
                             </div>
 
                             <div class="inline field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" tabindex="0" class="hidden">
-                                    <label>Projects</label>
+                                    <label>{% trans "Projects" %}</label>
                                 </div>
                             </div>
 
-                            <button class="ui purple button"><i class="search icon"></i> Search</button>
+                            <button class="ui purple button"><i class="search icon"></i> {% trans "Search" %}</button>
                         </div>
                     </form>
                 </div>
