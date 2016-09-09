@@ -148,7 +148,13 @@ class OrderIndexPage(RoutablePageMixin, Page):
         cart.add(project, request.POST.get('amount'), 1)
         request.session['funder_name']=request.POST.get('name')
         request.session['funder_organisation']=request.POST.get('organisation')
+        return redirect('/order/checkout')
 
+    @route(r'^remove-project/$')
+    def remove_project_from_cart(self, request, *args, **kwargs):
+        project = ProjectPage.objects.get(id=request.POST.get('project_id'))
+        cart = Cart(request)
+        cart.remove(project)
         return redirect('/order/checkout')
 
     @route(r'^add-product/$')
@@ -158,29 +164,12 @@ class OrderIndexPage(RoutablePageMixin, Page):
         cart.add(product, product.prize, request.POST.get('quantity'))
         return redirect('/order/checkout')
 
-
-def add_project_to_cart(request, project_id, prize):
-    project = ProjectPage.objects.get(id=project_id)
-    cart = Cart(request)
-    cart.add(project, prize, 1)
-
-def remove_project_from_cart(request, project_id):
-    project = ProjectPage.objects.get(id=project_id)
-    cart = Cart(request)
-    cart.remove(project)
-
-def add_product_to_cart(request, product_id, prize):
-    product = ProductPage.objects.get(id=product_id)
-    cart = Cart(request)
-    cart.add(product, prize, 1)
-
-def remove_product_from_cart(request, product_id):
-    project = ProductPage.objects.get(id=product_id)
-    cart = Cart(request)
-    cart.remove(project)
-
-def get_cart(request):
-    return dict(cart=Cart(request))
+    @route(r'^remove-product/$')
+    def remove_product_from_cart(self, request, *args, **kwargs):
+        product = ProductPage.objects.get(id=request.POST.get('product_id'))
+        cart = Cart(request)
+        cart.remove(product)
+        return redirect('/order/checkout')
 
 
 class Order(models.Model):

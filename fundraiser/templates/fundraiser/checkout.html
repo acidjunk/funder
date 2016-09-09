@@ -5,7 +5,8 @@
 <h1 class="ui dividing header">
     {% trans "Checkout" %}
 </h1>
-
+<form method="post" class="ui form" id="remove_product_form" action="/order/remove-product/">{% csrf_token %}<input type="hidden" name="product_id" value=""></form>
+<form method="post" class="ui form" id="remove_project_form" action="/order/remove-project/">{% csrf_token %}<input type="hidden" name="project_id" value=""></form>
 <form method="post" class="ui form" id="funder_checkout_form" action="/order/start-payment/">
     {% csrf_token %}
     <input type="hidden" name="provider_id">
@@ -69,32 +70,35 @@
 
         </div>
         <div class="five wide column">
+
             <div class="ui raised segment">
                 <h1 class="ui header">
                     <i class="shopping cart icon"></i>
                     <div class="content">Cart</div>
                 </h1>
 
-                <table class="ui very basic collapsing celled table">
+                <table class="ui very basic small celled table">
                     <thead>
                         <tr>
-                            <th>{% trans "Product/Project" %}</th>
+                            <th>{% trans "Item" %}</th>
                             <th>{% trans "Quantity" %}</th>
                             <th>{% trans "Price" %}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in cart %}
-                        <tr>
-                            <td>{{ item.product }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>{{ item.total_price }}</td>
-                        </tr>
+                        {% for item in cart %}Remove
+                            <tr>
+                                <td>{{ item.product }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.total_price }}</td>
+                                <td><a href="#" class="remove_{% if item.content_type.name == "Project"%}project{% elif item.content_type.name == "Product"%}product{% endif %}" data-value="{{ item.product.id }}"><i class="remove icon"></i></a></td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="3">
+                            <th colspan="4">
                                 <div align="right">
                                     <i>{% trans "Total ex VAT" %}: </i>{{ total_without_vat }}<br>
                                     <i>{% trans "VAT" %}:</i>21%<br>
@@ -111,7 +115,6 @@
                 <p>{% trans "Also subscribe to the newsletter?" %}</p>
 
                 <div class="ui form">
-
                     <div class="field">
                         <div class="ui checkbox">
                             <input type="checkbox" tabindex="0" class="hidden">
@@ -120,7 +123,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
 
@@ -132,10 +134,19 @@
 <script>
 $('.ui.card').on("click", function () {
     var provider_id = $(this).attr('data-value');
-    $('input[name="provider_id"]').val(provider_id)
+    $('input[name="provider_id"]').val(provider_id);
     $('#funder_checkout_form').submit();
 });
-
+$('.remove_product').on('click', function() {
+    var product_id = $(this).attr('data-value');
+    $('input[name="product_id"]').val(product_id);
+    $('#remove_product_form').submit();
+});
+$('.remove_project').on('click', function() {
+    var project_id = $(this).attr('data-value');
+    $('input[name="project_id"]').val(project_id);
+    $('#remove_project_form').submit();
+});
 
 $(document).ready(function() {
 
