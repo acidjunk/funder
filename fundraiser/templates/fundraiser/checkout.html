@@ -44,7 +44,7 @@
                     </div>
                     <div class="field">
                       <label>{% trans "I agree to the" %} <a href="">{% trans "terms and conditions" %}</a></label>
-                      <input type="checkbox" name="terms">
+                      <div class="ui checkbox"><input type="checkbox" name="terms"></div>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                             <tr>
                                 <td>{{ item.product }}</td>
                                 <td>{{ item.quantity }}</td>
-                                <td>{{ item.total_price }}</td>
+                                <td>&euro; {{ item.total_price }}</td>
                                 <td><a href="#" class="remove_{% if item.content_type.name == "Project"%}project{% elif item.content_type.name == "Product"%}product{% endif %}" data-value="{{ item.product.id }}"><i class="remove icon"></i></a></td>
                             </tr>
                         {% endfor %}
@@ -100,9 +100,9 @@
                         <tr>
                             <th colspan="4">
                                 <div align="right">
-                                    <i>{% trans "Total ex VAT" %}: </i>{{ total_without_vat }}<br>
+                                    <i>{% trans "Total ex VAT" %}: </i> &euro; {{ total_without_vat }}<br>
                                     <i>{% trans "VAT" %}:</i>21%<br>
-                                    <span style="font-size: 1.2rem;"><i>{% trans "Total with VAT" %}:</i>{{ total_with_vat }}</span>
+                                    <span style="font-size: 1.2rem;"><i>{% trans "Total with VAT" %}:</i> &euro; {{ total_with_vat|floatformat:2 }}</span>
                                 </div>
                             </th>
                         </tr>
@@ -132,83 +132,87 @@
 
 {% block extra_js %}
 <script>
-$('.ui.card').on("click", function () {
-    var provider_id = $(this).attr('data-value');
-    $('input[name="provider_id"]').val(provider_id);
-    $('#funder_checkout_form').submit();
-});
-$('.remove_product').on('click', function() {
-    var product_id = $(this).attr('data-value');
-    $('input[name="product_id"]').val(product_id);
-    $('#remove_product_form').submit();
-});
-$('.remove_project').on('click', function() {
-    var project_id = $(this).attr('data-value');
-    $('input[name="project_id"]').val(project_id);
-    $('#remove_project_form').submit();
-});
+    $('.ui.checkbox')
+  .checkbox()
+;
 
-$(document).ready(function() {
-
-    // validation
-    $('.ui.form').form({
-        fields: {
-            name: {
-                identifier: 'name',
-                rules: [
-                    {
-                        type: 'empty',
-                        prompt: '{% trans "Please enter a name" %}'
-                    }
-                ]
-            },
-
-            email: {
-                identifier: 'email',
-                optional: true,
-                rules: [
-                    {
-                        type: 'email',
-                        prompt: '{% trans "Please enter a valid email address" %}'
-                    }
-                ]
-            },
-
-            terms: {
-                identifier: 'terms',
-                rules: [
-                    {
-                        type: 'checked',
-                        prompt: '{% trans "You must agree to the terms and conditions" %}'
-                    }
-                ]
-            }
-        }
+    $('.ui.card').on("click", function () {
+        var provider_id = $(this).attr('data-value');
+        $('input[name="provider_id"]').val(provider_id);
+        $('#funder_checkout_form').submit();
+    });
+    $('.remove_product').on('click', function() {
+        var product_id = $(this).attr('data-value');
+        $('input[name="product_id"]').val(product_id);
+        $('#remove_product_form').submit();
+    });
+    $('.remove_project').on('click', function() {
+        var project_id = $(this).attr('data-value');
+        $('input[name="project_id"]').val(project_id);
+        $('#remove_project_form').submit();
     });
 
-    // called if correct data added to form
-    function validationpassed() {
+    $(document).ready(function() {
 
-        // Multiple instances may have been bound to the form, only submit one.
-        // This is a workaround and not ideal.
-        // Improvements welcomed.
+        // validation
+        $('.ui.form').form({
+            fields: {
+                name: {
+                    identifier: 'name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '{% trans "Please enter a name" %}'
+                        }
+                    ]
+                },
 
-        if (window.lock != "locked") {
-            var myform = $('.ui.form');
-            $.ajax({
-                type: myform.attr('method'),
-                url: myform.attr('action'),
-                data: myform.serialize(),
-                success: function (data) {
-                    //if successful at posting the form via ajax.
-                    myformposted(data);
-                    window.lock = "";
+                email: {
+                    identifier: 'email',
+                    optional: true,
+                    rules: [
+                        {
+                            type: 'email',
+                            prompt: '{% trans "Please enter a valid email address" %}'
+                        }
+                    ]
+                },
+
+                terms: {
+                    identifier: 'terms',
+                    rules: [
+                        {
+                            type: 'checked',
+                            prompt: '{% trans "You must agree to the terms and conditions" %}'
+                        }
+                    ]
                 }
-            });
+            }
+        });
+
+        // called if correct data added to form
+        function validationpassed() {
+
+            // Multiple instances may have been bound to the form, only submit one.
+            // This is a workaround and not ideal.
+            // Improvements welcomed.
+
+            if (window.lock != "locked") {
+                var myform = $('.ui.form');
+                $.ajax({
+                    type: myform.attr('method'),
+                    url: myform.attr('action'),
+                    data: myform.serialize(),
+                    success: function (data) {
+                        //if successful at posting the form via ajax.
+                        myformposted(data);
+                        window.lock = "";
+                    }
+                });
+            }
+            window.lock = "locked";
         }
-        window.lock = "locked";
-    }
-});
+    });
 </script>
 {% endblock %}
 

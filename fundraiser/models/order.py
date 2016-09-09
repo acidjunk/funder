@@ -46,7 +46,7 @@ class OrderIndexPage(RoutablePageMixin, Page):
         total_without_vat = 0
         for item in cart:
             total_without_vat += item.total_price
-        total_with_vat = int(total_without_vat* decimal.Decimal(1.21))*100
+        total_with_vat = float(total_without_vat* decimal.Decimal(1.21))
 
         return TemplateResponse(
             request,
