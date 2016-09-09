@@ -53,22 +53,23 @@
                     </div>
 
                     <div class="content">
-                        <div class="description">{{ blog.teaser|richtext }}</div>
+                        <div class="description">{{ product.teaser|richtext }}</div>
                         <a href="{% pageurl product %}">{% trans "Read more" %} &raquo;</a>
                         <div class="ui divider"></div>
-                        <button class="ui circular linkedin icon button" st_title="{{ blog.title }}"
-                                st_url="{{ SITE_URL }}{% pageurl product %}" displayText="LinkedIn"><i class="linkedin icon"></i>
-                        </button>
-                        <button class="ui circular twitter icon button" st_title="{{ blog.title }}"
-                                st_url="{{ SITE_URL }}{% pageurl product %}" displayText="Tweet"><i class="twitter icon"></i>
-                        </button>
-                        <button class="ui circular facebook icon button" st_title="{{ blog.title }}"
-                                st_url="{{ SITE_URL }}{% pageurl product %}" displayText="Facebook"><i class="facebook icon"></i>
-                        </button>
-                        <button class="ui circular google plus icon button" st_title="{{ blog.title }}"
-                                st_url="{{ SITE_URL }}{% pageurl product %}" displayText="Google +1"><i class="google plus icon"></i>
-                        </button>
-                        <button class="ui circular mail icon button" st_title="{{ product.title }}" st_url="{{ SITE_URL }}{% pageurl product %}"
+                        <a target="_new" href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.get_url_parts.1 }}{% pageurl product %}&title={{ product.title }}">
+                            <button class="ui circular linkedin icon button" st_title="{{ product.title }}"><i class="linkedin icon"></i></button>
+                        </a>
+                        <a target="_new" href="https://twitter.com/share?url={{ page.get_url_parts.1 }}{% pageurl product %}">
+                            <button class="ui circular twitter icon button"><i class="twitter icon"></i></button>
+                        </a>
+                        <a target="_new" href="http://www.facebook.com/sharer/sharer.php?u={{ page.get_url_parts.1 }}{% pageurl product %}">
+                            <button class="ui circular facebook icon button" st_title="{{ product.title }}"><i class="facebook icon"></i></button>
+                        </a>
+                        <a target="_new" href="https://plus.google.com/share?url={{ page.get_url_parts.1 }}{% pageurl product %}">
+                            <button class="ui circular google plus icon button"><i class="google plus icon"></i></button>
+                        </a>
+                        <button class="ui circular mail icon button" st_title="{{ product.title }}"
+                                st_url="{{ SITE_URL }}{% pageurl product %}"
                                 displayText="Email"><i class="mail icon"></i>
                         </button>
                     </div>

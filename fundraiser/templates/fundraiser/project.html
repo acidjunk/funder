@@ -42,21 +42,18 @@
                 {{ page.description|richtext }}
                 <div class="ui divider"></div>
                 <h3 class="ui header">{% trans "Share on" %}</h3>
-                <button class="ui circular linkedin icon button" st_title="{{ project.title }}"
-                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="LinkedIn"><i
-                        class="linkedin icon"></i>
-                </button>
-                <button class="ui circular twitter icon button" st_title="{{ project.title }}"
-                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Tweet"><i class="twitter icon"></i>
-                </button>
-                <button class="ui circular facebook icon button" st_title="{{ project.title }}"
-                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Facebook"><i
-                        class="facebook icon"></i>
-                </button>
-                <button class="ui circular google plus icon button" st_title="{{ project.title }}"
-                        st_url="{{ SITE_URL }}{% pageurl project %}" displayText="Google +1"><i
-                        class="google plus icon"></i>
-                </button>
+                <a target="_new" href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.get_url_parts.1 }}{% pageurl project %}&title={{ project.title }}">
+                    <button class="ui circular linkedin icon button" st_title="{{ project.title }}"><i class="linkedin icon"></i></button>
+                </a>
+                <a target="_new" href="https://twitter.com/share?url={{ page.get_url_parts.1 }}{% pageurl project %}">
+                    <button class="ui circular twitter icon button"><i class="twitter icon"></i></button>
+                </a>
+                <a target="_new" href="http://www.facebook.com/sharer/sharer.php?u={{ page.get_url_parts.1 }}{% pageurl project %}">
+                    <button class="ui circular facebook icon button" st_title="{{ project.title }}"><i class="facebook icon"></i></button>
+                </a>
+                <a target="_new" href="https://plus.google.com/share?url={{ page.get_url_parts.1 }}{% pageurl project %}">
+                    <button class="ui circular google plus icon button"><i class="google plus icon"></i></button>
+                </a>
                 <button class="ui circular mail icon button" st_title="{{ project.title }}"
                         st_url="{{ SITE_URL }}{% pageurl project %}"
                         displayText="Email"><i class="mail icon"></i>
