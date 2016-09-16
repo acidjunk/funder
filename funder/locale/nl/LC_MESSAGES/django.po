@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-03 11:32+0000\n"
+"POT-Creation-Date: 2016-09-16 22:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/templates/blog/blog_index_page.html:11 funder/templates/base.html:41
-#: funder/templates/base.html:93 search/templates/search/search.html:58
+#: blog/models.py:112
+#, fuzzy
+#| msgid "Blog Feeds"
+msgid "Blog index"
+msgstr "Blog Feeds"
+
+#: blog/models.py:120 fundraiser/models/product.py:121
+#: fundraiser/models/project.py:121
+#, fuzzy
+#| msgid "Categories"
+msgid "Category Name"
+msgstr "Categorieën"
+
+#: blog/models.py:125 fundraiser/models/product.py:126
+#: fundraiser/models/project.py:126
+msgid ""
+"Categories, unlike tags, can have a hierarchy. You might have a Jazz "
+"category, and under that have children categories for Bebop and Big Band. "
+"Totally optional."
+msgstr ""
+"Categorieën kunnen in tegenstelling tot tags hierarchisch zijn. Je zou een category Jazz kunnen "
+"hebben, met daaronder subcategorieën zoals Bebop and Bigband. Uiteraard optioneel."
+
+#: blog/models.py:133
+#, fuzzy
+#| msgid "Categories"
+msgid "Blog Category"
+msgstr "Categorieën"
+
+#: blog/models.py:134
+#, fuzzy
+#| msgid "Categories"
+msgid "Blog Categories"
+msgstr "Categorieën"
+
+#: blog/models.py:165 fundraiser/models/product.py:166
+#: fundraiser/models/project.py:166
+#, fuzzy
+#| msgid "Categories"
+msgid "Category"
+msgstr "Categorieën"
+
+#: blog/models.py:201
+msgid "body"
+msgstr ""
+
+#: blog/models.py:204 fundraiser/models/product.py:209
+#: fundraiser/models/project.py:210
+msgid "Post date"
+msgstr ""
+
+#: blog/models.py:205 fundraiser/models/product.py:210
+#: fundraiser/models/project.py:211
+msgid ""
+"This date may be displayed on the blog post. It is not used to schedule "
+"posts to go live at a later date."
+msgstr ""
+
+#: blog/models.py:214 fundraiser/models/product.py:219
+#: fundraiser/models/project.py:220
+msgid "Header image"
+msgstr ""
+
+#: blog/models.py:220 fundraiser/models/product.py:225
+#: fundraiser/models/project.py:226
+msgid "Author"
+msgstr ""
+
+#: blog/models.py:263
+#, fuzzy
+#| msgid "Blog Feeds"
+msgid "Blog page"
+msgstr "Blog Feeds"
+
+#: blog/models.py:264
+#, fuzzy
+#| msgid "Blog Feeds"
+msgid "Blog pages"
+msgstr "Blog Feeds"
+
+#: blog/models.py:273 blog/templates/blog/blog_index_page.html:137
+#: blog/templates/blog/blog_post.html:87 fundraiser/models/product.py:275
+#: fundraiser/models/project.py:276
+#: fundraiser/templates/fundraiser/product_index_page.html:140
+#: fundraiser/templates/fundraiser/project_index_page.html:140
+msgid "Categories"
+msgstr "Categorieën"
+
+#: blog/templates/blog/blog_index_page.html:11 funder/templates/base.html:40
+#: funder/templates/base.html:90 search/templates/search/search.html:58
 msgid "Blog"
 msgstr "Blog"
 
@@ -64,8 +152,8 @@ msgid "Read more"
 msgstr "Lees meer"
 
 #: blog/templates/blog/blog_index_page.html:91
-#: fundraiser/templates/fundraiser/product_index_page.html:92
-#: fundraiser/templates/fundraiser/project_index_page.html:92
+#: fundraiser/templates/fundraiser/product_index_page.html:93
+#: fundraiser/templates/fundraiser/project_index_page.html:93
 msgid "No tags or categories"
 msgstr "Geen tags of categorieën"
 
@@ -74,34 +162,27 @@ msgid "There are currently no blog posts"
 msgstr "Er zijn momenteel geen blog berichten"
 
 #: blog/templates/blog/blog_index_page.html:122
-#: fundraiser/templates/fundraiser/product_index_page.html:124
-#: fundraiser/templates/fundraiser/project_index_page.html:124
+#: fundraiser/templates/fundraiser/product_index_page.html:125
+#: fundraiser/templates/fundraiser/project_index_page.html:125
 msgid "All"
 msgstr "Alles"
 
 #: blog/templates/blog/blog_index_page.html:127
 #: blog/templates/blog/blog_post.html:76
-#: fundraiser/templates/fundraiser/product_index_page.html:129
-#: fundraiser/templates/fundraiser/project_index_page.html:129
+#: fundraiser/templates/fundraiser/product_index_page.html:130
+#: fundraiser/templates/fundraiser/project_index_page.html:130
 msgid "Tags"
 msgstr "Tags"
 
 #: blog/templates/blog/blog_index_page.html:128
-#: fundraiser/templates/fundraiser/product_index_page.html:130
-#: fundraiser/templates/fundraiser/project_index_page.html:130
+#: fundraiser/templates/fundraiser/product_index_page.html:131
+#: fundraiser/templates/fundraiser/project_index_page.html:131
 msgid "Select a tag to filter"
 msgstr "Selecteer een tag om te filteren"
 
-#: blog/templates/blog/blog_index_page.html:137
-#: blog/templates/blog/blog_post.html:87
-#: fundraiser/templates/fundraiser/product_index_page.html:139
-#: fundraiser/templates/fundraiser/project_index_page.html:139
-msgid "Categories"
-msgstr "Categorieën"
-
 #: blog/templates/blog/blog_index_page.html:138
-#: fundraiser/templates/fundraiser/product_index_page.html:140
-#: fundraiser/templates/fundraiser/project_index_page.html:140
+#: fundraiser/templates/fundraiser/product_index_page.html:141
+#: fundraiser/templates/fundraiser/project_index_page.html:141
 msgid "Select a category to filter"
 msgstr "Selecteer een categorie om te filteren"
 
@@ -109,8 +190,8 @@ msgstr "Selecteer een categorie om te filteren"
 #: blog/templates/blog/blog_post.html:93
 #: blog/templates/blog/search_results.html:4
 #: blog/templates/blog/search_results.html:39
-#: fundraiser/templates/fundraiser/product_index_page.html:149
-#: fundraiser/templates/fundraiser/project_index_page.html:149
+#: fundraiser/templates/fundraiser/product_index_page.html:150
+#: fundraiser/templates/fundraiser/project_index_page.html:150
 #: fundraiser/templates/fundraiser/search_results.html:47
 #: search/templates/search/search.html:76
 msgid "Search"
@@ -146,7 +227,7 @@ msgid "Share on"
 msgstr "Deel via"
 
 #: blog/templates/blog/blog_post.html:43
-#: fundraiser/templates/fundraiser/project.html:121
+#: fundraiser/templates/fundraiser/project.html:118
 msgid "Comments"
 msgstr "Reacties"
 
@@ -175,168 +256,232 @@ msgstr "Voer a.u.b. een zoekopdracht in"
 msgid "Refine search"
 msgstr "Verfijn zoekopdracht"
 
-#: funder/templates/base.html:42 funder/templates/base.html:76
+#: funder/templates/base.html:41 funder/templates/base.html:73
+#: fundraiser/models/product.py:267
 #: fundraiser/templates/fundraiser/product_index_page.html:12
 #: search/templates/search/search.html:65
 msgid "Products"
 msgstr "Producten"
 
-#: funder/templates/base.html:43 funder/templates/base.html:77
+#: funder/templates/base.html:42 funder/templates/base.html:74
+#: fundraiser/models/project.py:268
 #: fundraiser/templates/fundraiser/project_index_page.html:12
 #: search/templates/search/search.html:72
 msgid "Projects"
 msgstr "Projecten"
 
-#: funder/templates/base.html:44 funder/templates/base.html:94
-#: funder/templates/base.html:146
+#: funder/templates/base.html:43 funder/templates/base.html:91
+#: funder/templates/base.html:143
 msgid "Contact"
 msgstr "Contact"
 
-#: funder/templates/base.html:48 funder/templates/base.html:96
+#: funder/templates/base.html:47 funder/templates/base.html:93
 msgid "Search..."
 msgstr "Zoek..."
 
-#: funder/templates/base.html:115
+#: funder/templates/base.html:112
 msgid "Product Feeds"
 msgstr "Producten Feeds"
 
-#: funder/templates/base.html:123
+#: funder/templates/base.html:120
 msgid "Project Feeds"
 msgstr "Projecten Feeds"
 
-#: funder/templates/base.html:130
+#: funder/templates/base.html:127
 msgid "Blog Feeds"
 msgstr "Blog Feeds"
 
-#: funder/templates/base.html:136
+#: funder/templates/base.html:133
 msgid "Want to add your own project or product?"
 msgstr "Uw eigen project of product toevoegen?"
 
-#: funder/templates/base.html:138
+#: funder/templates/base.html:135
 msgid ""
 "We are always open for suggestions. If you are running your own non profit "
 "organisation and want to join us, please fill out the"
 msgstr ""
-"We staan altijd open voor suggesties. Wanneer u zelf een non profit organisatie "
-"bestuurt en mee wilt doen, gebruik dan dit"
+"We staan altijd open voor suggesties. Wanneer u zelf een non profit "
+"organisatie bestuurt en mee wilt doen, gebruik dan dit"
 
-#: funder/templates/base.html:138
+#: funder/templates/base.html:135
 msgid "form"
 msgstr "formulier"
 
-#: funder/templates/base.html:145
+#: funder/templates/base.html:142
 msgid "Site Map"
 msgstr "Site Map"
 
-#: funder/templates/base.html:147
+#: funder/templates/base.html:144
 msgid "Terms and Conditions"
 msgstr "Algemene voorwaarden"
 
-#: funder/templates/base.html:148
+#: funder/templates/base.html:145
 msgid "Privacy Policy"
 msgstr "Privacy statement"
+
+#: fundraiser/models/product.py:113
+#, fuzzy
+#| msgid "Products"
+msgid "Products index"
+msgstr "Producten"
+
+#: fundraiser/models/product.py:134
+#, fuzzy
+#| msgid "Product Feeds"
+msgid "Product Category"
+msgstr "Producten Feeds"
+
+#: fundraiser/models/product.py:135
+#, fuzzy
+#| msgid "Categories"
+msgid "Product Categories"
+msgstr "Categorieën"
+
+#: fundraiser/models/product.py:266
+#, fuzzy
+#| msgid "Products"
+msgid "Product"
+msgstr "Producten"
+
+#: fundraiser/models/project.py:113
+#, fuzzy
+#| msgid "Projects"
+msgid "Projects index"
+msgstr "Projecten"
+
+#: fundraiser/models/project.py:134
+#, fuzzy
+#| msgid "Project Feeds"
+msgid "Project Category"
+msgstr "Projecten Feeds"
+
+#: fundraiser/models/project.py:135
+#, fuzzy
+#| msgid "Categories"
+msgid "Project Categories"
+msgstr "Categorieën"
+
+#: fundraiser/models/project.py:267
+#, fuzzy
+#| msgid "Projects"
+msgid "Project"
+msgstr "Projecten"
 
 #: fundraiser/templates/fundraiser/checkout.html:6
 msgid "Checkout"
 msgstr "Afrekenen"
 
-#: fundraiser/templates/fundraiser/checkout.html:15
+#: fundraiser/templates/fundraiser/checkout.html:16
 msgid ""
 "Check the form, and then click one of the banks to complete your donation."
-msgstr "Vul het formulier aan en klik dan op een van de banken om uw donatie af te ronden. "
+msgstr ""
+"Vul het formulier aan en klik dan op een van de banken om uw donatie af te "
+"ronden. "
 
-#: fundraiser/templates/fundraiser/checkout.html:19
-#: fundraiser/templates/fundraiser/project.html:178
+#: fundraiser/templates/fundraiser/checkout.html:20
+#: fundraiser/templates/fundraiser/project.html:175
 msgid "Name"
 msgstr "Naam"
 
-#: fundraiser/templates/fundraiser/checkout.html:20
-#: fundraiser/templates/fundraiser/project.html:179
+#: fundraiser/templates/fundraiser/checkout.html:21
+#: fundraiser/templates/fundraiser/project.html:176
 msgid "Your name"
 msgstr "Uw naam"
 
-#: fundraiser/templates/fundraiser/checkout.html:25
+#: fundraiser/templates/fundraiser/checkout.html:26
 #: fundraiser/templates/fundraiser/project.html:35
-#: fundraiser/templates/fundraiser/project.html:186
-#: fundraiser/templates/fundraiser/project.html:187
+#: fundraiser/templates/fundraiser/project.html:183
+#: fundraiser/templates/fundraiser/project.html:184
 msgid "Organisation"
 msgstr "Organisatie"
 
-#: fundraiser/templates/fundraiser/checkout.html:26
+#: fundraiser/templates/fundraiser/checkout.html:27
 msgid "Your organisation's name if any"
 msgstr "Uw organisatie"
 
-#: fundraiser/templates/fundraiser/checkout.html:33
 #: fundraiser/templates/fundraiser/checkout.html:34
+#: fundraiser/templates/fundraiser/checkout.html:35
 msgid "Email"
 msgstr "E-mail"
 
-#: fundraiser/templates/fundraiser/checkout.html:36
+#: fundraiser/templates/fundraiser/checkout.html:37
 msgid "Anonymous?"
 msgstr "Anoniem?"
 
-#: fundraiser/templates/fundraiser/checkout.html:40
+#: fundraiser/templates/fundraiser/checkout.html:41
 msgid "Do not show my name on the project pages"
 msgstr "Laat mijn naam niet op de projecten pagina's zien"
 
-#: fundraiser/templates/fundraiser/checkout.html:45
+#: fundraiser/templates/fundraiser/checkout.html:46
 msgid "I agree to the"
-msgstr "I ga akkoord met de"
+msgstr "Ik ga akkoord met de"
 
-#: fundraiser/templates/fundraiser/checkout.html:45
+#: fundraiser/templates/fundraiser/checkout.html:46
 msgid "terms and conditions"
 msgstr "algemene voorwaarden"
 
-#: fundraiser/templates/fundraiser/checkout.html:52
+#: fundraiser/templates/fundraiser/checkout.html:53
 msgid "Choose a bank to continue"
 msgstr "Kies een bank om verder te gaan"
 
-#: fundraiser/templates/fundraiser/checkout.html:81
-msgid "Product/Project"
+#: fundraiser/templates/fundraiser/checkout.html:77
+msgid "Cart"
+msgstr "Mandje"
+
+#: fundraiser/templates/fundraiser/checkout.html:83
+msgid "Item"
 msgstr "Item"
 
-#: fundraiser/templates/fundraiser/checkout.html:82
-#: fundraiser/templates/fundraiser/product.html:72
+#: fundraiser/templates/fundraiser/checkout.html:84
+#: fundraiser/templates/fundraiser/product.html:69
 msgid "Quantity"
 msgstr "Hoeveelheid"
 
-#: fundraiser/templates/fundraiser/checkout.html:83
+#: fundraiser/templates/fundraiser/checkout.html:85
 msgid "Price"
 msgstr "Prijs"
 
-#: fundraiser/templates/fundraiser/checkout.html:99
+#: fundraiser/templates/fundraiser/checkout.html:104
+#: fundraiser/templates/fundraiser/start_payment.html:33
 msgid "Total ex VAT"
 msgstr "Totaal ex BTW"
 
-#: fundraiser/templates/fundraiser/checkout.html:100
+#: fundraiser/templates/fundraiser/checkout.html:105
+#: fundraiser/templates/fundraiser/start_payment.html:34
 msgid "VAT"
 msgstr "BTW"
 
-#: fundraiser/templates/fundraiser/checkout.html:101
+#: fundraiser/templates/fundraiser/checkout.html:106
+#: fundraiser/templates/fundraiser/start_payment.html:35
 msgid "Total with VAT"
 msgstr "Totaal inclusief BTW"
 
-#: fundraiser/templates/fundraiser/checkout.html:110
+#: fundraiser/templates/fundraiser/checkout.html:108
+#: fundraiser/templates/fundraiser/start_payment.html:37
+msgid "Total"
+msgstr "Totaal"
+
+#: fundraiser/templates/fundraiser/checkout.html:118
 msgid "Newsletter"
 msgstr "Nieuwsbrief"
 
-#: fundraiser/templates/fundraiser/checkout.html:111
+#: fundraiser/templates/fundraiser/checkout.html:119
 msgid "Also subscribe to the newsletter?"
-msgstr "Tegelijkertijd abboneren op de nieuwsbrief?"
+msgstr "Tegelijkertijd abonneren op de nieuwsbrief?"
 
-#: fundraiser/templates/fundraiser/checkout.html:118
+#: fundraiser/templates/fundraiser/checkout.html:125
 msgid "Sign me up for the newsletter"
 msgstr "Abboneer mij op de nieuwsbrief"
 
-#: fundraiser/templates/fundraiser/checkout.html:150
+#: fundraiser/templates/fundraiser/checkout.html:169
 msgid "Please enter a name"
 msgstr "Voer a.u.b. een naam in"
 
-#: fundraiser/templates/fundraiser/checkout.html:161
+#: fundraiser/templates/fundraiser/checkout.html:180
 msgid "Please enter a valid email address"
 msgstr "Voer a.u.b. een geldig e-mail adres in"
 
-#: fundraiser/templates/fundraiser/checkout.html:171
+#: fundraiser/templates/fundraiser/checkout.html:190
 msgid "You must agree to the terms and conditions"
 msgstr "U moet akkoord gaan met de algemene voorwaarden"
 
@@ -344,11 +489,11 @@ msgstr "U moet akkoord gaan met de algemene voorwaarden"
 msgid "Current stock"
 msgstr "Huidige voorraad"
 
-#: fundraiser/templates/fundraiser/product.html:61
+#: fundraiser/templates/fundraiser/product.html:58
 msgid "Prize"
 msgstr "Prijs"
 
-#: fundraiser/templates/fundraiser/product.html:75
+#: fundraiser/templates/fundraiser/product.html:72
 msgid "Add to shopping basket"
 msgstr "Voeg toe aan mandje"
 
@@ -360,12 +505,12 @@ msgstr "Getoond worden alleen producten in"
 msgid "Showing only products tagged with"
 msgstr "Getoond worden alleen producten getagged met"
 
-#: fundraiser/templates/fundraiser/product_index_page.html:115
+#: fundraiser/templates/fundraiser/product_index_page.html:116
 msgid "There are currently no products"
 msgstr "Er zijn momenteel geen producten"
 
-#: fundraiser/templates/fundraiser/product_index_page.html:151
-#: fundraiser/templates/fundraiser/project_index_page.html:151
+#: fundraiser/templates/fundraiser/product_index_page.html:152
+#: fundraiser/templates/fundraiser/project_index_page.html:152
 msgid "Search products..."
 msgstr "Zoek producten..."
 
@@ -377,32 +522,32 @@ msgstr "Benodigd bedrag"
 msgid "Amount raised"
 msgstr "Opgehaald bedrag"
 
-#: fundraiser/templates/fundraiser/project.html:67
+#: fundraiser/templates/fundraiser/project.html:64
 msgid "Activity"
 msgstr "Activiteit"
 
-#: fundraiser/templates/fundraiser/project.html:148
+#: fundraiser/templates/fundraiser/project.html:145
 msgid "Comments are disabled for this project"
 msgstr "Reacties zinn uitgeschakeld voor dit project"
 
-#: fundraiser/templates/fundraiser/project.html:159
+#: fundraiser/templates/fundraiser/project.html:156
 #: fundraiser/templates/fundraiser/thanks.html:14
 msgid "Status"
 msgstr "Status"
 
-#: fundraiser/templates/fundraiser/project.html:168
+#: fundraiser/templates/fundraiser/project.html:165
 msgid "Donated"
 msgstr "Gedoneerd"
 
-#: fundraiser/templates/fundraiser/project.html:173
+#: fundraiser/templates/fundraiser/project.html:170
 msgid "Donate now!"
 msgstr "Doneer nu!"
 
-#: fundraiser/templates/fundraiser/project.html:182
+#: fundraiser/templates/fundraiser/project.html:179
 msgid "Amount"
 msgstr "Bedrag"
 
-#: fundraiser/templates/fundraiser/project.html:189
+#: fundraiser/templates/fundraiser/project.html:186
 msgid "Donate"
 msgstr "Doneer"
 
@@ -414,7 +559,7 @@ msgstr "Getoond worden alleen projecten in"
 msgid "Showing only projects tagged with"
 msgstr "Getoond worden alleen projecten getagged met"
 
-#: fundraiser/templates/fundraiser/project_index_page.html:115
+#: fundraiser/templates/fundraiser/project_index_page.html:116
 msgid "There are currently no projects"
 msgstr "Er zijn momenteel geen projecten"
 
@@ -484,7 +629,9 @@ msgstr "Wij helpen vrijwilligers organisaties"
 
 #: home/templates/home/home_page.html:12
 msgid "An free platform ready to support millions of nonprofits worldwide."
-msgstr "Een gratis platform klaar om wereldwijd alle vrijwilligersoranisaties te ondersteunen"
+msgstr ""
+"Een gratis platform klaar om wereldwijd alle vrijwilligersoranisaties te "
+"ondersteunen"
 
 #: home/templates/home/home_page.html:15
 msgid "Contribute"
@@ -495,8 +642,8 @@ msgid ""
 "To show how this application can be used in some real world scenario's we "
 "added some demo projects."
 msgstr ""
-"Om te demonstreren dat deze applicatie gebruikt kan worden in een aantal praktische scenario's "
-"hebben we een aantal demo projecten toegevoegd"
+"Om te demonstreren dat deze applicatie gebruikt kan worden in een aantal "
+"praktische scenario's hebben we een aantal demo projecten toegevoegd"
 
 #: home/templates/home/home_page.html:38
 msgid "Recent projects"
@@ -505,3 +652,6 @@ msgstr "Recente projecten"
 #: home/templates/home/home_page.html:59
 msgid "Recent products"
 msgstr "Recente producten"
+
+#~ msgid "Product/Project"
+#~ msgstr "Item"

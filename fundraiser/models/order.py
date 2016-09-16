@@ -5,6 +5,7 @@ import uuid
 import decimal
 
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.db import models
@@ -76,7 +77,7 @@ class OrderIndexPage(RoutablePageMixin, Page):
         # Check if order already exist for this cart
         try:
             order = Order.objects.get(cart=cart.cart)
-        except:
+        except ObjectDoesNotExist:
             order = Order(order_nr=uuid.uuid4(), cart=cart.cart, amount='2293', #todo
                           billing_name=name, billing_company=organisation, paid_date=datetime.datetime.now())
             order.save()
@@ -94,7 +95,7 @@ class OrderIndexPage(RoutablePageMixin, Page):
         if settings.FUNDER_SHOW_VAT:
             t = Transaction(entrance, total_with_vat, '06', entrance, 'Funder donation')
         else:
-            t = Transaction(entrance, total_without_vat, '06', entrance, 'Funder donation')
+            t = Transaction(entrance, int(total_without_vat)*100, '06', entrance, 'Funder donation')
         # Send transaction
         # Todo: create something with a setting:
         urls = WebshopURLs('https://funder.formatics.nl/order/thanks/?order_nr={}'.format(order.order_nr))
