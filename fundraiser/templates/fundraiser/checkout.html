@@ -87,7 +87,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in cart %}Remove
+                        {% for item in cart %}
                             <tr>
                                 <td>{{ item.product }}</td>
                                 <td>{{ item.quantity }}</td>
@@ -100,9 +100,13 @@
                         <tr>
                             <th colspan="4">
                                 <div align="right">
-                                    <i>{% trans "Total ex VAT" %}: </i> &euro; {{ total_without_vat }}<br>
-                                    <i>{% trans "VAT" %}:</i>21%<br>
-                                    <span style="font-size: 1.2rem;"><i>{% trans "Total with VAT" %}:</i> &euro; {{ total_with_vat|floatformat:2 }}</span>
+                                    {% if show_vat %}
+                                        <i>{% trans "Total ex VAT" %}: </i> &euro; {{ total_without_vat }}<br>
+                                        <i>{% trans "VAT" %}:</i>21%<br>
+                                        <span style="font-size: 1.2rem;"><i>{% trans "Total with VAT" %}:</i> &euro; {{ total_with_vat|floatformat:2 }}</span>
+                                    {% else %}
+                                        <span style="font-size: 1.2rem;"><i>{% trans "Total" %}:</i> &euro; {{ total_without_vat|floatformat:2 }}</span>
+                                    {% endif %}
                                 </div>
                             </th>
                         </tr>

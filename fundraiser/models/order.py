@@ -48,7 +48,7 @@ class OrderIndexPage(RoutablePageMixin, Page):
         total_without_vat = 0
         for item in cart:
             total_without_vat += item.total_price
-        total_with_vat = float(total_without_vat* decimal.Decimal(1.21))
+        total_with_vat = float(total_without_vat* decimal.Decimal(1+settings.FUNDER_VAT_PERCENTAGE/100))
 
         return TemplateResponse(
             request,
@@ -58,6 +58,8 @@ class OrderIndexPage(RoutablePageMixin, Page):
                 "cart": cart,
                 "total_without_vat": total_without_vat,
                 "total_with_vat": total_with_vat,
+                "show_vat": settings.FUNDER_SHOW_VAT,
+                "vat_percentage": settings.FUNDER_VAT_PERCENTAGE,
              }
         )
 
@@ -89,7 +91,10 @@ class OrderIndexPage(RoutablePageMixin, Page):
 
         # Build transaction
         entrance = datetime.datetime.now().strftime("E%Y%m%dT%H%M")
-        t = Transaction(entrance, total_with_vat, '06', entrance, 'Funder donation')
+        if settings.FUNDER_SHOW_VAT:
+            t = Transaction(entrance, total_with_vat, '06', entrance, 'Funder donation')
+        else:
+            t = Transaction(entrance, total_without_vat, '06', entrance, 'Funder donation')
         # Send transaction
         # Todo: create something with a setting:
         urls = WebshopURLs('https://funder.formatics.nl/order/thanks/?order_nr={}'.format(order.order_nr))
@@ -109,7 +114,6 @@ class OrderIndexPage(RoutablePageMixin, Page):
                 "url_ideal": url_ideal,
                 "show_vat": settings.FUNDER_SHOW_VAT,
                 "vat_percentage": settings.FUNDER_VAT_PERCENTAGE,
-
             }
         )
 
