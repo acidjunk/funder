@@ -471,7 +471,7 @@ msgstr "Tegelijkertijd abonneren op de nieuwsbrief?"
 
 #: fundraiser/templates/fundraiser/checkout.html:125
 msgid "Sign me up for the newsletter"
-msgstr "Abboneer mij op de nieuwsbrief"
+msgstr "Abonneer mij op de nieuwsbrief"
 
 #: fundraiser/templates/fundraiser/checkout.html:169
 msgid "Please enter a name"
