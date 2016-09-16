@@ -3,6 +3,8 @@ import urllib
 import uuid
 
 import decimal
+
+from django.conf import settings
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.db import models
@@ -105,6 +107,9 @@ class OrderIndexPage(RoutablePageMixin, Page):
                 "total_with_vat": total_with_vat,
                 "provider_id": provider_id,
                 "url_ideal": url_ideal,
+                "show_vat": settings.FUNDER_SHOW_VAT,
+                "vat_percentage": settings.FUNDER_VAT_PERCENTAGE,
+
             }
         )
 

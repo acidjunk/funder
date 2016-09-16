@@ -133,7 +133,7 @@ USE_L10N = True
 USE_TZ = True
 
 FUNDER_SHOW_VAT = False
-FUNDER_VAT = 21.0
+FUNDER_VAT_PERCENTAGE = 21.0
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
