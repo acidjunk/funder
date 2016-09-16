@@ -22,6 +22,15 @@ class HomePage(Page):
         context['recent_projects'] = ProjectPage.objects.all().order_by('-id')[0:5]
         return context
 
+
+class StaticPage(Page):
+    body = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname="full")
+    ]
+
+
 class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')
 

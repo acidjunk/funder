@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags i18n %}
+
+{% block content %}
+
+    <h1 class="ui dividing header" style="margin-top: -2px;">
+        <div class="content">
+            {{ page.title }}
+        </div>
+    </h1>
+
+    <div class="content">
+        {{ page.body|richtext }}
+    </div>
+
+{% endblock %}
+
