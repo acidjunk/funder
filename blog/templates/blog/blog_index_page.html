@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load gravatar humanize wagtailcore_tags wagtailimages_tags static i18n %}
+{% load gravatar humanize taggit_templatetags2_tags wagtailcore_tags wagtailimages_tags static i18n %}
 
 {% block content %}
     {% for rl in self.related_links.all %}
@@ -126,9 +126,14 @@
                     <div class="item">
                         <h4>{% trans "Tags" %}</h4>
                         <p>{% trans "Select a tag to filter" %}:</p>
+                        {% get_taglist as tags for 'blog.blogpage' %}
                         {% if tags %}
                             {% for tag_item in tags %}
-                                <a class="{% if tag == tag_item.slug %}active {% endif %}teal item" href="{% url 'blog:tag' tag_item.slug %}/">{{ tag_item }}</a>
+                                <a class="{% if tag == tag_item.slug %}active {% endif %}teal item" href="{% url 'blog:tag' tag_item.slug %}/">
+                                    {{ tag_item }}
+                                    <div class="ui left pointing label">{{ tag_item.num_times }}</div>
+
+                                </a>
                             {% endfor %}
                         {% endif %}
                     </div>

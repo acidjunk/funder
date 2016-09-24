@@ -97,7 +97,6 @@ class ProductIndexPage(Page):
             except EmptyPage:
                 products = paginator.page(paginator.num_pages)
 
-        context['tags'] = Tag.objects.all()
         context['categories'] = ProductCategory.objects.all()
         context['number_of_products'] = ProductPage.objects.count() # Todo: update with tag
         context['products'] = products

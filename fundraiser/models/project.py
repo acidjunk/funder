@@ -97,7 +97,6 @@ class ProjectIndexPage(Page):
             except EmptyPage:
                 projects = paginator.page(paginator.num_pages)
 
-        context['tags'] = Tag.objects.all()
         context['categories'] = ProjectCategory.objects.all()
         context['number_of_projects'] = ProjectPage.objects.count() # Todo: update with tag
         context['projects'] = projects

@@ -96,7 +96,6 @@ class BlogIndexPage(Page):
             except EmptyPage:
                 blogs = paginator.page(paginator.num_pages)
 
-        context['tags'] = Tag.objects.all()
         context['categories'] = BlogCategory.objects.all()
         context['number_of_blog_posts'] = BlogPage.objects.count() # Todo: update with tag
         context['blogs'] = blogs
