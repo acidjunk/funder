@@ -1,4 +1,4 @@
-{% load static staticfiles wagtailuserbar i18n %}
+{% load static staticfiles wagtailuserbar i18n blog_helper fundraiser_helper %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -111,22 +111,19 @@
                     <div class="three wide column">
                         <h4 class="ui inverted header"><i class="rss icon"></i>{% trans "Product Feeds" %}</h4>
                         <div class="ui inverted link list">
-                            <a href="/products/products-category/animal/feed/" class="item">Animal</a>
-                            <a href="/products/productst-category/neighborhood/feed/" class="item">Neighborhood</a>
-                            <a href="/products/productst-category/wellfare/feed/" class="item">Wellfare</a>
+                            {% show_product_feeds %}
                         </div>
                     </div>
                     <div class="three wide column">
                         <h4 class="ui inverted header"><i class="rss icon"></i>{% trans "Project Feeds" %}</h4>
                         <div class="ui inverted link list">
-                            <a href="/projects/project-category/international/feed/" class="item">International</a>
-                            <a href="/projects/project-category/local-area/feed/" class="item">Local Area</a>
+                            {% show_project_feeds %}
                         </div>
                     </div>
                     <div class="three wide column">
                         <h4 class="ui inverted header"><i class="rss icon"></i>{% trans "Blog Feeds" %}</h4>
                         <div class="ui inverted link list">
-                            <a href="/blog/category/live/feed/" class="item">Category Live</a>
+                            {% show_blog_feeds %}
                         </div>
                     </div>
                     <div class="seven wide column">

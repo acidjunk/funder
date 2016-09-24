@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-16 22:17+0000\n"
+"POT-Creation-Date: 2016-09-24 15:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,91 +18,92 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/models.py:112
+#: blog/models.py:111
 #, fuzzy
 #| msgid "Blog Feeds"
 msgid "Blog index"
 msgstr "Blog Feeds"
 
-#: blog/models.py:120 fundraiser/models/product.py:121
-#: fundraiser/models/project.py:121
+#: blog/models.py:119 fundraiser/models/product.py:120
+#: fundraiser/models/project.py:120
 #, fuzzy
 #| msgid "Categories"
 msgid "Category Name"
 msgstr "Categorieën"
 
-#: blog/models.py:125 fundraiser/models/product.py:126
-#: fundraiser/models/project.py:126
+#: blog/models.py:124 fundraiser/models/product.py:125
+#: fundraiser/models/project.py:125
 msgid ""
 "Categories, unlike tags, can have a hierarchy. You might have a Jazz "
 "category, and under that have children categories for Bebop and Big Band. "
 "Totally optional."
 msgstr ""
-"Categorieën kunnen in tegenstelling tot tags hierarchisch zijn. Je zou een category Jazz kunnen "
-"hebben, met daaronder subcategorieën zoals Bebop and Bigband. Uiteraard optioneel."
+"Categorieën kunnen in tegenstelling tot tags hierarchisch zijn. Je zou een "
+"category Jazz kunnen hebben, met daaronder subcategorieën zoals Bebop and "
+"Bigband. Uiteraard optioneel."
 
-#: blog/models.py:133
+#: blog/models.py:132
 #, fuzzy
 #| msgid "Categories"
 msgid "Blog Category"
 msgstr "Categorieën"
 
-#: blog/models.py:134
+#: blog/models.py:133
 #, fuzzy
 #| msgid "Categories"
 msgid "Blog Categories"
 msgstr "Categorieën"
 
-#: blog/models.py:165 fundraiser/models/product.py:166
-#: fundraiser/models/project.py:166
+#: blog/models.py:164 fundraiser/models/product.py:165
+#: fundraiser/models/project.py:165
 #, fuzzy
 #| msgid "Categories"
 msgid "Category"
 msgstr "Categorieën"
 
-#: blog/models.py:201
+#: blog/models.py:200
 msgid "body"
+msgstr ""
+
+#: blog/models.py:203 fundraiser/models/product.py:208
+#: fundraiser/models/project.py:209
+msgid "Post date"
 msgstr ""
 
 #: blog/models.py:204 fundraiser/models/product.py:209
 #: fundraiser/models/project.py:210
-msgid "Post date"
-msgstr ""
-
-#: blog/models.py:205 fundraiser/models/product.py:210
-#: fundraiser/models/project.py:211
 msgid ""
 "This date may be displayed on the blog post. It is not used to schedule "
 "posts to go live at a later date."
 msgstr ""
 
-#: blog/models.py:214 fundraiser/models/product.py:219
-#: fundraiser/models/project.py:220
+#: blog/models.py:213 fundraiser/models/product.py:218
+#: fundraiser/models/project.py:219
 msgid "Header image"
 msgstr ""
 
-#: blog/models.py:220 fundraiser/models/product.py:225
-#: fundraiser/models/project.py:226
+#: blog/models.py:219 fundraiser/models/product.py:224
+#: fundraiser/models/project.py:225
 msgid "Author"
 msgstr ""
 
-#: blog/models.py:263
+#: blog/models.py:262
 #, fuzzy
 #| msgid "Blog Feeds"
 msgid "Blog page"
 msgstr "Blog Feeds"
 
-#: blog/models.py:264
+#: blog/models.py:263
 #, fuzzy
 #| msgid "Blog Feeds"
 msgid "Blog pages"
 msgstr "Blog Feeds"
 
-#: blog/models.py:273 blog/templates/blog/blog_index_page.html:137
-#: blog/templates/blog/blog_post.html:87 fundraiser/models/product.py:275
-#: fundraiser/models/project.py:276
-#: fundraiser/templates/fundraiser/product_index_page.html:140
-#: fundraiser/templates/fundraiser/project_index_page.html:140
+#: blog/models.py:272 blog/templates/blog/blog_index_page.html:142
+#: blog/templates/blog/blog_post.html:87 fundraiser/models/product.py:274
+#: fundraiser/models/project.py:275
+#: fundraiser/templates/fundraiser/product_index_page.html:144
+#: fundraiser/templates/fundraiser/project_index_page.html:144
 msgid "Categories"
 msgstr "Categorieën"
 
@@ -180,24 +181,24 @@ msgstr "Tags"
 msgid "Select a tag to filter"
 msgstr "Selecteer een tag om te filteren"
 
-#: blog/templates/blog/blog_index_page.html:138
-#: fundraiser/templates/fundraiser/product_index_page.html:141
-#: fundraiser/templates/fundraiser/project_index_page.html:141
+#: blog/templates/blog/blog_index_page.html:143
+#: fundraiser/templates/fundraiser/product_index_page.html:145
+#: fundraiser/templates/fundraiser/project_index_page.html:145
 msgid "Select a category to filter"
 msgstr "Selecteer een categorie om te filteren"
 
-#: blog/templates/blog/blog_index_page.html:147
+#: blog/templates/blog/blog_index_page.html:152
 #: blog/templates/blog/blog_post.html:93
 #: blog/templates/blog/search_results.html:4
 #: blog/templates/blog/search_results.html:39
-#: fundraiser/templates/fundraiser/product_index_page.html:150
-#: fundraiser/templates/fundraiser/project_index_page.html:150
+#: fundraiser/templates/fundraiser/product_index_page.html:154
+#: fundraiser/templates/fundraiser/project_index_page.html:154
 #: fundraiser/templates/fundraiser/search_results.html:47
 #: search/templates/search/search.html:76
 msgid "Search"
 msgstr "Zoek"
 
-#: blog/templates/blog/blog_index_page.html:149
+#: blog/templates/blog/blog_index_page.html:154
 #: blog/templates/blog/blog_post.html:95
 msgid "Search posts..."
 msgstr "Zoek berichten..."
@@ -256,22 +257,28 @@ msgstr "Voer a.u.b. een zoekopdracht in"
 msgid "Refine search"
 msgstr "Verfijn zoekopdracht"
 
+#: blog/templates/blog/templatetags/show_blog_feeds.html:7
+#: fundraiser/templates/fundraiser/templatetags/show_product_feeds.html:7
+#: fundraiser/templates/fundraiser/templatetags/show_project_feeds.html:7
+msgid "No feeds available"
+msgstr "Geen feeds beschikbaar"
+
 #: funder/templates/base.html:41 funder/templates/base.html:73
-#: fundraiser/models/product.py:267
+#: fundraiser/models/product.py:266
 #: fundraiser/templates/fundraiser/product_index_page.html:12
 #: search/templates/search/search.html:65
 msgid "Products"
 msgstr "Producten"
 
 #: funder/templates/base.html:42 funder/templates/base.html:74
-#: fundraiser/models/project.py:268
+#: fundraiser/models/project.py:267
 #: fundraiser/templates/fundraiser/project_index_page.html:12
 #: search/templates/search/search.html:72
 msgid "Projects"
 msgstr "Projecten"
 
 #: funder/templates/base.html:43 funder/templates/base.html:91
-#: funder/templates/base.html:143
+#: funder/templates/base.html:140
 msgid "Contact"
 msgstr "Contact"
 
@@ -283,19 +290,19 @@ msgstr "Zoek..."
 msgid "Product Feeds"
 msgstr "Producten Feeds"
 
-#: funder/templates/base.html:120
+#: funder/templates/base.html:118
 msgid "Project Feeds"
 msgstr "Projecten Feeds"
 
-#: funder/templates/base.html:127
+#: funder/templates/base.html:124
 msgid "Blog Feeds"
 msgstr "Blog Feeds"
 
-#: funder/templates/base.html:133
+#: funder/templates/base.html:130
 msgid "Want to add your own project or product?"
 msgstr "Uw eigen project of product toevoegen?"
 
-#: funder/templates/base.html:135
+#: funder/templates/base.html:132
 msgid ""
 "We are always open for suggestions. If you are running your own non profit "
 "organisation and want to join us, please fill out the"
@@ -303,65 +310,65 @@ msgstr ""
 "We staan altijd open voor suggesties. Wanneer u zelf een non profit "
 "organisatie bestuurt en mee wilt doen, gebruik dan dit"
 
-#: funder/templates/base.html:135
+#: funder/templates/base.html:132
 msgid "form"
 msgstr "formulier"
 
-#: funder/templates/base.html:142
+#: funder/templates/base.html:139
 msgid "Site Map"
 msgstr "Site Map"
 
-#: funder/templates/base.html:144
+#: funder/templates/base.html:141
 msgid "Terms and Conditions"
 msgstr "Algemene voorwaarden"
 
-#: funder/templates/base.html:145
+#: funder/templates/base.html:142
 msgid "Privacy Policy"
 msgstr "Privacy statement"
 
-#: fundraiser/models/product.py:113
+#: fundraiser/models/product.py:112
 #, fuzzy
 #| msgid "Products"
 msgid "Products index"
 msgstr "Producten"
 
-#: fundraiser/models/product.py:134
+#: fundraiser/models/product.py:133
 #, fuzzy
 #| msgid "Product Feeds"
 msgid "Product Category"
 msgstr "Producten Feeds"
 
-#: fundraiser/models/product.py:135
+#: fundraiser/models/product.py:134
 #, fuzzy
 #| msgid "Categories"
 msgid "Product Categories"
 msgstr "Categorieën"
 
-#: fundraiser/models/product.py:266
+#: fundraiser/models/product.py:265
 #, fuzzy
 #| msgid "Products"
 msgid "Product"
 msgstr "Producten"
 
-#: fundraiser/models/project.py:113
+#: fundraiser/models/project.py:112
 #, fuzzy
 #| msgid "Projects"
 msgid "Projects index"
 msgstr "Projecten"
 
-#: fundraiser/models/project.py:134
+#: fundraiser/models/project.py:133
 #, fuzzy
 #| msgid "Project Feeds"
 msgid "Project Category"
 msgstr "Projecten Feeds"
 
-#: fundraiser/models/project.py:135
+#: fundraiser/models/project.py:134
 #, fuzzy
 #| msgid "Categories"
 msgid "Project Categories"
 msgstr "Categorieën"
 
-#: fundraiser/models/project.py:267
+#: fundraiser/models/project.py:266
 #, fuzzy
 #| msgid "Projects"
 msgid "Project"
@@ -509,8 +516,8 @@ msgstr "Getoond worden alleen producten getagged met"
 msgid "There are currently no products"
 msgstr "Er zijn momenteel geen producten"
 
-#: fundraiser/templates/fundraiser/product_index_page.html:152
-#: fundraiser/templates/fundraiser/project_index_page.html:152
+#: fundraiser/templates/fundraiser/product_index_page.html:156
+#: fundraiser/templates/fundraiser/project_index_page.html:156
 msgid "Search products..."
 msgstr "Zoek producten..."
 

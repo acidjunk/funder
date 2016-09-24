@@ -1,0 +1,8 @@
+{% load i18n %}
+{% if categories %}
+    {% for category in categories %}
+        <a href="/products/product-category/{{ category.slug }}/feed/" class="item">{{ category.name }}</a>
+    {% endfor %}
+{% else %}
+    {% trans 'No feeds available' %}
+{% endif %}
