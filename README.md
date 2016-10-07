@@ -3,7 +3,11 @@ Funder is a Django/Wagtail based fundraising application to support online donat
 for Charity and Non Profit's. The flexible 'product' model makes it easy to start a simple 
 shop with iDeal checkout options. It's also easy to add your own models to funder.
 
-That being said: funder is a work in progress.
+That being said: funder is a work in progress, this is how it looks now:
+![Checkout with iDeal example](docs/images/checkout.png?raw=true)
+
+with some sample products:
+![Product page with some examples products](docs/images/products.png?raw=true)
 
 
 
