@@ -91,6 +91,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            os.path.join(PROJECT_DIR, '..', '..', 'funder_custom_templates'), # Override default design
             os.path.join(PROJECT_DIR, 'templates'),
         ],
         'APP_DIRS': True,
@@ -145,6 +146,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, '..', '..', 'funder_custom_templates','static'),  # Override default static location
     os.path.join(PROJECT_DIR, 'static'),
 ]
 
