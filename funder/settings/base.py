@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 
     # TODO: find out why tags/site is not working ok
     #'disqus',
-
     'django.contrib.humanize',
     'django_gravatar',
     'cart',
@@ -60,6 +59,7 @@ INSTALLED_APPS = [
     'search',
     'blog',
     'fundraiser',
+    'aa_app',
 
 ]
 
@@ -91,7 +91,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(PROJECT_DIR, '..', '..', 'funder_custom_templates'), # Override default design
+            os.path.join(PROJECT_DIR, '..', 'aa_app', 'templates'), # Override default design
             os.path.join(PROJECT_DIR, 'templates'),
         ],
         'APP_DIRS': True,
@@ -146,7 +146,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, '..', '..', 'funder_custom_templates','static'),  # Override default static location
+    os.path.join(PROJECT_DIR, '..', 'aa_app', 'static'),  # Override default static location
     os.path.join(PROJECT_DIR, 'static'),
 ]
 
