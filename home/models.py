@@ -21,16 +21,18 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
-
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel)
 
 from fundraiser.models import ProductPage, ProjectPage
 
 class HomePage(Page):
     body = RichTextField(blank=True)
+    extra_content = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full")
+        FieldPanel('body', classname="full"),
+        FieldPanel('extra_content', classname="full"),
+
     ]
 
     def get_context(self, request, *args, **kwargs):
