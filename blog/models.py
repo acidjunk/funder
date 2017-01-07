@@ -241,6 +241,7 @@ class BlogPage(Page):
 
     search_fields = Page.search_fields + (
         index.SearchField('body'),
+        index.SearchField('teaser'),
     )
     blog_categories = models.ManyToManyField(
         BlogCategory, through=BlogCategoryBlogPage, blank=True)
@@ -289,6 +290,7 @@ BlogPage.content_panels = [
         InlinePanel('categories', label=_("Categories")),
     ], heading="Tags and Categories"),
     ImageChooserPanel('header_image'),
+    FieldPanel('teaser', classname="full"),
     FieldPanel('body', classname="full"),
     FieldPanel('show_comments')
 ]
