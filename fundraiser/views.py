@@ -16,8 +16,18 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from django.contrib.syndication.views import Feed
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.utils.feedgenerator import Atom1Feed
+
+from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.utils import timezone
+
+from reportlab.pdfgen.canvas import Canvas
+from reportlab.platypus import Table
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm
+
 from .models import ProductIndexPage, ProductPage, ProjectIndexPage, ProjectPage, ProjectCategory
 from django.shortcuts import get_object_or_404, render
 from django.conf import settings
@@ -206,3 +216,93 @@ class ProductLatestCategoryFeed(Feed):
 
     def item_description(self, item):
         return item.description
+
+
+def pdf(request, order_nr):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="funder_invoice.pdf"'
+
+    # Create the PDF object, using the response object as its "file."
+    pdf = Canvas(response, pagesize=A4)
+
+    """ Draws the invoice header """
+    pdf.setStrokeColorRGB(0.9, 0.5, 0.2)
+    pdf.setFillColorRGB(0.2, 0.2, 0.2)
+    pdf.setFont('Helvetica', 16)
+    pdf.drawString(18 * cm, 28 * cm, 'Factuur')
+    # pdf.drawInlineImage(settings.INV_LOGO, 1 * cm, -1 * cm, 250, 16)
+    pdf.setLineWidth(4)
+    pdf.line(0, 27 * cm, 21.7 * cm, 27 * cm)
+
+    """ Draws the business address """
+    business_details = (
+        u'COMPANY NAME LTD',
+        u'STREET',
+        u'TOWN',
+        U'COUNTY',
+        U'POSTCODE',
+        U'COUNTRY',
+        u'',
+        u'',
+        u'Phone: +00 (0) 000 000 000',
+        u'Email: example@example.com',
+        u'Website: www.example.com',
+        u'Reg No: 00000000'
+    )
+    pdf.setFont('Helvetica', 9)
+    textobject = pdf.beginText(1 * cm, 26 * cm)
+    for line in business_details:
+        textobject.textLine(line)
+    pdf.drawText(textobject)
+
+    """ Draws the client address """
+    textobject = pdf.beginText(14 * cm, 26 * cm)
+    textobject.textLine('Formatics')
+    textobject.textLine('Contactpersoon: Freek de Groot')
+    textobject.textLine('Big street 17')
+    textobject.textLine('1234AB Barendburg')
+    pdf.drawText(textobject)
+
+    """ Draws the invoice info """
+    pdf.setFont('Helvetica', 11)
+    textobject = pdf.beginText(1.5 * cm, 19 * cm)
+    textobject.textLine('Factuurnummer: 20170321-1, datum: {}'.format(timezone.now().strftime('%d %b %Y')))
+    pdf.drawText(textobject)
+
+
+    """ Draws the costs table """
+    # table headers
+    data = [[u'Quantity', u'Description', u'Amount', u'Total'], ]
+    # fake some data for now
+    data.append([5, 'Pony\'s', 12.00, 60.00])
+    data.append([1, 'Mier', 15.00, 15.00])
+    data.append([u'', u'', u'Total:', 75.00])
+
+    # build the table
+    table = Table(data, colWidths=[2 * cm, 11 * cm, 3 * cm, 3 * cm])
+    table.setStyle([
+        ('FONT', (0, 0), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('TEXTCOLOR', (0, 0), (-1, -1), (0.2, 0.2, 0.2)),
+        ('GRID', (0, 0), (-1, -2), 1, (0.7, 0.7, 0.7)),
+        ('GRID', (-2, -1), (-1, -1), 1, (0.7, 0.7, 0.7)),
+        ('ALIGN', (-2, 0), (-1, -1), 'RIGHT'),
+        ('BACKGROUND', (0, 0), (-1, 0), (0.8, 0.8, 0.8)),
+    ])
+    tw, th, = table.wrapOn(pdf, 15 * cm, 19 * cm)
+    table.drawOn(pdf, 1 * cm, 18 * cm - th)
+
+    """ Draws the invoice footer """
+    note = (
+        u'Funder iNvoice :: {}'.format(timezone.now()),
+    )
+    textobject = pdf.beginText(1 * cm, 0.5 * cm)
+    for line in note:
+        textobject.textLine(line)
+    pdf.drawText(textobject)
+
+    # Close the PDF object cleanly, and we're done.
+    pdf.showPage()
+    pdf.save()
+    return response

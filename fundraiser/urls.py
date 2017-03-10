@@ -26,4 +26,7 @@ urlpatterns = [
     url(r'(?P<product_slug>[\w-]+)/atom.*/',
         views.ProductLatestEntriesFeedAtom(),
         name="product_latest_entries_feed_atom"),
+
+    url(r'^pdf/(?P<order_nr>[-\w]+)/', views.pdf, name="pdf"),
+
 ]

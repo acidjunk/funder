@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls', namespace="blog")),
     url(r'^projects/', include('fundraiser.urls', namespace="project")),
     url(r'^products/', include('fundraiser.urls', namespace="product")),
+    url(r'^orders/', include('fundraiser.urls', namespace="order")),
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

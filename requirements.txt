@@ -4,5 +4,6 @@ django-disqus==0.5
 django-gravatar2==1.4.0
 wagtail==1.6.2
 django-taggit-templatetags2==1.5.3
+reportlab==3.4.0
 #just for now (will be handled by future sisow pypi package)
 lxml==3.6.0
